@@ -632,7 +632,9 @@ const TRAVA = {
 };
 const senhaDe = (email, pin) => `Pmx#${pin}@${String(email).trim().toLowerCase()}`;
 async function hash(s) { const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s)); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, "0")).join(""); }
-const AUTH = { modo: "entrar", pin: "", pin1: null, msg: "", ok: false, email: LS.get("pmx_email") || "", travado: false };
+const VIS_EMAIL = (CFG.visitanteEmail || "").toLowerCase();
+const AUTH = { modo: "entrar", pin: "", pin1: null, msg: "", ok: false, email: LS.get("pmx_email") || "", travado: false, visit: !!VIS_EMAIL && LS.get("pmx_tipo") === "visitante" };
+function tipoAcesso(v) { AUTH.visit = v; AUTH.modo = "entrar"; AUTH.pin = ""; AUTH.pin1 = null; AUTH.msg = ""; LS.set("pmx_tipo", v ? "visitante" : "equipe"); vAuth(); }
 let appPronto = false, ultimaAtividade = Date.now();
 
 function vAuth() {
@@ -643,11 +645,13 @@ function vAuth() {
   $("#root").innerHTML = `<div class="login"><div class="card">
     <img class="seal" src="${ASSETS.selo}" alt="Grupo Protemaxi">
     <h2>Protemaxi Projetos</h2><div class="sub">${titulos[A.modo]} · ${sub[A.modo]}</div>
-    ${nuvem ? `<input class="inp" id="lg_e" type="email" autocomplete="username" placeholder="Seu e-mail" value="${esc(A.email)}" style="text-align:center" ${A.travado ? "disabled" : ""}>` : ""}
+    ${nuvem && VIS_EMAIL && !A.travado ? `<div class="seg" style="margin:0 auto 14px;display:flex;justify-content:center"><button class="${!A.visit ? "on" : ""}" onclick="tipoAcesso(false)">Equipe</button><button class="${A.visit ? "on" : ""}" onclick="tipoAcesso(true)">Visitante</button></div>` : ""}
+    ${nuvem && !(A.visit && !A.travado) ? `<input class="inp" id="lg_e" type="email" autocomplete="username" placeholder="Seu e-mail" value="${esc(A.email)}" style="text-align:center" ${A.travado ? "disabled" : ""}>` : ""}
+    ${nuvem && A.visit && !A.travado ? `<div class="hint" style="text-align:center">Acesso de visitante — digite só o PIN</div>` : ""}
     <div class="dots ${A.err ? "err" : ""}">${[0, 1, 2, 3].map(i => `<i class="${i < A.pin.length ? "on" : ""}"></i>`).join("")}</div>
     <div class="msg ${A.ok ? "ok" : ""}">${esc(seg ? `Muitas tentativas. Aguarde ${seg}s.` : A.msg)}</div>
     <div class="pad-num">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => `<button onclick="digito('${n}')">${n}</button>`).join("")}
-      <button class="fn" onclick="${nuvem && !A.travado ? `trocarModo()` : ""}">${nuvem && !A.travado ? (A.modo === "entrar" ? "Primeiro<br>acesso" : "Já tenho<br>acesso") : ""}</button>
+      <button class="fn" onclick="${nuvem && !A.travado && !A.visit ? `trocarModo()` : ""}">${nuvem && !A.travado && !A.visit ? (A.modo === "entrar" ? "Primeiro<br>acesso" : "Já tenho<br>acesso") : ""}</button>
       <button onclick="digito('0')">0</button><button class="fn" onclick="apagarDigito()">⌫</button></div>
     ${A.travado && nuvem ? `<div style="margin-top:14px;font-size:13px"><a href="#" onclick="sair();return false">Entrar com outro usuário</a></div>` : ""}
   </div></div>`;
@@ -657,7 +661,7 @@ function vAuth() {
 function trocarModo() { AUTH.modo = AUTH.modo === "entrar" ? "criar" : "entrar"; AUTH.pin = ""; AUTH.pin1 = null; AUTH.msg = ""; vAuth(); }
 function apagarDigito() { AUTH.pin = AUTH.pin.slice(0, -1); vAuth(); }
 function digito(d) {
-  if (TRAVA.segundos()) return; const e = $("#lg_e"); if (e) AUTH.email = e.value.trim();
+  if (TRAVA.segundos()) return; const e = $("#lg_e"); if (AUTH.visit && !AUTH.travado) AUTH.email = VIS_EMAIL; else if (e) AUTH.email = e.value.trim();
   if (AUTH.pin.length >= 4) return; AUTH.pin += d; AUTH.msg = ""; vAuth();
   if (AUTH.pin.length === 4) setTimeout(enviarPin, 120);
 }
@@ -687,7 +691,7 @@ async function enviarPin() {
     if (!/^\S+@\S+\.\S+$/.test(A.email)) return falha("Digite seu e-mail.");
     const d = busy("Entrando…"); const { data, error } = await sb.auth.signInWithPassword({ email: A.email, password: senhaDe(A.email, pin) }); d();
     if (error) { const n = TRAVA.erro(); return falha(/confirm/i.test(error.message) ? "Confirme seu e-mail antes de entrar." : n >= 5 ? "" : `E-mail ou PIN incorreto (${5 - n} tentativa${5 - n > 1 ? "s" : ""} antes do bloqueio).`); }
-    LS.set("pmx_email", A.email); DB.user = data.user; liberar();
+    if (!A.visit) LS.set("pmx_email", A.email); DB.user = data.user; liberar();
   } catch (e) { falha("Erro: " + e.message); }
 }
 function liberar() { TRAVA.ok(); AUTH.pin = ""; AUTH.msg = ""; AUTH.travado = false; ultimaAtividade = Date.now(); if (appPronto) { if (DB.local) render(); else retomar(); } else iniciarApp(); }
