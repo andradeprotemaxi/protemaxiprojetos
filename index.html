@@ -1,0 +1,1286 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Protemaxi Projetos</title>
+<meta name="description" content="Projetos de CFTV, alarme e cerca elétrica — Grupo Protemaxi">
+<meta name="theme-color" content="#14223d">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' data: blob: https://*.supabase.co wss://*.supabase.co https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; worker-src 'self' blob: https://cdnjs.cloudflare.com; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="config.js"></script>
+<style>
+:root{
+  --bg:#f1f4f9;--card:#fff;--ink:#13213a;--mut:#64748b;--line:#e2e7ef;--soft:#f6f8fb;
+  --navy:#14223d;--navy2:#273f6b;--pri:#2f5fa7;--pri2:#244b86;--brand:#1f497d;--gold:#f2c230;
+  --novo:#3b82f6;--exec:#f59e0b;--ok:#10b981;--tot:#6366f1;--danger:#ef4444;
+  --r:14px;--sh:0 1px 2px rgba(19,33,58,.06),0 6px 20px rgba(19,33,58,.06);
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--bg);color:var(--ink);font-size:14px;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--pri)}
+.app{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+.side{background:linear-gradient(180deg,var(--navy),var(--navy2));color:#c9d4e6;padding:22px 14px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px}
+.brand{display:flex;align-items:center;gap:11px;padding:2px 8px 22px}
+.brand .mk{width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center;overflow:hidden;box-shadow:0 6px 18px rgba(0,0,0,.25);flex:none}
+.brand .mk img{width:100%;height:100%;object-fit:contain}
+.brand b{display:block;color:#fff;font-size:16px;letter-spacing:.3px}
+.brand small{color:#8ea3c4;font-size:11px;letter-spacing:1.6px;text-transform:uppercase}
+.nav{display:flex;flex-direction:column;gap:4px}
+.nav button{all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px;color:#c9d4e6;font-weight:500}
+.nav button:hover{background:rgba(255,255,255,.06);color:#fff}
+.nav button.on{background:rgba(255,255,255,.1);color:#fff;box-shadow:inset 3px 0 0 var(--gold)}
+.nav svg{width:19px;height:19px;flex:none}
+.side .foot{margin-top:auto;font-size:11px;color:#7f93b4;padding:8px;line-height:1.7}
+.side .mode{display:inline-flex;align-items:center;gap:6px;padding:4px 8px;border-radius:99px;background:rgba(255,255,255,.07)}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--ok)}
+.main{padding:26px 30px 40px;min-width:0}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px;flex-wrap:wrap}
+.top h1{font-size:23px;margin:0;font-weight:800;letter-spacing:-.3px}
+.top p{margin:3px 0 0;color:var(--mut)}
+.tright{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:10px;padding:9px 14px;font-weight:600;cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:#c6d0de}
+.btn.pri{background:var(--pri);border-color:var(--pri);color:#fff}
+.btn.pri:hover{background:var(--pri2)}
+.btn.ghost{background:transparent;border-color:transparent}
+.btn.danger{color:var(--danger)}
+.btn.sm{padding:6px 10px;font-size:13px;border-radius:8px}
+.btn svg{width:17px;height:17px}
+.icon-btn{width:40px;height:40px;padding:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh)}
+.pad{padding:18px}
+.grid{display:grid;gap:16px}
+.kpis{grid-template-columns:repeat(4,1fr)}
+.kpi{padding:18px;position:relative;overflow:hidden}
+.kpi .lb{color:var(--mut);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.8px}
+.kpi .vl{font-size:34px;font-weight:800;margin-top:6px;letter-spacing:-1px}
+.kpi .sub{font-size:12px;color:var(--mut)}
+.kpi .ic{position:absolute;right:16px;top:16px;width:42px;height:42px;border-radius:12px;display:grid;place-items:center}
+.kpi .ic svg{width:22px;height:22px}
+.kpi .bar{height:5px;border-radius:9px;background:var(--soft);margin-top:12px;overflow:hidden}
+.kpi .bar i{display:block;height:100%;border-radius:9px}
+.k-tot .ic{background:#eef0ff;color:var(--tot)}.k-tot .bar i{background:var(--tot)}
+.k-novo .ic{background:#e8f1ff;color:var(--novo)}.k-novo .bar i{background:var(--novo)}.k-novo .vl{color:var(--novo)}
+.k-exec .ic{background:#fff4e0;color:var(--exec)}.k-exec .bar i{background:var(--exec)}.k-exec .vl{color:#d48806}
+.k-ok .ic{background:#e3f8ef;color:var(--ok)}.k-ok .bar i{background:var(--ok)}.k-ok .vl{color:#059669}
+h3{margin:0 0 14px;font-size:15px;font-weight:700}
+.flow{display:grid;grid-template-columns:repeat(6,1fr);position:relative}
+.step{text-align:center;position:relative;padding:0 4px}
+.step .cir{width:46px;height:46px;border-radius:50%;margin:0 auto 8px;display:grid;place-items:center;font-weight:800;font-size:16px;color:#fff;position:relative;z-index:1;box-shadow:0 0 0 5px #fff}
+.step:not(:last-child)::after{content:"";position:absolute;top:23px;left:55%;width:90%;height:3px;background:var(--line)}
+.step b{display:block;font-size:12.5px}
+.step small{color:var(--mut);font-size:11.5px}
+.stack{display:flex;height:14px;border-radius:9px;overflow:hidden;background:var(--soft)}
+.stack i{display:block;height:100%}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;color:var(--mut);font-size:12.5px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.two{grid-template-columns:1.4fr 1fr}
+table.tb{width:100%;border-collapse:collapse}
+.tb th{text-align:left;font-size:11.5px;text-transform:uppercase;letter-spacing:.7px;color:var(--mut);font-weight:600;padding:10px 12px;border-bottom:1px solid var(--line);white-space:nowrap}
+.tb td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+.tb tr:last-child td{border-bottom:0}
+.tb tr.click{cursor:pointer}.tb tr.click:hover td{background:var(--soft)}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:99px;font-size:12px;font-weight:600;white-space:nowrap}
+.chip.novo{background:#e8f1ff;color:#1d5fd6}.chip.execucao{background:#fff4e0;color:#b36b00}.chip.concluido{background:#e3f8ef;color:#047857}
+.chip i{width:6px;height:6px;border-radius:50%;background:currentColor}
+.mini{display:flex;gap:3px}
+.mini i{width:18px;height:5px;border-radius:3px;background:var(--line)}
+.muted{color:var(--mut)}
+.empty{text-align:center;padding:42px 20px;color:var(--mut)}
+.empty svg{width:46px;height:46px;opacity:.5}
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:16px}
+.seg{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:10px;padding:3px;flex-wrap:wrap}
+.seg button{all:unset;cursor:pointer;padding:7px 12px;border-radius:7px;font-weight:600;font-size:13px;color:var(--mut)}
+.seg button.on{background:var(--navy);color:#fff}
+.inp,select.inp,textarea.inp{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:#fff;outline:none}
+.inp:focus{border-color:var(--pri);box-shadow:0 0 0 3px rgba(47,95,167,.14)}
+textarea.inp{min-height:110px;resize:vertical;line-height:1.5}
+label.f{display:block;font-weight:600;font-size:12.5px;margin-bottom:6px;color:#334155}
+.fg{display:grid;gap:14px;grid-template-columns:repeat(2,1fr)}
+.fg .full{grid-column:1/-1}
+.pcards{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+.pcard{padding:16px;display:flex;flex-direction:column;gap:10px;cursor:pointer;transition:.15s}
+.pcard:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(19,33,58,.1)}
+.pcard .th{height:130px;border-radius:10px;background:var(--soft) center/cover no-repeat;border:1px solid var(--line);display:grid;place-items:center;color:var(--mut)}
+.pcard h4{margin:0;font-size:15px}
+.pcard .meta{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.drop{border:2px dashed #c9d4e4;border-radius:12px;padding:22px;text-align:center;background:var(--soft);cursor:pointer;transition:.15s}
+.drop:hover,.drop.over{border-color:var(--pri);background:#eef3fb}
+.drop svg{width:30px;height:30px;color:var(--pri)}
+.thumbs{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-top:10px}
+.thumbs .ph{display:flex;flex-direction:column;gap:5px}
+.thumbs .im{position:relative;aspect-ratio:4/3;border-radius:9px;background:#dde3ec center/cover;border:3px solid #395e89}
+.thumbs .im.plain{border:1px solid var(--line);aspect-ratio:1}
+.thumbs button{position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:50%;border:0;background:rgba(19,33,58,.78);color:#fff;cursor:pointer;line-height:1}
+.thumbs input{padding:5px 7px;font-size:11.5px;border-radius:7px;text-transform:uppercase}
+.checks{display:flex;gap:10px;flex-wrap:wrap}
+.ck{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;background:#fff;font-weight:600}
+.ck input{accent-color:var(--pri);width:16px;height:16px}
+.sec-t{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--mut);font-weight:700;margin:22px 0 10px}
+.ed{display:grid;grid-template-columns:200px 1fr 290px;gap:14px;height:calc(100vh - 140px);min-height:520px}
+.tools{padding:10px;overflow:auto;display:flex;flex-direction:column;gap:3px}
+.tools .tg{font-size:10.5px;text-transform:uppercase;letter-spacing:1px;color:var(--mut);font-weight:700;margin:10px 6px 4px}
+.tool{all:unset;cursor:pointer;display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:9px;font-size:13px;font-weight:500}
+.tool:hover{background:var(--soft)}
+.tool.on{background:#e7eef9;color:var(--pri2);font-weight:700}
+.tool .sw{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:8.5px;font-weight:800;flex:none}
+.canvas-wrap{position:relative;overflow:auto;background:#e9eef6 repeating-linear-gradient(0deg,transparent 0 23px,#dfe6f0 23px 24px),repeating-linear-gradient(90deg,transparent 0 23px,#dfe6f0 23px 24px);border-radius:var(--r);border:1px solid var(--line)}
+.canvas-wrap svg{display:block;margin:16px auto;background:#fff;box-shadow:var(--sh);touch-action:none;user-select:none}
+.zoom{position:sticky;left:10px;top:10px;z-index:5;display:inline-flex;gap:4px;background:#fff;border:1px solid var(--line);border-radius:10px;padding:3px;margin:10px}
+.panel{padding:14px;overflow:auto}
+.kv{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px dashed var(--line);font-size:13px}
+.kv b{font-weight:700;white-space:nowrap}
+.hint{font-size:12px;color:var(--mut);background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:10px;line-height:1.45}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:18px;overflow:auto}
+.tabs button{all:unset;cursor:pointer;padding:10px 14px;font-weight:600;color:var(--mut);border-bottom:2px solid transparent;white-space:nowrap}
+.tabs button.on{color:var(--pri);border-color:var(--pri)}
+.tb input.inp,.tb select.inp{padding:7px 9px;border-radius:8px}
+.toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:11px 18px;border-radius:12px;box-shadow:var(--sh);z-index:999;font-weight:600;max-width:90vw;text-align:center}
+.loading{position:fixed;inset:0;background:rgba(20,34,61,.45);display:grid;place-items:center;z-index:998;color:#fff;font-weight:700}
+.loading div{background:var(--navy);padding:20px 26px;border-radius:14px;display:flex;gap:12px;align-items:center}
+.spin{width:20px;height:20px;border:3px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+/* Login com PIN */
+.login{min-height:100vh;display:grid;place-items:center;background:radial-gradient(circle at 15% 0%,#2f4f86,var(--navy) 62%);padding:20px}
+.login .card{width:100%;max-width:370px;padding:28px 26px;text-align:center}
+.login .seal{width:96px;height:96px;margin:0 auto 10px;border-radius:50%;background:#fff;box-shadow:0 8px 26px rgba(19,33,58,.18)}
+.login h2{margin:4px 0 2px;font-size:20px}
+.login .sub{color:var(--mut);font-size:13px;margin-bottom:18px}
+.dots{display:flex;justify-content:center;gap:16px;margin:18px 0 8px}
+.dots i{width:16px;height:16px;border-radius:50%;border:2px solid #9fb0c8;transition:.12s}
+.dots i.on{background:var(--brand);border-color:var(--brand);transform:scale(1.05)}
+.dots.err i{border-color:var(--danger);animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.pad-num{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.pad-num button{all:unset;cursor:pointer;height:58px;border-radius:14px;background:var(--soft);border:1px solid var(--line);font-size:22px;font-weight:700;display:grid;place-items:center;user-select:none}
+.pad-num button:active{background:#e3eaf5}
+.pad-num button.fn{font-size:13px;font-weight:600;color:var(--mut);background:transparent;border-color:transparent}
+.msg{min-height:20px;font-size:13px;font-weight:600;color:var(--danger);margin-top:6px}
+.msg.ok{color:#047857}
+.avatar{width:40px;height:40px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700;overflow:hidden}
+.avatar img{width:100%;height:100%;object-fit:contain;background:#fff}
+.money{font-variant-numeric:tabular-nums}
+@media (max-width:1100px){.kpis{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}.ed{grid-template-columns:170px 1fr}.ed .panel{grid-column:1/-1}}
+@media (max-width:860px){
+  .app{grid-template-columns:1fr}
+  .side{position:fixed;bottom:0;top:auto;left:0;right:0;height:auto;padding:6px 6px calc(6px + env(safe-area-inset-bottom));z-index:60;flex-direction:row}
+  .brand,.side .foot{display:none}
+  .nav{flex-direction:row;width:100%;justify-content:space-around}
+  .nav button{flex-direction:column;gap:3px;padding:7px 8px;font-size:10.5px}
+  .nav button.on{box-shadow:none}
+  .main{padding:16px 14px 96px}
+  .top h1{font-size:19px}
+  .fg{grid-template-columns:1fr}
+  .flow{grid-template-columns:repeat(3,1fr);row-gap:18px}
+  .step:nth-child(3)::after{display:none}
+  .ed{grid-template-columns:1fr;height:auto}
+  .tools{flex-direction:row;flex-wrap:wrap}
+  .tools .tg{width:100%}
+  .canvas-wrap{height:62vh}
+  .hide-m{display:none}
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script>
+/* =========================================================
+   PROTEMAXI PROJETOS — CFTV • Alarme • Cerca elétrica
+   ========================================================= */
+const CFG = window.PROTEMAXI_CONFIG || {};
+const LIBS = {
+  supabase: "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js",
+  pptx: "https://cdn.jsdelivr.net/npm/pptxgenjs@3.12.0/dist/pptxgen.bundle.js",
+  jspdf: "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js",
+  pdfjs: "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js",
+  pdfworker: "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"
+};
+const ASSETS = { capa: "assets/capa.jpg", fundo: "assets/fundo.jpg", fim: "assets/encerramento.jpg", selo: "assets/selo.png", logo: "assets/logo-protemaxi.jpg" };
+const $ = (s, el = document) => el.querySelector(s);
+const $$ = (s, el = document) => [...el.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const uid = () => (crypto.randomUUID ? crypto.randomUUID() : "id-" + Date.now() + Math.random().toString(16).slice(2));
+const clone = o => JSON.parse(JSON.stringify(o));
+const fmtData = d => d ? new Date(d).toLocaleDateString("pt-BR") : "-";
+const BRL = v => (+v || 0).toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+const NUM = v => (+v || 0).toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const slug = s => String(s || "projeto").normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-zA-Z0-9]+/g, "-").replace(/^-|-$/g, "").toLowerCase();
+const loaded = {};
+function loadScript(src) {
+  if (loaded[src]) return loaded[src];
+  return loaded[src] = new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.crossOrigin = "anonymous"; s.onload = res; s.onerror = () => { delete loaded[src]; rej(new Error("Falha ao carregar biblioteca. Verifique a internet.")); }; document.head.appendChild(s); });
+}
+function toast(msg, ms = 2600) { $$(".toast").forEach(x => x.remove()); const t = document.createElement("div"); t.className = "toast"; t.textContent = msg; document.body.appendChild(t); setTimeout(() => t.remove(), ms); }
+function busy(msg) { const d = document.createElement("div"); d.className = "loading"; d.innerHTML = `<div><span class="spin"></span>${esc(msg)}</div>`; document.body.appendChild(d); return () => d.remove(); }
+
+const I = {
+  dash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>',
+  folder:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>',
+  plus:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>',
+  gear:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>',
+  clock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  check:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg>',
+  spark:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></svg>',
+  up:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"/></svg>',
+  ppt:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4M8 13V8h3a2 2 0 0 1 0 4H8"/></svg>',
+  pdf:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M9 15h6M9 18h4"/></svg>',
+  list:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>',
+  edit:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/></svg>',
+  trash:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg>',
+  back:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>',
+  copy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg>',
+  save:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h11l5 5v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M7 3v5h8M7 21v-7h10v7"/></svg>',
+  lock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>'
+};
+
+/* ---------- Linhas de alarme ---------- */
+const LINHAS = {
+  amt2018: { nome: "Intelbras AMT 2018 E SMART (com fio)", curto: "Alarme com fio", fio: true, notas: [
+    "Central monitorada com 18 zonas com fio e 2 partições; aceita até 4 teclados (cada teclado adiciona 2 zonas).",
+    "Até 24 zonas sem fio com receptor opcional (XAR 4000 SMART) — permite projeto misto.",
+    "Teclados compatíveis: XAT 2000 LCD, XAT 3000 LED e XAT 4000 LCD. Comunicação Ethernet e linha telefônica (EG: GPRS).",
+    "Sensores usados pela Protemaxi: IVP 7000 EX (presença externo com fio) e IVA 7100 HEXA (barreira ativa).",
+    "Exige cabo de cada sensor, teclado e sirene até a central, bateria 12 V 7 Ah e caixas herméticas nos pontos externos." ] },
+  amt8000pro: { nome: "Intelbras AMT 8000 PRO (sem fio)", curto: "Alarme sem fio", fio: false, notas: [
+    "Central monitorada totalmente sem fio, com sirene integrada; comunicação Ethernet, Wi-Fi e módulos XG 2G/3G/4G.",
+    "Capacidade: 64 sensores, 16 partições, 16 teclados, 16 sirenes, 98 controles, 16 atuadores e 4 repetidores.",
+    "Dispositivos série 8000: IVP 8000 PET, IVP 8000 PET CAM, IVP 8000 EX, XAS 8000, XSS 8000, XAT 8000, XAC 8000, REP 8000, TX 8000.",
+    "Não possui saída auxiliar para alimentar outros dispositivos — prever fonte própria se precisar.",
+    "Sem cabeamento de sensores: só ponto de energia e rede/Wi-Fi para a central." ] },
+  jfl: { nome: "JFL (reserva)", curto: "Alarme JFL", fio: true, notas: [
+    "Linha guardada como alternativa (centrais Active, sensores e eletrificadores JFL).",
+    "Antes de usar, conferir no manual do modelo: zonas, teclados, partições e alimentação.",
+    "Cadastre os produtos JFL com código e preço no Catálogo (Inside)." ] }
+};
+
+/* ---------- Catálogo padrão (padrão Inside da Protemaxi) ---------- */
+const P_ = (codigo, produto, nome, grupo, tipo, un, preco, base, mult, cada, cond) => ({ id: "c" + (codigo || slug(nome)), codigo, produto, nome, grupo, tipo, un, preco, base, mult, cada, cond, ativo: true });
+const CATALOGO = [
+  P_("2858", "CAMERA IP DE TV BULLET VIP 1230 B G5", "Câmera bullet IP", "CFTV", "Equipamento", "un", 534.72, "equip:cam", 1, 1, ""),
+  P_("2340", "CAMERA DE TV IP DOME VIP 1230 D G4", "Câmera dome IP", "CFTV", "Equipamento", "un", 716.04, "equip:cam_dome", 1, 1, ""),
+  P_("", "CAMERA IP COM IA (DEFINIR MODELO)", "Câmera com IA", "CFTV", "Equipamento", "un", 0, "equip:cam_ia", 1, 1, ""),
+  P_("", "GRAVADOR NVR 8 CANAIS (DEFINIR MODELO)", "Gravador 8 canais", "CFTV", "Equipamento", "un", 0, "fixo", 1, 1, "cftv_faixa:1-8"),
+  P_("", "GRAVADOR NVR 16 CANAIS (DEFINIR MODELO)", "Gravador 16 canais", "CFTV", "Equipamento", "un", 0, "fixo", 1, 1, "cftv_faixa:9-16"),
+  P_("2483", "GRAVADOR DIG VIDEO INVD 3032", "Gravador 32 canais", "CFTV", "Equipamento", "un", 4963.26, "fixo", 1, 1, "cftv_faixa:17-32"),
+  P_("", "SWITCH POE 8 PORTAS (DEFINIR MODELO)", "Switch PoE 8 portas", "CFTV", "Equipamento", "un", 0, "fixo", 1, 1, "cftv_faixa:1-8"),
+  P_("", "SWITCH POE 16 PORTAS (DEFINIR MODELO)", "Switch PoE 16 portas", "CFTV", "Equipamento", "un", 0, "fixo", 1, 1, "cftv_faixa:9-16"),
+  P_("2493", "SWITCH GERENCIAVEL 24P SKD SG2404D POE M", "Switch PoE 24 portas", "CFTV", "Equipamento", "un", 5039.10, "cameras", 1, 24, "cftv_faixa:17-999"),
+  P_("2745", "DISCO RIGIDO WD PURPLE 10TB WD102PURP", "HD para gravação", "CFTV", "Equipamento", "un", 4804.44, "fixo", 1, 1, "cftv"),
+  P_("2464", "NOBREAK XNB 1440VA-220V INTELBRAS", "Nobreak", "CFTV", "Equipamento", "un", 1527.80, "fixo", 1, 1, "cftv"),
+  P_("1346", "RACK MINI 12U", "Rack 12U", "CFTV", "Equipamento", "un", 100.22, "fixo", 1, 1, "cftv"),
+  P_("2816", "BANDEJA FIXA P/RACK BF1U 400MM INTELBRAS", "Bandeja para rack", "CFTV", "Material", "un", 255.30, "fixo", 1, 1, "cftv"),
+  P_("2551", "CABO LAN CAT5 UTP 4PARES ALARME 305M PRETO", "Cabo de rede (caixa 305 m)", "CFTV", "Material", "cx", 916.00, "m_cabos", 1, 305, "algum"),
+  P_("1975", "CAIXA DE PASSAGEM P/ CAMERAS DE CFTV VBOX 1100", "Caixa de passagem para câmera", "CFTV", "Material", "un", 14.23, "cameras", 1, 1, "cftv"),
+  P_("1935", "CONECTOR RJ45 CAT5 50 UN", "Conector RJ45 (pacote 50)", "CFTV", "Material", "pct", 52.98, "cameras", 2, 50, "cftv"),
+  P_("2594", "AMT 2018 E SMART CENTRAL DE ALARME", "Central de alarme", "ALARME", "Equipamento", "un", 1432.46, "central", 1, 1, "fio"),
+  P_("", "AMT 8000 PRO CENTRAL DE ALARME SEM FIO", "Central de alarme sem fio", "ALARME", "Equipamento", "un", 0, "central", 1, 1, "semfio"),
+  P_("2655", "XAT 4000 LCD TECLADO", "Teclado", "ALARME", "Equipamento", "un", 420.86, "teclados", 1, 1, "fio"),
+  P_("", "XAT 8000 TECLADO SEM FIO", "Teclado sem fio", "ALARME", "Equipamento", "un", 0, "teclados", 1, 1, "semfio"),
+  P_("2780", "SENSOR INFRA PASSIVO C/FIO IVP 7000 EX", "Sensor de presença", "ALARME", "Equipamento", "un", 484.00, "equip:ivp", 1, 1, "fio"),
+  P_("", "IVP 8000 PET SENSOR DE PRESENCA SEM FIO", "Sensor de presença sem fio", "ALARME", "Equipamento", "un", 0, "equip:ivp", 1, 1, "semfio"),
+  P_("", "SENSOR MAGNETICO COM FIO (DEFINIR MODELO)", "Sensor de abertura", "ALARME", "Equipamento", "un", 0, "equip:mag", 1, 1, "fio"),
+  P_("", "XAS 8000 SENSOR DE ABERTURA SEM FIO", "Sensor de abertura sem fio", "ALARME", "Equipamento", "un", 0, "equip:mag", 1, 1, "semfio"),
+  P_("2557", "SENSOR ATIVO IVA 7100 HEXA", "Barreira infravermelha", "ALARME", "Equipamento", "un", 999.90, "equip:barreira", 1, 1, ""),
+  P_("1976", "SIRENE 120 DB SIR 3000 BR INTELBRAS", "Sirene", "ALARME", "Equipamento", "un", 135.06, "sirenes", 1, 1, "fio"),
+  P_("", "XSS 8000 SIRENE SEM FIO", "Sirene sem fio", "ALARME", "Equipamento", "un", 0, "sirenes", 1, 1, "semfio"),
+  P_("2476", "BATERIA XB 1270 VRLA 12V 7,0AH", "Bateria 12 V", "ALARME", "Equipamento", "un", 190.74, "fixo", 1, 1, "fio"),
+  P_("2184", "CAIXA HERMETICA", "Caixa hermética", "ALARME", "Material", "un", 27.32, "alarme_fio", 1, 1, "fio"),
+  P_("2300", "CABO FLEXIVEL 750V 2,50MM 100 AZ", "Cabo de energia 2,5 mm (rolo 100 m)", "ALARME", "Material", "rl", 327.90, "fixo", 1, 1, "algum"),
+  P_("196", "ELETRODUTO DE 3/4\" RIGIDO (VARA 3M)", "Eletroduto 3/4\" (vara 3 m)", "ALARME", "Material", "vr", 8.50, "m_infra", 1, 3, "infra:eletroduto"),
+  P_("200", "CURVA 90 DE 3/4\"", "Curva 90° 3/4\"", "ALARME", "Material", "un", 6.75, "m_infra", 1, 10, "infra:eletroduto"),
+  P_("680", "LUVA DE 3/4", "Luva 3/4\"", "ALARME", "Material", "un", 1.80, "m_infra", 1, 10, "infra:eletroduto"),
+  P_("2624", "ABRACADEIRA GALV.C/CUNHA 3/4\"", "Abraçadeira galvanizada 3/4\"", "ALARME", "Material", "un", 1.54, "m_infra", 1, 2, "infra:eletroduto"),
+  P_("", "CONDULETE 3/4\" (DEFINIR MODELO)", "Condulete 3/4\"", "ALARME", "Material", "un", 0, "dispositivos", 1, 1, "infra:eletroduto"),
+  P_("", "CANALETA 20X10 BARRA 2M", "Canaleta (barra 2 m)", "ALARME", "Material", "br", 0, "m_infra", 1, 2, "infra:canaleta"),
+  P_("", "FIXA FIO COM BUCHA", "Fixa-fio", "ALARME", "Material", "un", 0, "m_infra", 2, 1, "infra:aparente"),
+  P_("2817", "ETIQUETA BROTHER M231 12MM PRETO/BRANCO", "Etiqueta de identificação", "ALARME", "Material", "un", 174.68, "fixo", 1, 1, "algum"),
+  P_("", "CENTRAL DE CERCA ELETRICA (DEFINIR MODELO)", "Central de cerca elétrica", "CERCA", "Equipamento", "un", 0, "eletrificador", 1, 1, "cerca"),
+  P_("", "BATERIA 12V 7AH (CERCA)", "Bateria 12 V (cerca)", "CERCA", "Equipamento", "un", 0, "fixo", 1, 1, "cerca"),
+  P_("", "FIO DE ACO INOX P/ CERCA", "Fio de aço inox", "CERCA", "Material", "m", 0, "m_cerca_fios", 1, 1, "cerca"),
+  P_("", "HASTE P/ CERCA ELETRICA", "Haste de cerca", "CERCA", "Material", "un", 0, "hastes", 1, 1, "cerca"),
+  P_("", "ISOLADOR P/ CERCA", "Isolador", "CERCA", "Material", "un", 0, "isoladores", 1, 1, "cerca"),
+  P_("", "PLACA DE ADVERTENCIA CERCA", "Placa de advertência", "CERCA", "Material", "un", 0, "m_cerca", 1, 10, "cerca"),
+  P_("", "KIT ATERRAMENTO (HASTE COBRE)", "Kit de aterramento", "CERCA", "Material", "kit", 0, "fixo", 1, 1, "cerca"),
+  P_("", "CABO DE ALTA ISOLACAO", "Cabo de alta isolação", "CERCA", "Material", "m", 0, "fixo", 15, 1, "cerca")
+];
+const DEFAULT_SETTINGS = {
+  versao: 2,
+  perfil: { empresa: "Grupo Protemaxi", responsavel: "Andrade", cargo: "Projetos Segurança Eletrônica", telefone: "(85)", email: "andrade@protemaxi.com.br",
+    endereco: "Rua Antônio Correia Lima, 3940\nMontese – Fortaleza/CE", linkedin: "linkedin.com/company/grupo-protemaxi", site: "www.grupoprotemaxi.com.br", instagram: "grupoprotemaxi", logo: null },
+  apres: { tituloCapa: "PROPOSTA FINANCEIRA", tituloFotos: "Sistema de Câmeras", frase: "SEGURANÇA ELETRÔNICA É INVESTIMENTO, NÃO CUSTO.",
+    funcionamento: "A proposta contempla a implantação de um sistema de alarme e câmeras monitorado, desenvolvido para proporcionar maior segurança e proteção ao patrimônio, permitindo a detecção de possíveis invasões e situações de risco.\n\nSerão instalados sensores de presença, câmeras e demais dispositivos de detecção, posicionados estrategicamente para identificar movimentações não autorizadas nas áreas protegidas. O sistema contará com uma central de alarme integrada ao monitoramento eletrônico, permitindo o recebimento de eventos e o acionamento dos procedimentos de segurança conforme a necessidade da operação.",
+    beneficios: "Proteção de áreas estratégicas e pontos vulneráveis;\nIntegração com a central de monitoramento eletrônico;\nMaior segurança e proteção do patrimônio;\nAcionamento de procedimentos de segurança em caso de ocorrência." },
+  parametros: { folga: 3, fatorRota: 1.15, infraFator: 0.35, cercaFios: 6, cercaHaste: 2.5, larguraPadrao: 20, bloqueioMin: 20 },
+  equipamentos: [
+    { id: "cam", nome: "Câmera bullet", grupo: "cftv", sigla: "C", cor: "#1e6bff" },
+    { id: "cam_dome", nome: "Câmera dome", grupo: "cftv", sigla: "D", cor: "#06b6d4" },
+    { id: "cam_ia", nome: "Câmera com IA", grupo: "cftv", sigla: "IA", cor: "#4f46e5" },
+    { id: "ivp", nome: "Sensor de presença", grupo: "alarme", sigla: "P", cor: "#f59e0b" },
+    { id: "mag", nome: "Sensor de abertura", grupo: "alarme", sigla: "A", cor: "#ca8a04" },
+    { id: "barreira", nome: "Barreira infravermelha", grupo: "alarme", sigla: "B", cor: "#ef4444" },
+    { id: "sirene", nome: "Sirene", grupo: "alarme", sigla: "S", cor: "#db2777" },
+    { id: "teclado", nome: "Teclado", grupo: "alarme", sigla: "T", cor: "#8b5cf6" },
+    { id: "central", nome: "Central de alarme", grupo: "alarme", sigla: "CA", cor: "#0f766e" },
+    { id: "eletrificador", nome: "Central de cerca elétrica", grupo: "cerca", sigla: "CE", cor: "#b91c1c" },
+    { id: "rack", nome: "Rack / gravador", grupo: "infra", sigla: "R", cor: "#14223d", marcador: true }
+  ],
+  catalogo: CATALOGO
+};
+const BASES = { cameras: "Nº de câmeras", sensores: "Nº de sensores", alarme_fio: "Pontos de alarme cabeados", dispositivos: "Total de pontos", central: "Central (1 se tiver alarme)", teclados: "Teclados (mín. 1 com alarme)", sirenes: "Sirenes (mín. 1 com alarme)", eletrificador: "Eletrificador (1 se tiver cerca)", m_cftv: "Metros de cabo CFTV", m_alarme: "Metros de cabo alarme", m_cabos: "Metros totais de cabo", m_infra: "Metros de tubulação/canaleta", m_cerca: "Metros de cerca", m_cerca_fios: "Metros de fio de cerca", hastes: "Hastes de cerca", isoladores: "Isoladores de cerca", fixo: "Quantidade fixa" };
+const CONDS = { "": "Sempre", algum: "Se houver qualquer sistema", cftv: "Se tiver CFTV", alarme: "Se tiver alarme", fio: "Se alarme com fio", semfio: "Se alarme sem fio", cerca: "Se tiver cerca", "infra:eletroduto": "Infra: eletroduto", "infra:canaleta": "Infra: canaleta", "infra:aparente": "Infra: aparente", "cftv_faixa:1-8": "1 a 8 câmeras", "cftv_faixa:9-16": "9 a 16 câmeras", "cftv_faixa:17-32": "17 a 32 câmeras", "cftv_faixa:17-999": "17 câmeras ou mais", "cftv_faixa:33-999": "33 câmeras ou mais" };
+const GRUPOS = ["CFTV", "ALARME", "CERCA", "INFRA"];
+const STATUS = { novo: "Novo", execucao: "Em execução", concluido: "Concluído" };
+const ETAPAS = ["Cadastro", "Levantamento", "Projeto", "Apresentação", "Execução", "Concluído"];
+const ETAPA_COR = ["#94a3b8", "#6366f1", "#2f5fa7", "#06b6d4", "#f59e0b", "#10b981"];
+const INFRA = { eletroduto: "Eletroduto 3/4\"", canaleta: "Canaleta", aparente: "Aparente (fixa-fio)", embutida: "Embutida (tubulação existente)" };
+
+/* =========================================================
+   Armazenamento: Supabase (nuvem) ou IndexedDB (local)
+   ========================================================= */
+let sb = null;
+const IMG = new Map();
+const DB = {
+  local: true, idb: null, user: null, admin: false,
+  async init() {
+    if (CFG.supabaseUrl && CFG.supabaseAnonKey) {
+      try { await loadScript(LIBS.supabase); sb = window.supabase.createClient(CFG.supabaseUrl, CFG.supabaseAnonKey, { auth: { persistSession: true, autoRefreshToken: true } }); this.local = false; }
+      catch (e) { console.warn(e); }
+    }
+    this.idb = await new Promise((res, rej) => {
+      const r = indexedDB.open("protemaxi", 1);
+      r.onupgradeneeded = () => { r.result.createObjectStore("projetos", { keyPath: "id" }); r.result.createObjectStore("kv"); };
+      r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error);
+    });
+  },
+  tx(store, mode, fn) { return new Promise((res, rej) => { const t = this.idb.transaction(store, mode); const q = fn(t.objectStore(store)); t.oncomplete = () => res(q && q.result); t.onerror = () => rej(t.error); }); },
+  kvGet(k) { return this.tx("kv", "readonly", s => s.get(k)); },
+  kvSet(k, v) { return this.tx("kv", "readwrite", s => s.put(v, k)); },
+  async listar() {
+    if (this.local) return (await this.tx("projetos", "readonly", s => s.getAll())) || [];
+    const { data, error } = await sb.from("projetos").select("id,status,dados,created_at,updated_at").order("updated_at", { ascending: false });
+    if (error) throw error;
+    return data.map(r => ({ ...r.dados, id: r.id, status: r.status, created_at: r.created_at, updated_at: r.updated_at }));
+  },
+  async salvar(p) {
+    p.updated_at = new Date().toISOString(); if (!p.created_at) p.created_at = p.updated_at;
+    if (this.local) return this.tx("projetos", "readwrite", s => s.put(clone(p)));
+    const { error } = await sb.from("projetos").upsert({ id: p.id, nome: p.nome, cliente: p.cliente, status: p.status, dados: p, updated_at: p.updated_at });
+    if (error) throw error;
+  },
+  async excluir(p) {
+    if (this.local) return this.tx("projetos", "readwrite", s => s.delete(p.id));
+    const refs = [p.planta?.ref, p.logoCliente, ...(p.fotos || []).map(f => f.ref)].filter(r => r && r.startsWith("sb:")).map(r => r.slice(3));
+    if (refs.length) await sb.storage.from("projetos").remove(refs);
+    const { error } = await sb.from("projetos").delete().eq("id", p.id); if (error) throw error;
+  },
+  async getSettings() {
+    let s = null;
+    if (this.local) s = await this.kvGet("settings");
+    else { const { data } = await sb.from("configuracoes").select("dados").eq("id", "empresa").maybeSingle(); s = data?.dados; }
+    return mergeSettings(s);
+  },
+  async saveSettings(s) {
+    if (this.local) return this.kvSet("settings", clone(s));
+    const { error } = await sb.from("configuracoes").upsert({ id: "empresa", dados: s, updated_at: new Date().toISOString() }); if (error) throw error;
+  },
+  async upload(projId, dataUrl, nome) {
+    if (this.local) return dataUrl;
+    const blob = await (await fetch(dataUrl)).blob();
+    const path = `${projId}/${Date.now()}-${slug(nome)}.${blob.type.includes("png") ? "png" : "jpg"}`;
+    const { error } = await sb.storage.from("projetos").upload(path, blob, { upsert: true, contentType: blob.type });
+    if (error) throw error;
+    IMG.set("sb:" + path, dataUrl); return "sb:" + path;
+  },
+  async remover(ref) { if (!this.local && ref?.startsWith("sb:")) await sb.storage.from("projetos").remove([ref.slice(3)]); IMG.delete(ref); },
+  async img(ref) {
+    if (!ref) return null; if (ref.startsWith("data:")) return ref; if (IMG.has(ref)) return IMG.get(ref);
+    const { data, error } = await sb.storage.from("projetos").download(ref.slice(3)); if (error) throw error;
+    const d = await blobToDataURL(data); IMG.set(ref, d); return d;
+  }
+};
+function mergeSettings(s) {
+  const d = clone(DEFAULT_SETTINGS); if (!s) return d;
+  const velho = !s.versao || s.versao < 2;
+  return { ...d, ...s, versao: 2, perfil: { ...d.perfil, ...(velho ? {} : s.perfil || {}) }, apres: { ...d.apres, ...(s.apres || {}) }, parametros: { ...d.parametros, ...(s.parametros || {}) },
+    equipamentos: !velho && s.equipamentos?.length ? s.equipamentos : d.equipamentos, catalogo: !velho && s.catalogo?.length ? s.catalogo : d.catalogo };
+}
+async function asset(k) { if (IMG.has("a:" + k)) return IMG.get("a:" + k); const r = await fetch(ASSETS[k]); if (!r.ok) throw new Error("Arquivo do modelo não encontrado: " + ASSETS[k]); const d = await blobToDataURL(await r.blob()); IMG.set("a:" + k, d); return d; }
+
+/* ---------- Imagens ---------- */
+const blobToDataURL = b => new Promise(r => { const f = new FileReader(); f.onload = () => r(f.result); f.readAsDataURL(b); });
+const loadImg = src => new Promise((res, rej) => { const i = new Image(); i.onload = () => res(i); i.onerror = rej; i.src = src; });
+async function compress(dataUrl, max = 1800, type = "image/jpeg", q = 0.85) {
+  const im = await loadImg(dataUrl); const k = Math.min(1, max / Math.max(im.width, im.height));
+  const c = document.createElement("canvas"); c.width = Math.round(im.width * k); c.height = Math.round(im.height * k);
+  const x = c.getContext("2d"); if (type === "image/jpeg") { x.fillStyle = "#fff"; x.fillRect(0, 0, c.width, c.height); } x.drawImage(im, 0, 0, c.width, c.height);
+  return { data: c.toDataURL(type, q), w: c.width, h: c.height };
+}
+async function cropCover(dataUrl, w, h, maxW = 1100) {
+  const im = await loadImg(dataUrl), ar = w / h, iar = im.width / im.height;
+  let sx = 0, sy = 0, sw = im.width, sh = im.height;
+  if (iar > ar) { sw = im.height * ar; sx = (im.width - sw) / 2; } else { sh = im.width / ar; sy = (im.height - sh) / 2; }
+  const c = document.createElement("canvas"); c.width = Math.min(maxW, Math.round(sw)); c.height = Math.round(c.width / ar);
+  c.getContext("2d").drawImage(im, sx, sy, sw, sh, 0, 0, c.width, c.height); return c.toDataURL("image/jpeg", 0.85);
+}
+async function imgSize(d) { const im = await loadImg(d); return { w: im.width, h: im.height }; }
+async function pdfToImage(file) {
+  await loadScript(LIBS.pdfjs); pdfjsLib.GlobalWorkerOptions.workerSrc = LIBS.pdfworker;
+  const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise; const pg = await pdf.getPage(1);
+  const v1 = pg.getViewport({ scale: 1 }); const scale = Math.min(3, 2400 / Math.max(v1.width, v1.height)); const vp = pg.getViewport({ scale });
+  const c = document.createElement("canvas"); c.width = vp.width; c.height = vp.height; const x = c.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, c.width, c.height);
+  await pg.render({ canvasContext: x, viewport: vp }).promise; return c.toDataURL("image/png");
+}
+async function contentBBox(dataUrl) {
+  const im = await loadImg(dataUrl); const k = Math.min(1, 500 / Math.max(im.width, im.height));
+  const w = Math.round(im.width * k), h = Math.round(im.height * k); const c = document.createElement("canvas"); c.width = w; c.height = h;
+  const x = c.getContext("2d"); x.fillStyle = "#fff"; x.fillRect(0, 0, w, h); x.drawImage(im, 0, 0, w, h);
+  const d = x.getImageData(0, 0, w, h).data; let x0 = w, y0 = h, x1 = 0, y1 = 0, n = 0;
+  for (let y = 0; y < h; y++) for (let i = 0; i < w; i++) { const o = (y * w + i) * 4; if (d[o] * .3 + d[o + 1] * .59 + d[o + 2] * .11 < 190) { n++; if (i < x0) x0 = i; if (i > x1) x1 = i; if (y < y0) y0 = y; if (y > y1) y1 = y; } }
+  if (n < 50 || (x1 - x0) < w * .15) return { x: im.width * .04, y: im.height * .04, w: im.width * .92, h: im.height * .92 };
+  return { x: x0 / k, y: y0 / k, w: (x1 - x0) / k, h: (y1 - y0) / k };
+}
+function croquiBranco() {
+  const c = document.createElement("canvas"); c.width = 1800; c.height = 1200; const x = c.getContext("2d");
+  x.fillStyle = "#fff"; x.fillRect(0, 0, 1800, 1200); x.strokeStyle = "#e5eaf2"; x.lineWidth = 1;
+  for (let i = 0; i <= 1800; i += 60) { x.beginPath(); x.moveTo(i, 0); x.lineTo(i, 1200); x.stroke(); }
+  for (let j = 0; j <= 1200; j += 60) { x.beginPath(); x.moveTo(0, j); x.lineTo(1800, j); x.stroke(); }
+  x.strokeStyle = "#334155"; x.lineWidth = 6; x.strokeRect(120, 120, 1560, 960);
+  return c.toDataURL("image/png");
+}
+
+/* =========================================================
+   Cálculo: equipamentos, materiais, cabos e valores
+   ========================================================= */
+const eqMap = S => Object.fromEntries(S.equipamentos.map(e => [e.id, e]));
+function numerar(p, S) {
+  const cnt = {}, eq = eqMap(S), out = {};
+  (p.itens || []).forEach(i => { const e = eq[i.t]; if (!e) return; cnt[i.t] = (cnt[i.t] || 0) + 1; out[i.id] = e.marcador ? e.sigla : e.sigla + cnt[i.t]; });
+  return out;
+}
+function calc(p, S) {
+  const eq = eqMap(S), par = S.parametros, it = (p.itens || []).filter(i => eq[i.t]);
+  const W = p.planta?.w || 1000, H = p.planta?.h || 700, bb = p.planta?.bbox || { x: 0, y: 0, w: W, h: H };
+  const mpp = (+p.larguraM || par.larguraPadrao) / (bb.w || W);
+  const linha = LINHAS[p.linha] || LINHAS.amt2018, fio = linha.fio;
+  const g = grp => it.filter(i => eq[i.t].grupo === grp), cnt = t => it.filter(i => i.t === t).length;
+  const cams = g("cftv"), alarm = g("alarme"), centro = { x: bb.x + bb.w / 2, y: bb.y + bb.h / 2 };
+  const rack = it.find(i => i.t === "rack") || centro, central = it.find(i => i.t === "central") || rack;
+  const dist = (a, b) => (Math.abs(a.x - b.x) + Math.abs(a.y - b.y)) * mpp * (+par.fatorRota || 1) + (+par.folga || 0);
+  const mC = Math.ceil(cams.reduce((s, c) => s + dist(c, rack), 0));
+  const alarmCab = alarm.filter(i => i.t !== "central");
+  const mA = fio ? Math.ceil(alarmCab.reduce((s, c) => s + dist(c, central), 0)) : 0;
+  let mCerca = 0; const pts = p.cerca?.pts || [];
+  for (let k = 1; k < pts.length; k++) mCerca += Math.hypot(pts[k][0] - pts[k - 1][0], pts[k][1] - pts[k - 1][1]);
+  if (p.cerca?.fechada && pts.length > 2) mCerca += Math.hypot(pts[0][0] - pts[pts.length - 1][0], pts[0][1] - pts[pts.length - 1][1]);
+  mCerca = Math.ceil(mCerca * mpp);
+  const hastes = mCerca ? Math.ceil(mCerca / (+par.cercaHaste || 2.5)) + 1 : 0, fios = +par.cercaFios || 6;
+  const nc = cams.length, temAl = alarm.length > 0, temCerca = mCerca > 0;
+  const sensores = it.filter(i => ["ivp", "mag", "barreira"].includes(i.t)).length;
+  const B = { cameras: nc, sensores, alarme_fio: fio ? alarmCab.length : 0, dispositivos: it.filter(i => !eq[i.t].marcador).length,
+    central: temAl ? Math.max(1, cnt("central")) : 0, teclados: temAl ? Math.max(1, cnt("teclado")) : 0, sirenes: temAl ? Math.max(1, cnt("sirene")) : 0, eletrificador: temCerca ? Math.max(1, cnt("eletrificador")) : 0,
+    m_cftv: mC, m_alarme: mA, m_cabos: mC + mA, m_infra: Math.ceil((mC + mA) * (+par.infraFator || 0.35)), m_cerca: mCerca, m_cerca_fios: mCerca * fios, hastes, isoladores: hastes * fios, fixo: 1 };
+  const val = b => b?.startsWith("equip:") ? cnt(b.slice(6)) : (B[b] || 0);
+  const okCond = c => { if (!c) return true; if (c === "algum") return nc > 0 || temAl || temCerca; if (c === "cftv") return nc > 0; if (c === "alarme") return temAl;
+    if (c === "fio") return fio && temAl; if (c === "semfio") return !fio && temAl; if (c === "cerca") return temCerca;
+    if (c.startsWith("infra:")) return p.infra === c.slice(6) && (mC + mA) > 0;
+    if (c.startsWith("cftv_faixa:")) { const [a, b] = c.slice(11).split("-").map(Number); return nc >= a && nc <= b; } return true; };
+  const usados = new Set(), itens = [];
+  S.catalogo.filter(m => m.ativo !== false && okCond(m.cond)).forEach(m => {
+    if (m.base?.startsWith("equip:")) usados.add(m.base.slice(6)); else if ({ central: 1, teclados: 1, sirenes: 1, eletrificador: 1 }[m.base]) usados.add({ central: "central", teclados: "teclado", sirenes: "sirene", eletrificador: "eletrificador" }[m.base]);
+    const q = Math.ceil(val(m.base) * (+m.mult || 1) / (+m.cada || 1)); if (q <= 0) return;
+    itens.push({ codigo: m.codigo || "", produto: m.produto || m.nome, nome: m.nome || m.produto, un: m.un || "un", qtd: q, preco: +m.preco || 0, total: q * (+m.preco || 0), grupo: m.grupo || "INFRA", tipo: m.tipo || "Material" });
+  });
+  S.equipamentos.forEach(e => { if (e.marcador || usados.has(e.id)) return; const n = cnt(e.id); if (n) itens.push({ codigo: "", produto: e.nome.toUpperCase(), nome: e.nome, un: "un", qtd: n, preco: 0, total: 0, grupo: { cftv: "CFTV", alarme: "ALARME", cerca: "CERCA" }[e.grupo] || "INFRA", tipo: "Equipamento" }); });
+  const ord = x => (x.tipo === "Equipamento" ? 0 : 10) + GRUPOS.indexOf(x.grupo);
+  itens.sort((a, b) => ord(a) - ord(b));
+  const totalItens = itens.reduce((s, x) => s + x.total, 0), mo = +p.maoDeObra || 0, desc = +p.desconto || 0;
+  return { itens, equip: itens.filter(x => x.tipo === "Equipamento"), materiais: itens.filter(x => x.tipo !== "Equipamento"), totalItens, total: totalItens + mo - desc, mo, desc,
+    m: { cftv: mC, alarme: mA, cerca: mCerca, total: mC + mA }, linha, fio, cams: nc, sensores, semPreco: itens.filter(x => !x.preco).length };
+}
+function etapa(p) {
+  if (p.status === "concluido") return 5; if (p.status === "execucao") return 4; if (p.exportado) return 3;
+  if ((p.itens || []).length) return 2; if (p.planta || (p.fotos || []).length) return 1; return 0;
+}
+function sistemasTxt(p) { return [p.sistemas.cftv && "CFTV", p.sistemas.alarme && (LINHAS[p.linha]?.curto || "Alarme"), p.sistemas.barreira && "Barreiras", p.sistemas.cerca && "Cerca elétrica"].filter(Boolean); }
+function escopoAuto(p) {
+  const s = p.sistemas, partes = [s.cftv && "câmeras de monitoramento", (s.alarme || s.barreira) && `sensores${s.barreira ? " de barreira" : ""} integrados ao sistema de alarme`, s.cerca && "cerca elétrica"].filter(Boolean);
+  const lista = partes.length > 1 ? partes.slice(0, -1).join(", ") + " e " + partes.slice(-1) : (partes[0] || "sistemas de segurança eletrônica");
+  const nec = ["Avaliação do perímetro e dos acessos.", "Definição dos pontos de instalação.", s.cftv && "Monitoramento por câmeras das áreas estratégicas.", (s.alarme || s.barreira) && "Proteção contra invasões e acessos não autorizados.", s.cerca && "Proteção perimetral com cerca elétrica.", "Levantamento da infraestrutura necessária.", (s.alarme || s.barreira) && "Integração dos sensores à central de alarme para monitoramento."].filter(Boolean);
+  return `Foi realizada visita técnica para avaliar o ambiente e definir os pontos estratégicos para instalação de ${lista}.\n\nNecessidades identificadas:\n\n${nec.map(n => "- " + n).join("\n")}`;
+}
+
+/* ---------- Posicionamento automático ---------- */
+function autoSugerir(p, S) {
+  const W = p.planta.w, H = p.planta.h, b = p.planta.bbox || { x: 0, y: 0, w: W, h: H };
+  const mpp = (+p.larguraM || S.parametros.larguraPadrao) / b.w;
+  const ins = Math.min(b.w, b.h) * 0.045, cx = b.x + b.w / 2, cy = b.y + b.h / 2;
+  const itens = [], ang = (x, y) => Math.round(Math.atan2(cy - y, cx - x) * 180 / Math.PI);
+  const add = (t, x, y, a = 0) => itens.push({ id: uid(), t, x: Math.round(x), y: Math.round(y), ang: a });
+  const ac = (p.apoio || []).filter(a => a.t === "acesso"), amb = (p.apoio || []).filter(a => a.t === "ambiente");
+  const L = b.x + ins, R = b.x + b.w - ins, T = b.y + ins, Bt = b.y + b.h - ins;
+  const rk = amb[0] ? { x: amb[0].x + ins * .6, y: amb[0].y + ins * .6 } : { x: cx, y: cy };
+  if (p.sistemas.cftv) {
+    [[L, T], [R, T], [R, Bt], [L, Bt]].forEach(([x, y]) => add("cam", x, y, ang(x, y)));
+    if (b.w * mpp > 25) { add("cam", cx, T, 90); add("cam", cx, Bt, -90); }
+    if (b.h * mpp > 25) { add("cam", L, cy, 0); add("cam", R, cy, 180); }
+    ac.forEach(a => add("cam_dome", a.x + (cx - a.x) * .12, a.y + (cy - a.y) * .12, ang(a.x, a.y) + 180));
+    amb.forEach(a => add("cam_dome", a.x - ins * .6, a.y + ins * .6, ang(a.x, a.y)));
+    add("rack", rk.x, rk.y);
+  }
+  if (p.sistemas.alarme) {
+    const acs = ac.length ? ac : [{ x: cx, y: Bt }];
+    acs.forEach(a => add("mag", a.x, a.y));
+    const ambs = amb.length ? amb : [[.25, .3], [.75, .3], [.25, .72], [.75, .72]].map(([fx, fy]) => ({ x: b.x + b.w * fx, y: b.y + b.h * fy }));
+    ambs.forEach(a => add("ivp", a.x + ins * .5, a.y - ins * .5, ang(a.x, a.y)));
+    add("central", rk.x - ins, rk.y); add("teclado", acs[0].x + (cx - acs[0].x) * .18 + ins * .6, acs[0].y + (cy - acs[0].y) * .18); add("sirene", cx + ins, T + ins * .2);
+  }
+  if (p.sistemas.barreira) { add("barreira", L + ins, Bt - ins * .4); add("barreira", R - ins, Bt - ins * .4); add("barreira", L + ins, T + ins * .4); add("barreira", R - ins, T + ins * .4); }
+  if (p.sistemas.cerca) {
+    p.cerca = { pts: [[b.x, b.y], [b.x + b.w, b.y], [b.x + b.w, b.y + b.h], [b.x, b.y + b.h]].map(q => q.map(Math.round)), fechada: true };
+    add("eletrificador", rk.x, rk.y + ins * 1.2);
+  }
+  p.itens = itens;
+}
+
+/* =========================================================
+   Segurança: login com PIN de 4 dígitos
+   ========================================================= */
+const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) { } } };
+const TRAVA = {
+  ler() { try { return JSON.parse(LS.get("pmx_trava") || '{"n":0,"t":0}'); } catch (e) { return { n: 0, t: 0 }; } },
+  segundos() { const f = this.ler(); return f.t > Date.now() ? Math.ceil((f.t - Date.now()) / 1000) : 0; },
+  erro() { const f = this.ler(); f.n++; if (f.n >= 5) f.t = Date.now() + 30000 * Math.pow(2, Math.min(f.n - 5, 6)); LS.set("pmx_trava", JSON.stringify(f)); return f.n; },
+  ok() { LS.set("pmx_trava", JSON.stringify({ n: 0, t: 0 })); }
+};
+const senhaDe = (email, pin) => `Pmx#${pin}@${String(email).trim().toLowerCase()}`;
+async function hash(s) { const b = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s)); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, "0")).join(""); }
+const AUTH = { modo: "entrar", pin: "", pin1: null, msg: "", ok: false, email: LS.get("pmx_email") || "", travado: false };
+let appPronto = false, ultimaAtividade = Date.now();
+
+function vAuth() {
+  const A = AUTH, nuvem = !DB.local;
+  const titulos = { entrar: "Entrar", criar: "Primeiro acesso", "local-criar": "Crie seu PIN", "local-entrar": "Digite seu PIN" };
+  const sub = { entrar: "Digite seu PIN de 4 dígitos", criar: A.pin1 ? "Confirme o PIN" : "Escolha um PIN de 4 dígitos", "local-criar": A.pin1 ? "Confirme o PIN" : "Escolha um PIN de 4 números para proteger o app", "local-entrar": A.travado ? "App bloqueado por inatividade" : "Acesso protegido" };
+  const seg = TRAVA.segundos();
+  $("#root").innerHTML = `<div class="login"><div class="card">
+    <img class="seal" src="${ASSETS.selo}" alt="Grupo Protemaxi">
+    <h2>Protemaxi Projetos</h2><div class="sub">${titulos[A.modo]} · ${sub[A.modo]}</div>
+    ${nuvem ? `<input class="inp" id="lg_e" type="email" autocomplete="username" placeholder="Seu e-mail" value="${esc(A.email)}" style="text-align:center" ${A.travado ? "disabled" : ""}>` : ""}
+    <div class="dots ${A.err ? "err" : ""}">${[0, 1, 2, 3].map(i => `<i class="${i < A.pin.length ? "on" : ""}"></i>`).join("")}</div>
+    <div class="msg ${A.ok ? "ok" : ""}">${esc(seg ? `Muitas tentativas. Aguarde ${seg}s.` : A.msg)}</div>
+    <div class="pad-num">${[1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => `<button onclick="digito('${n}')">${n}</button>`).join("")}
+      <button class="fn" onclick="${nuvem && !A.travado ? `trocarModo()` : ""}">${nuvem && !A.travado ? (A.modo === "entrar" ? "Primeiro<br>acesso" : "Já tenho<br>acesso") : ""}</button>
+      <button onclick="digito('0')">0</button><button class="fn" onclick="apagarDigito()">⌫</button></div>
+    ${A.travado && nuvem ? `<div style="margin-top:14px;font-size:13px"><a href="#" onclick="sair();return false">Entrar com outro usuário</a></div>` : ""}
+  </div></div>`;
+  A.err = false;
+  if (seg) setTimeout(() => !appPronto || AUTH.travado ? vAuth() : 0, 1000);
+}
+function trocarModo() { AUTH.modo = AUTH.modo === "entrar" ? "criar" : "entrar"; AUTH.pin = ""; AUTH.pin1 = null; AUTH.msg = ""; vAuth(); }
+function apagarDigito() { AUTH.pin = AUTH.pin.slice(0, -1); vAuth(); }
+function digito(d) {
+  if (TRAVA.segundos()) return; const e = $("#lg_e"); if (e) AUTH.email = e.value.trim();
+  if (AUTH.pin.length >= 4) return; AUTH.pin += d; AUTH.msg = ""; vAuth();
+  if (AUTH.pin.length === 4) setTimeout(enviarPin, 120);
+}
+document.addEventListener("keydown", e => { if (!$(".pad-num")) return; if (document.activeElement?.id === "lg_e" && !/^\d$/.test(e.key)) return; if (/^\d$/.test(e.key)) { e.preventDefault(); digito(e.key); } else if (e.key === "Backspace") apagarDigito(); });
+function falha(m) { AUTH.pin = ""; AUTH.err = true; AUTH.ok = false; AUTH.msg = m; vAuth(); }
+async function enviarPin() {
+  const A = AUTH, pin = A.pin;
+  if (!/^\d{4}$/.test(pin)) return falha("O PIN deve ter 4 números.");
+  try {
+    if (A.modo === "local-criar" || A.modo === "criar") {
+      if (!A.pin1) { A.pin1 = pin; A.pin = ""; A.msg = ""; return vAuth(); }
+      if (A.pin1 !== pin) { A.pin1 = null; return falha("Os PINs não conferem. Tente de novo."); }
+      A.pin1 = null;
+      if (A.modo === "local-criar") { const salt = uid(); await DB.kvSet("pin", { salt, h: await hash(salt + pin) }); return liberar(); }
+      if (!/^\S+@\S+\.\S+$/.test(A.email)) return falha("Digite um e-mail válido.");
+      const d = busy("Criando acesso…"); const { data, error } = await sb.auth.signUp({ email: A.email, password: senhaDe(A.email, pin) }); d();
+      if (error) return falha(error.message.includes("registered") ? "Este e-mail já tem acesso. Use “Já tenho acesso”." : error.message);
+      LS.set("pmx_email", A.email);
+      if (data.session) { DB.user = data.user; return liberar(); }
+      A.modo = "entrar"; A.pin = ""; A.ok = true; A.msg = "Acesso criado. Confirme no seu e-mail e depois entre."; return vAuth();
+    }
+    if (TRAVA.segundos()) return falha("");
+    if (A.modo === "local-entrar") {
+      const s = await DB.kvGet("pin"); if (s && await hash(s.salt + pin) === s.h) return liberar();
+      const n = TRAVA.erro(); return falha(n >= 5 ? "" : `PIN incorreto (${5 - n} tentativa${5 - n > 1 ? "s" : ""} antes do bloqueio).`);
+    }
+    if (!/^\S+@\S+\.\S+$/.test(A.email)) return falha("Digite seu e-mail.");
+    const d = busy("Entrando…"); const { data, error } = await sb.auth.signInWithPassword({ email: A.email, password: senhaDe(A.email, pin) }); d();
+    if (error) { const n = TRAVA.erro(); return falha(/confirm/i.test(error.message) ? "Confirme seu e-mail antes de entrar." : n >= 5 ? "" : `E-mail ou PIN incorreto (${5 - n} tentativa${5 - n > 1 ? "s" : ""} antes do bloqueio).`); }
+    LS.set("pmx_email", A.email); DB.user = data.user; liberar();
+  } catch (e) { falha("Erro: " + e.message); }
+}
+function liberar() { TRAVA.ok(); AUTH.pin = ""; AUTH.msg = ""; AUTH.travado = false; ultimaAtividade = Date.now(); if (appPronto) render(); else iniciarApp(); }
+function bloquear() { if (!appPronto || AUTH.travado) return; AUTH.travado = true; AUTH.modo = DB.local ? "local-entrar" : "entrar"; AUTH.pin = ""; AUTH.msg = ""; vAuth(); }
+["pointerdown", "keydown", "touchstart"].forEach(ev => document.addEventListener(ev, () => { if (!AUTH.travado) ultimaAtividade = Date.now(); }, { passive: true }));
+setInterval(() => { const m = +(st.S?.parametros?.bloqueioMin) || 20; if (appPronto && !AUTH.travado && Date.now() - ultimaAtividade > m * 60000) bloquear(); }, 15000);
+async function sair() { if (sb) await sb.auth.signOut(); IMG.clear(); location.reload(); }
+async function trocarPin() {
+  const a = prompt("Novo PIN (4 números):"); if (a === null) return; if (!/^\d{4}$/.test(a)) return alert("O PIN deve ter exatamente 4 números.");
+  const b = prompt("Repita o novo PIN:"); if (a !== b) return alert("Os PINs não conferem.");
+  try {
+    if (DB.local) { const salt = uid(); await DB.kvSet("pin", { salt, h: await hash(salt + a) }); }
+    else { const { error } = await sb.auth.updateUser({ password: senhaDe(DB.user.email, a) }); if (error) throw error; }
+    toast("PIN alterado");
+  } catch (e) { alert("Não foi possível alterar: " + e.message); }
+}
+
+/* =========================================================
+   Estado, navegação e telas
+   ========================================================= */
+const st = { S: null, projetos: [], view: "dashboard", filtro: "todos", busca: "", ed: null, cfgTab: "perfil", equipe: null };
+function go(view, arg) { st.view = view; st.arg = arg; render(); window.scrollTo(0, 0); }
+async function recarregar() { st.projetos = await DB.listar(); }
+const getP = id => st.projetos.find(p => p.id === id);
+
+function shell(inner) {
+  const nav = [["dashboard", "Painel", I.dash], ["projetos", "Projetos", I.folder], ["novo", "Novo projeto", I.plus], ["config", "Configurações", I.gear]];
+  const P = st.S.perfil;
+  return `<div class="app"><aside class="side">
+    <div class="brand"><div class="mk"><img src="${P.logo || ASSETS.selo}" alt=""></div><div><b>Protemaxi</b><small>Projetos</small></div></div>
+    <nav class="nav">${nav.map(([v, l, ic]) => `<button class="${st.view === v || (v === "projetos" && ["editor", "editar"].includes(st.view)) ? "on" : ""}" onclick="go('${v}')">${ic}<span class="lbl">${l}</span></button>`).join("")}</nav>
+    <div class="foot"><span class="mode"><span class="dot" style="background:${DB.local ? "#f59e0b" : "#10b981"}"></span>${DB.local ? "Modo local" : "Nuvem conectada"}</span><br>
+      ${DB.user ? esc(DB.user.email) + "<br>" : ""}<a href="#" onclick="bloquear();return false" style="color:#9fb4d6">Bloquear</a>${DB.user ? ` · <a href="#" onclick="sair();return false" style="color:#9fb4d6">Sair</a>` : ""}</div>
+  </aside><main class="main">${inner}</main></div>`;
+}
+function topo(t, sub, right = "") {
+  return `<div class="top"><div><h1>${t}</h1>${sub ? `<p>${sub}</p>` : ""}</div><div class="tright">${right}
+    <button class="btn icon-btn" title="Bloquear" onclick="bloquear()">${I.lock}</button>
+    <button class="btn icon-btn" title="Configurações" onclick="go('config')">${I.gear}</button></div></div>`;
+}
+
+/* ---------- Painel ---------- */
+function vDashboard() {
+  const ps = st.projetos, n = s => ps.filter(p => p.status === s).length, tot = ps.length, pc = v => tot ? Math.round(v / tot * 100) : 0;
+  const nv = n("novo"), ex = n("execucao"), ok = n("concluido"), et = ETAPAS.map((_, i) => ps.filter(p => etapa(p) === i).length);
+  const cs = ps.map(p => calc(p, st.S)), camsTot = cs.reduce((s, c) => s + c.cams, 0), sensTot = cs.reduce((s, c) => s + c.sensores, 0);
+  const kpi = (cls, lb, v, ic, sub, w) => `<div class="card kpi ${cls}"><div class="ic">${ic}</div><div class="lb">${lb}</div><div class="vl">${v}</div><div class="sub">${sub}</div><div class="bar"><i style="width:${w}%"></i></div></div>`;
+  return topo("Painel de projetos", "Visão geral de todos os projetos da equipe", `<button class="btn pri" onclick="go('novo')">${I.plus}<span class="hide-m">Novo projeto</span></button>`) + `
+  <div class="grid kpis">
+    ${kpi("k-tot", "Total de projetos", tot, I.folder, `${camsTot} câmeras · ${sensTot} sensores projetados`, 100)}
+    ${kpi("k-novo", "Projetos novos", nv, I.spark, `${pc(nv)}% do total`, pc(nv))}
+    ${kpi("k-exec", "Em execução", ex, I.clock, `${pc(ex)}% do total`, pc(ex))}
+    ${kpi("k-ok", "Concluídos", ok, I.check, `${pc(ok)}% do total`, pc(ok))}
+  </div>
+  <div class="card pad" style="margin-top:16px"><h3>Passo a passo dos projetos</h3>
+    <div class="flow">${ETAPAS.map((e, i) => `<div class="step"><div class="cir" style="background:${ETAPA_COR[i]}">${et[i]}</div><b>${i + 1}. ${e}</b><small>${et[i] === 1 ? "1 projeto" : et[i] + " projetos"}</small></div>`).join("")}</div>
+    <div style="margin-top:22px"><div class="stack">${tot ? `<i style="width:${pc(nv)}%;background:var(--novo)"></i><i style="width:${pc(ex)}%;background:var(--exec)"></i><i style="width:${pc(ok)}%;background:var(--ok)"></i>` : ""}</div>
+    <div class="legend"><span><i style="background:var(--novo)"></i>Novos ${nv}</span><span><i style="background:var(--exec)"></i>Em execução ${ex}</span><span><i style="background:var(--ok)"></i>Concluídos ${ok}</span><span><i style="background:var(--tot)"></i>Total ${tot}</span></div></div>
+  </div>
+  <div class="card" style="margin-top:16px"><div class="pad" style="padding-bottom:0;display:flex;justify-content:space-between;align-items:center"><h3>Projetos recentes</h3><button class="btn sm" onclick="go('projetos')">Ver todos</button></div>
+  ${ps.length ? `<div style="overflow:auto"><table class="tb"><thead><tr><th>Projeto</th><th class="hide-m">Cliente</th><th>Status</th><th class="hide-m">Etapa</th><th class="hide-m">Valor</th><th class="hide-m">Atualizado</th></tr></thead><tbody>
+  ${ps.slice(0, 8).map((p, k) => `<tr class="click" onclick="abrir('${p.id}')"><td><b>${esc(p.nome)}</b><div class="muted" style="font-size:12px">${cs[k].cams} câm · ${cs[k].sensores} sens</div></td><td class="hide-m">${esc(p.cliente || "-")}</td><td>${chip(p.status)}</td><td class="hide-m">${miniEtapa(p)}</td><td class="hide-m money">${cs[k].total ? BRL(cs[k].total) : "-"}</td><td class="hide-m muted">${fmtData(p.updated_at)}</td></tr>`).join("")}
+  </tbody></table></div>` : `<div class="empty">${I.folder}<p>Nenhum projeto ainda.<br>Clique em <b>Novo projeto</b> para começar.</p></div>`}</div>`;
+}
+const chip = s => `<span class="chip ${s}"><i></i>${STATUS[s] || s}</span>`;
+const miniEtapa = p => { const e = etapa(p); return `<div class="mini" title="${ETAPAS[e]}">${ETAPAS.map((_, i) => `<i style="${i <= e ? "background:" + ETAPA_COR[e] : ""}"></i>`).join("")}</div>`; };
+
+/* ---------- Lista ---------- */
+function vProjetos() {
+  const q = st.busca.toLowerCase();
+  const ps = st.projetos.filter(p => (st.filtro === "todos" || p.status === st.filtro) && (!q || (p.nome + " " + (p.cliente || "") + " " + (p.endereco || "")).toLowerCase().includes(q)));
+  return topo("Projetos", `${st.projetos.length} projetos cadastrados`, `<button class="btn pri" onclick="go('novo')">${I.plus}<span class="hide-m">Novo projeto</span></button>`) + `
+  <div class="filters"><div class="seg">${[["todos", "Todos"], ["novo", "Novos"], ["execucao", "Em execução"], ["concluido", "Concluídos"]].map(([k, l]) => `<button class="${st.filtro === k ? "on" : ""}" onclick="st.filtro='${k}';render()">${l}</button>`).join("")}</div>
+  <input class="inp" id="busca" style="max-width:300px" placeholder="Buscar projeto, cliente, endereço…" value="${esc(st.busca)}" oninput="st.busca=this.value;clearTimeout(window._bt);window._bt=setTimeout(()=>{render();const i=$('#busca');i.focus();i.setSelectionRange(i.value.length,i.value.length)},300)"></div>
+  ${ps.length ? `<div class="grid pcards">${ps.map(p => `<div class="card pcard" onclick="abrir('${p.id}')">
+    <div class="th" data-thumb="${esc(p.planta?.ref || p.fotos?.[0]?.ref || "")}">${p.planta || p.fotos?.length ? "" : I.folder}</div>
+    <div class="meta"><h4>${esc(p.nome)}</h4>${chip(p.status)}</div>
+    <div class="muted" style="font-size:12.5px">${esc(p.cliente || "Sem cliente")} · ${fmtData(p.updated_at)}</div>
+    <div class="meta">${miniEtapa(p)}<div onclick="event.stopPropagation()" style="display:flex;gap:4px">
+      <select class="inp" style="padding:5px 8px;font-size:12px;width:auto" onchange="mudarStatus('${p.id}',this.value)">${Object.entries(STATUS).map(([k, l]) => `<option value="${k}" ${p.status === k ? "selected" : ""}>${l}</option>`).join("")}</select>
+      <button class="btn sm ghost" title="Duplicar" onclick="duplicar('${p.id}')">${I.copy}</button>
+      <button class="btn sm ghost danger" title="Excluir" onclick="excluir('${p.id}')">${I.trash}</button></div></div>
+  </div>`).join("")}</div>` : `<div class="card empty">${I.folder}<p>Nenhum projeto encontrado.</p></div>`}`;
+}
+async function carregarThumbs() { for (const el of $$("[data-thumb]")) { const r = el.dataset.thumb; if (!r) continue; try { el.style.backgroundImage = `url("${await DB.img(r)}")`; } catch (e) { } } }
+async function mudarStatus(id, s) { const p = getP(id); p.status = s; await DB.salvar(p); toast("Status: " + STATUS[s]); render(); }
+async function duplicar(id) { const p = clone(getP(id)); p.id = uid(); p.nome += " (cópia)"; p.status = "novo"; p.exportado = false; p.created_at = null; await DB.salvar(p); await recarregar(); render(); toast("Projeto duplicado"); }
+async function excluir(id) { const p = getP(id); if (!confirm(`Excluir o projeto "${p.nome}"? Essa ação não pode ser desfeita.`)) return; await DB.excluir(p); await recarregar(); render(); toast("Projeto excluído"); }
+const abrir = id => go("editor", id);
+
+/* ---------- Formulário ---------- */
+function novoProjeto() {
+  return { id: uid(), nome: "", cliente: "", telefone: "", endereco: "", tipo: "Comercial", sistemas: { cftv: true, alarme: true, cerca: false, barreira: false },
+    linha: "amt2018", infra: "eletroduto", larguraM: st.S.parametros.larguraPadrao, descricao: "", escopo: "", tituloFotos: st.S.apres.tituloFotos + " - ÁREA EXTERNA",
+    valores: true, maoDeObra: 0, desconto: 0, logoCliente: null, planta: null, fotos: [], itens: [], apoio: [], cerca: { pts: [], fechada: true }, status: "novo", exportado: false };
+}
+function vForm() {
+  const p = st.form, ed = !!getP(p.id);
+  return topo(ed ? "Editar dados do projeto" : "Novo projeto", "Fotos do local, planta e descrição — o projeto é montado a partir disso",
+    `<button class="btn" onclick="${ed ? `go('editor','${p.id}')` : "go('projetos')"}">${I.back}<span class="hide-m">Voltar</span></button>`) + `
+  <div class="grid two">
+   <div class="card pad">
+    <div class="sec-t" style="margin-top:0">Dados do cliente</div>
+    <div class="fg">
+      <div class="full"><label class="f">Nome do projeto / local *</label><input class="inp" id="f_nome" value="${esc(p.nome)}" placeholder="Ex.: Mall Jardins de Fátima"></div>
+      <div><label class="f">Cliente</label><input class="inp" id="f_cliente" value="${esc(p.cliente)}"></div>
+      <div><label class="f">Telefone</label><input class="inp" id="f_telefone" value="${esc(p.telefone)}" inputmode="tel"></div>
+      <div class="full"><label class="f">Endereço</label><input class="inp" id="f_endereco" value="${esc(p.endereco)}"></div>
+      <div><label class="f">Tipo de imóvel</label><select class="inp" id="f_tipo">${["Comercial", "Residencial", "Condomínio", "Industrial", "Galpão", "Obra", "Rural"].map(t => `<option ${p.tipo === t ? "selected" : ""}>${t}</option>`).join("")}</select></div>
+      <div><label class="f">Status</label><select class="inp" id="f_status">${Object.entries(STATUS).map(([k, l]) => `<option value="${k}" ${p.status === k ? "selected" : ""}>${l}</option>`).join("")}</select></div>
+    </div>
+    <div class="sec-t">Sistemas do projeto</div>
+    <div class="checks">${[["cftv", "CFTV (câmeras)"], ["alarme", "Alarme"], ["barreira", "Barreiras"], ["cerca", "Cerca elétrica"]].map(([k, l]) => `<label class="ck"><input type="checkbox" id="s_${k}" ${p.sistemas[k] ? "checked" : ""}>${l}</label>`).join("")}</div>
+    <div class="fg" style="margin-top:14px">
+      <div><label class="f">Linha de alarme</label><select class="inp" id="f_linha">${Object.entries(LINHAS).map(([k, l]) => `<option value="${k}" ${p.linha === k ? "selected" : ""}>${l.nome}</option>`).join("")}</select></div>
+      <div><label class="f">Infraestrutura dos cabos</label><select class="inp" id="f_infra">${Object.entries(INFRA).map(([k, l]) => `<option value="${k}" ${p.infra === k ? "selected" : ""}>${l}</option>`).join("")}</select></div>
+      <div class="full"><label class="f">Largura real da área na planta (metros)</label><input class="inp" id="f_larg" type="number" min="1" step="0.5" value="${esc(p.larguraM)}"><div class="muted" style="font-size:12px;margin-top:5px">Escala para calcular cabos, eletrodutos e cerca. Ex.: terreno de 40 x 60 m com os 40 m na horizontal → 40.</div></div>
+      <div class="full"><label class="f">Descrição do local (uso interno)</label><textarea class="inp" id="f_desc" placeholder="Ex.: galpão em obra, frente para a avenida, muro lateral de 3 m, cliente quer cobrir estacionamento e acessos…">${esc(p.descricao)}</textarea></div>
+      <div class="full"><label class="f" style="display:flex;justify-content:space-between;align-items:center">Texto do ESCOPO (vai na apresentação)<button class="btn sm" type="button" onclick="gerarEscopo()">${I.spark}Gerar automático</button></label><textarea class="inp" id="f_escopo" style="min-height:170px" placeholder="Deixe em branco para gerar automaticamente">${esc(p.escopo)}</textarea></div>
+    </div>
+    <div class="sec-t">Proposta financeira</div>
+    <div class="fg">
+      <div class="full"><label class="ck" style="display:inline-flex"><input type="checkbox" id="f_valores" ${p.valores !== false ? "checked" : ""}>Incluir slide de proposta financeira com valores</label></div>
+      <div><label class="f">Mão de obra / instalação (R$)</label><input class="inp" id="f_mo" type="number" min="0" step="0.01" value="${esc(p.maoDeObra || 0)}"></div>
+      <div><label class="f">Desconto (R$)</label><input class="inp" id="f_desc_v" type="number" min="0" step="0.01" value="${esc(p.desconto || 0)}"></div>
+    </div>
+   </div>
+   <div class="grid" style="align-content:start">
+    <div class="card pad"><div class="sec-t" style="margin-top:0">Planta baixa / croqui</div>
+      <div class="drop" id="dropPlanta" onclick="$('#inPlanta').click()">${I.up}<div style="font-weight:700;margin-top:6px">Enviar planta</div><div class="muted" style="font-size:12px">PDF, PNG, JPG ou foto do croqui · DWG: exporte em PDF</div></div>
+      <input type="file" id="inPlanta" hidden accept="image/*,.pdf,.dwg,.dxf">
+      <div style="margin-top:10px">${p.planta ? `<div class="thumbs"><div class="ph"><div class="im plain" data-thumb="${esc(p.planta.ref)}"><button onclick="removerPlanta()">×</button></div></div></div>` : `<button class="btn sm" onclick="usarCroqui()">Sem planta? Usar croqui em branco</button>`}</div>
+    </div>
+    <div class="card pad"><div class="sec-t" style="margin-top:0">Fotos do local</div>
+      <div class="drop" id="dropFotos" onclick="$('#inFotos').click()">${I.up}<div style="font-weight:700;margin-top:6px">Enviar fotos</div><div class="muted" style="font-size:12px">Várias de uma vez · 6 por slide, com legenda</div></div>
+      <input type="file" id="inFotos" hidden accept="image/*" multiple>
+      <label class="f" style="margin-top:12px">Título do slide de fotos</label><input class="inp" id="f_tfotos" value="${esc(p.tituloFotos || "")}">
+      <div class="thumbs">${p.fotos.map((f, i) => `<div class="ph"><div class="im" data-thumb="${esc(f.ref)}"><button onclick="removerFoto(${i})">×</button></div><input class="inp" data-leg="${i}" value="${esc(f.legenda || "")}" placeholder="LEGENDA"></div>`).join("")}</div>
+    </div>
+    <div class="card pad"><div class="sec-t" style="margin-top:0">Logo do cliente (opcional)</div>
+      <div class="muted" style="font-size:12px;margin-bottom:10px">Aparece na capa ao lado da Protemaxi. Sem logo, entra o selo "Desde 2001".</div>
+      ${p.logoCliente ? `<div class="thumbs"><div class="ph"><div class="im plain" data-thumb="${esc(p.logoCliente)}" style="background-size:contain;background-repeat:no-repeat;background-color:#fff"><button onclick="removerLogoCliente()">×</button></div></div></div>` : `<button class="btn sm" onclick="$('#inLogoC').click()">${I.up}Enviar logo</button>`}
+      <input type="file" id="inLogoC" hidden accept="image/*">
+    </div>
+    <div class="card pad" style="display:flex;flex-direction:column;gap:8px">
+      <button class="btn pri" onclick="salvarForm(true)">${I.spark}Salvar e montar projeto automático</button>
+      <button class="btn" onclick="salvarForm(false)">${I.save}Salvar e abrir editor</button>
+    </div>
+   </div>
+  </div>`;
+}
+function lerForm() {
+  const p = st.form, v = id => $("#" + id)?.value ?? "";
+  if (!$("#f_nome")) return;
+  Object.assign(p, { nome: v("f_nome").trim(), cliente: v("f_cliente"), telefone: v("f_telefone"), endereco: v("f_endereco"), tipo: v("f_tipo"), status: v("f_status"), linha: v("f_linha"), infra: v("f_infra"),
+    larguraM: +v("f_larg") || st.S.parametros.larguraPadrao, descricao: v("f_desc"), escopo: v("f_escopo"), tituloFotos: v("f_tfotos"), valores: $("#f_valores").checked, maoDeObra: +v("f_mo") || 0, desconto: +v("f_desc_v") || 0 });
+  ["cftv", "alarme", "barreira", "cerca"].forEach(k => p.sistemas[k] = $("#s_" + k).checked);
+  $$("[data-leg]").forEach(el => { const f = p.fotos[+el.dataset.leg]; if (f) f.legenda = el.value.toUpperCase(); });
+}
+function gerarEscopo() { lerForm(); if (st.form.escopo && !confirm("Substituir o texto atual do escopo?")) return; st.form.escopo = escopoAuto(st.form); render(); }
+function bindForm() {
+  const dz = (id, fn) => { const d = $(id); d.ondragover = e => { e.preventDefault(); d.classList.add("over"); }; d.ondragleave = () => d.classList.remove("over"); d.ondrop = e => { e.preventDefault(); d.classList.remove("over"); fn([...e.dataTransfer.files]); }; };
+  $("#inPlanta").onchange = e => enviarPlanta(e.target.files[0]); $("#inFotos").onchange = e => enviarFotos([...e.target.files]); $("#inLogoC").onchange = e => enviarLogoCliente(e.target.files[0]);
+  dz("#dropPlanta", f => enviarPlanta(f[0])); dz("#dropFotos", enviarFotos); carregarThumbs();
+}
+async function enviarPlanta(file) {
+  if (!file) return; lerForm(); const ext = file.name.split(".").pop().toLowerCase();
+  if (["dwg", "dxf"].includes(ext)) { alert("Arquivos DWG/DXF não abrem no navegador.\n\nNo AutoCAD: Plotar (Ctrl+P) → impressora \"DWG To PDF.pc3\" → salve em PDF e envie aqui.\nTambém serve exportar como PNG/JPG ou tirar foto do croqui."); return; }
+  const done = busy("Processando planta…");
+  try {
+    const raw = ext === "pdf" || file.type === "application/pdf" ? await pdfToImage(file) : await blobToDataURL(file);
+    const c = await compress(raw, 2400, "image/jpeg", 0.9), bbox = await contentBBox(c.data);
+    if (st.form.planta?.ref) await DB.remover(st.form.planta.ref);
+    st.form.planta = { ref: await DB.upload(st.form.id, c.data, "planta"), w: c.w, h: c.h, bbox, nome: file.name }; render();
+  } catch (e) { console.error(e); alert("Não consegui ler esse arquivo: " + e.message); } finally { done(); }
+}
+async function usarCroqui() { lerForm(); st.form.planta = { ref: await DB.upload(st.form.id, croquiBranco(), "croqui"), w: 1800, h: 1200, bbox: { x: 120, y: 120, w: 1560, h: 960 }, nome: "Croqui" }; render(); }
+async function removerPlanta() { lerForm(); await DB.remover(st.form.planta.ref); st.form.planta = null; render(); }
+async function enviarFotos(files) {
+  lerForm(); const done = busy(`Enviando ${files.length} foto(s)…`);
+  try { for (const f of files) { if (!f.type.startsWith("image/")) continue; const c = await compress(await blobToDataURL(f), 1600, "image/jpeg", 0.82); st.form.fotos.push({ ref: await DB.upload(st.form.id, c.data, f.name), nome: f.name, legenda: "" }); } }
+  catch (e) { alert("Erro ao enviar foto: " + e.message); } finally { done(); render(); }
+}
+async function removerFoto(i) { lerForm(); await DB.remover(st.form.fotos[i].ref); st.form.fotos.splice(i, 1); render(); }
+async function enviarLogoCliente(f) { if (!f) return; lerForm(); const c = await compress(await blobToDataURL(f), 700, "image/png"); st.form.logoCliente = await DB.upload(st.form.id, c.data, "logo-cliente"); render(); }
+async function removerLogoCliente() { lerForm(); await DB.remover(st.form.logoCliente); st.form.logoCliente = null; render(); }
+async function salvarForm(auto) {
+  lerForm(); const p = st.form; if (!p.nome) { alert("Dê um nome ao projeto."); $("#f_nome").focus(); return; }
+  if (!p.escopo.trim()) p.escopo = escopoAuto(p);
+  if (auto) {
+    if (!p.planta) { if (!confirm("Ainda não há planta. Usar um croqui em branco para montar o projeto?")) return; await usarCroqui(); lerForm(); }
+    if (p.itens.length && !confirm("O projeto já tem dispositivos posicionados. Substituir pelo posicionamento automático?")) auto = false;
+    if (auto) autoSugerir(p, st.S);
+  }
+  const done = busy("Salvando…");
+  try { delete p._v; await DB.salvar(p); await recarregar(); toast(auto ? "Projeto montado — ajuste o que quiser no editor" : "Projeto salvo"); go("editor", p.id); }
+  catch (e) { alert("Erro ao salvar: " + e.message); } finally { done(); }
+}
+
+/* =========================================================
+   Editor de planta
+   ========================================================= */
+function vEditor() {
+  const p = getP(st.arg); if (!p) return topo("Projeto não encontrado", "");
+  if (!st.ed || st.ed.id !== p.id) st.ed = { id: p.id, tool: "sel", sel: null, zoom: 1, src: null };
+  const S = st.S, c = calc(p, S), E = st.ed, eq = eqMap(S), nums = numerar(p, S);
+  const tool = (id, nome, cor, sig) => `<button class="tool ${E.tool === id ? "on" : ""}" onclick="setTool('${id}')"><span class="sw" style="background:${cor}">${sig}</span>${nome}</button>`;
+  const grupos = { cftv: "CFTV", alarme: "Alarme", cerca: "Cerca", infra: "Infraestrutura" }, sel = (p.itens || []).find(i => i.id === E.sel);
+  return topo(esc(p.nome), `${esc(p.cliente || "")} ${p.endereco ? "· " + esc(p.endereco) : ""} &nbsp; ${chip(p.status)}`,
+    `<button class="btn" onclick="go('projetos')">${I.back}<span class="hide-m">Projetos</span></button>
+     <button class="btn" onclick="editarDados('${p.id}')">${I.edit}<span class="hide-m">Dados e fotos</span></button>
+     <button class="btn" onclick="exportInside('${p.id}')" title="Lista no formato do Inside">${I.list}<span class="hide-m">Lista Inside</span></button>
+     <button class="btn" onclick="exportar('${p.id}','pdf')">${I.pdf}<span class="hide-m">PDF</span></button>
+     <button class="btn pri" onclick="exportar('${p.id}','pptx')">${I.ppt}<span class="hide-m">Gerar PowerPoint</span></button>`) + `
+  <div class="ed">
+    <div class="card tools">
+      ${tool("sel", "Selecionar / mover", "#334155", "↖")}
+      ${Object.entries(grupos).map(([g, gl]) => { const l = S.equipamentos.filter(e => e.grupo === g); return l.length ? `<div class="tg">${gl}</div>` + l.map(e => tool(e.id, e.marcador ? "Local do rack" : e.nome, e.cor, e.sigla)).join("") : ""; }).join("")}
+      ${tool("cerca", "Desenhar cerca", "#b91c1c", "~")}
+      <div class="tg">Marcações de apoio</div>
+      ${tool("acesso", "Acesso (porta/portão)", "#64748b", "AC")}
+      ${tool("ambiente", "Ambiente (cômodo)", "#64748b", "AM")}
+      ${tool("apagar", "Apagar", "#ef4444", "×")}
+      <div class="tg">Ações</div>
+      <button class="tool" onclick="sugerir()"><span class="sw" style="background:var(--pri)">★</span>Posicionar automático</button>
+      <button class="tool" onclick="limparCerca()"><span class="sw" style="background:#94a3b8">~</span>Limpar cerca</button>
+      <button class="tool" onclick="limparTudo()"><span class="sw" style="background:#94a3b8">⌫</span>Limpar tudo</button>
+    </div>
+    <div class="canvas-wrap" id="cw">
+      <div class="zoom"><button class="btn sm ghost" onclick="zoom(-1)">−</button><button class="btn sm ghost" onclick="zoom(0)">${Math.round(E.zoom * 100)}%</button><button class="btn sm ghost" onclick="zoom(1)">+</button></div>
+      ${p.planta ? `<svg id="plan" viewBox="0 0 ${p.planta.w} ${p.planta.h}" style="width:${E.zoom * 100}%;min-width:${Math.min(900, p.planta.w) * E.zoom}px"></svg>` : `<div class="empty">Este projeto ainda não tem planta.<br><br><button class="btn pri" onclick="editarDados('${p.id}')">Enviar planta ou usar croqui</button></div>`}
+    </div>
+    <div class="card panel">
+      ${sel ? `<h3>${esc(eq[sel.t]?.nome || "")} <span class="muted">${nums[sel.id] || ""}</span></h3>
+        ${eq[sel.t]?.grupo === "cftv" ? `<label class="f" id="lbAng">Direção da câmera (${sel.ang || 0}°)</label><input type="range" min="-180" max="180" value="${sel.ang || 0}" style="width:100%" oninput="girar(this.value)">
+        <label class="f" style="margin-top:8px" id="lbFov">Abertura do campo de visão (${sel.fov || 90}°)</label><input type="range" min="30" max="180" value="${sel.fov || 90}" style="width:100%" oninput="abertura(this.value)">` : ""}
+        <label class="f" style="margin-top:8px">Observação (opcional)</label><input class="inp" value="${esc(sel.obs || "")}" onchange="obsItem(this.value)" placeholder="Ex.: portão da garagem">
+        <div style="display:flex;gap:6px;margin-top:10px"><button class="btn sm danger" onclick="apagarSel()">${I.trash}Apagar</button><button class="btn sm" onclick="st.ed.sel=null;render()">Fechar</button></div><hr style="border:0;border-top:1px solid var(--line);margin:16px 0">` : ""}
+      <h3>Quantitativo</h3>
+      ${c.itens.length ? c.itens.map(e => `<div class="kv"><span>${esc(e.nome)}</span><b>${e.qtd} ${e.un}</b></div>`).join("") : `<div class="hint">Escolha um equipamento à esquerda e clique na planta — ou use <b>Posicionar automático</b>.</div>`}
+      <div class="sec-t">Cabeamento estimado</div>
+      <div class="kv"><span>Cabo de rede (CFTV)</span><b>${c.m.cftv} m</b></div>
+      <div class="kv"><span>Cabo de rede (alarme)</span><b>${c.fio ? c.m.alarme + " m" : "sem fio"}</b></div>
+      ${c.m.cerca ? `<div class="kv"><span>Perímetro de cerca</span><b>${c.m.cerca} m</b></div>` : ""}
+      <div class="sec-t">Valores</div>
+      <div class="kv"><span>Equipamentos e materiais</span><b class="money">${BRL(c.totalItens)}</b></div>
+      ${c.mo ? `<div class="kv"><span>Mão de obra</span><b class="money">${BRL(c.mo)}</b></div>` : ""}${c.desc ? `<div class="kv"><span>Desconto</span><b class="money">− ${BRL(c.desc)}</b></div>` : ""}
+      <div class="kv" style="font-size:14.5px"><span><b>Total</b></span><b class="money" style="color:var(--pri2)">${BRL(c.total)}</b></div>
+      ${c.semPreco ? `<div class="hint" style="margin-top:10px">${c.semPreco} item(ns) sem preço no catálogo — defina em Configurações → Catálogo (Inside).</div>` : ""}
+      <div class="hint" style="margin-top:12px">${E.tool === "cerca" ? "Clique nos cantos do muro para desenhar a cerca. Ela fecha automaticamente." : "Dica: marque <b>acessos</b> e <b>ambientes</b> antes do automático — ele coloca câmeras dome e sensores nesses pontos. Arraste para mover."}</div>
+    </div>
+  </div>`;
+}
+async function desenharPlanta() {
+  const svg = $("#plan"); if (!svg) return; const p = getP(st.arg);
+  if (!st.ed.src || st.ed.srcRef !== p.planta.ref) { st.ed.src = await DB.img(p.planta.ref); st.ed.srcRef = p.planta.ref; }
+  svg.innerHTML = svgConteudo(p); bindSvg(svg);
+}
+function svgConteudo(p) {
+  const S = st.S, eq = eqMap(S), W = p.planta.w, H = p.planta.h, r = Math.max(10, W * 0.013), nums = numerar(p, S);
+  let s = `<image href="${st.ed.src}" x="0" y="0" width="${W}" height="${H}"/>`;
+  const pts = p.cerca?.pts || [];
+  if (pts.length) { s += `<${p.cerca.fechada && pts.length > 2 ? "polygon" : "polyline"} points="${pts.map(q => q.join(",")).join(" ")}" fill="none" stroke="#dc2626" stroke-width="${r * .35}" stroke-dasharray="${r * .9} ${r * .5}" stroke-linejoin="round"/>` + pts.map(q => `<circle cx="${q[0]}" cy="${q[1]}" r="${r * .35}" fill="#dc2626"/>`).join(""); }
+  (p.apoio || []).forEach(a => s += `<g data-ap="${a.id}" style="cursor:pointer"><rect x="${a.x - r * 1.3}" y="${a.y - r * .7}" width="${r * 2.6}" height="${r * 1.4}" rx="${r * .3}" fill="rgba(100,116,139,.15)" stroke="#64748b" stroke-dasharray="4 3" stroke-width="${r * .12}"/><text x="${a.x}" y="${a.y + r * .3}" text-anchor="middle" font-size="${r * .8}" font-family="Inter,Arial" font-weight="700" fill="#475569">${a.t === "acesso" ? "ACESSO" : "AMB."}</text></g>`);
+  (p.itens || []).forEach(i => {
+    const e = eq[i.t]; if (!e) return;
+    if (e.grupo === "cftv") { const L = W * 0.085, f = (i.fov || 90) / 2, a1 = (i.ang - f) * Math.PI / 180, a2 = (i.ang + f) * Math.PI / 180;
+      s += `<path d="M${i.x},${i.y} L${i.x + L * Math.cos(a1)},${i.y + L * Math.sin(a1)} A${L},${L} 0 ${f * 2 > 180 ? 1 : 0} 1 ${i.x + L * Math.cos(a2)},${i.y + L * Math.sin(a2)} Z" fill="${e.cor}" fill-opacity=".16" stroke="${e.cor}" stroke-opacity=".5" stroke-width="${r * .08}" pointer-events="none"/>`; }
+    const on = st.ed.sel === i.id, lab = nums[i.id] || e.sigla;
+    s += `<g data-id="${i.id}" style="cursor:grab">${on ? `<circle cx="${i.x}" cy="${i.y}" r="${r * 1.55}" fill="none" stroke="#244b86" stroke-width="${r * .18}" stroke-dasharray="${r * .4} ${r * .25}"/>` : ""}
+      ${e.marcador ? `<rect x="${i.x - r * 1.1}" y="${i.y - r * 1.1}" width="${r * 2.2}" height="${r * 2.2}" rx="${r * .3}" fill="${e.cor}" stroke="#fff" stroke-width="${r * .15}"/>` : `<circle cx="${i.x}" cy="${i.y}" r="${r}" fill="${e.cor}" stroke="#fff" stroke-width="${r * .15}"/>`}
+      <text x="${i.x}" y="${i.y + r * .33}" text-anchor="middle" font-size="${lab.length > 2 ? r * .7 : r * .85}" font-family="Inter,Arial" font-weight="800" fill="#fff" pointer-events="none">${esc(lab)}</text></g>`;
+  });
+  return s;
+}
+function bindSvg(svg) {
+  if (svg._bound) return; svg._bound = true;
+  const pt = e => { const m = svg.getScreenCTM().inverse(); const q = new DOMPoint(e.clientX, e.clientY).matrixTransform(m); return { x: Math.round(q.x), y: Math.round(q.y) }; };
+  let drag = null, raf = 0;
+  svg.addEventListener("pointerdown", e => {
+    const p = getP(st.arg), E = st.ed, q = pt(e), g = e.target.closest("[data-id]"), ga = e.target.closest("[data-ap]");
+    if (E.tool === "apagar") { if (g) p.itens = p.itens.filter(i => i.id !== g.dataset.id); else if (ga) p.apoio = p.apoio.filter(a => a.id !== ga.dataset.ap); else return; mudou(true); return; }
+    if (g && E.tool !== "cerca") { E.sel = g.dataset.id; const it = p.itens.find(i => i.id === E.sel); drag = { it, dx: q.x - it.x, dy: q.y - it.y, moved: false, sel: true }; svg.setPointerCapture(e.pointerId); svg.innerHTML = svgConteudo(p); return; }
+    if (ga && E.tool === "sel") { const a = p.apoio.find(x => x.id === ga.dataset.ap); drag = { it: a, dx: q.x - a.x, dy: q.y - a.y }; svg.setPointerCapture(e.pointerId); return; }
+    if (E.tool === "cerca") { p.cerca = p.cerca || { pts: [], fechada: true }; p.cerca.pts.push([q.x, q.y]); mudou(true); return; }
+    if (E.tool === "acesso" || E.tool === "ambiente") { p.apoio = p.apoio || []; p.apoio.push({ id: uid(), t: E.tool, x: q.x, y: q.y }); mudou(true); return; }
+    if (E.tool !== "sel") { if (!eqMap(st.S)[E.tool]) return; const n = { id: uid(), t: E.tool, x: q.x, y: q.y, ang: -90 }; p.itens.push(n); E.sel = n.id; mudou(true); return; }
+    E.sel = null; mudou(false);
+  });
+  svg.addEventListener("pointermove", e => { if (!drag) return; const q = pt(e); drag.it.x = q.x - drag.dx; drag.it.y = q.y - drag.dy; drag.moved = true; if (!raf) raf = requestAnimationFrame(() => { raf = 0; svg.innerHTML = svgConteudo(getP(st.arg)); }); });
+  const up = () => { if (drag) { const m = drag.moved, s = drag.sel; drag = null; if (m) mudou(true); else if (s) mudou(false); } };
+  svg.addEventListener("pointerup", up); svg.addEventListener("pointercancel", up);
+}
+let _save = 0;
+function salvarDepois() { const p = getP(st.arg); clearTimeout(_save); _save = setTimeout(() => DB.salvar(p).catch(e => toast("Erro ao salvar: " + e.message)), 600); }
+function mudou(salvar) {
+  const cw = $("#cw"), sl = cw ? cw.scrollLeft : 0, stp = cw ? cw.scrollTop : 0;
+  if (salvar) salvarDepois(); render(); const c2 = $("#cw"); if (c2) { c2.scrollLeft = sl; c2.scrollTop = stp; }
+}
+function setTool(t) { st.ed.tool = t; if (t !== "sel") st.ed.sel = null; mudou(false); }
+function zoom(d) { st.ed.zoom = d === 0 ? 1 : Math.max(.5, Math.min(4, st.ed.zoom + d * .25)); mudou(false); }
+const selItem = () => getP(st.arg).itens.find(i => i.id === st.ed.sel);
+function girar(v) { const i = selItem(); if (!i) return; i.ang = +v; $("#plan").innerHTML = svgConteudo(getP(st.arg)); $("#lbAng").textContent = `Direção da câmera (${v}°)`; salvarDepois(); }
+function abertura(v) { const i = selItem(); if (!i) return; i.fov = +v; $("#plan").innerHTML = svgConteudo(getP(st.arg)); $("#lbFov").textContent = `Abertura do campo de visão (${v}°)`; salvarDepois(); }
+function obsItem(v) { const i = selItem(); if (i) { i.obs = v; mudou(true); } }
+function apagarSel() { const p = getP(st.arg); p.itens = p.itens.filter(i => i.id !== st.ed.sel); st.ed.sel = null; mudou(true); }
+function limparCerca() { getP(st.arg).cerca = { pts: [], fechada: true }; mudou(true); }
+function limparTudo() { if (!confirm("Remover todos os dispositivos, marcações e cerca da planta?")) return; const p = getP(st.arg); p.itens = []; p.apoio = []; p.cerca = { pts: [], fechada: true }; st.ed.sel = null; mudou(true); }
+function sugerir() { const p = getP(st.arg); if (!p.planta) return; if (p.itens.length && !confirm("Substituir os dispositivos atuais pelo posicionamento automático? (acessos e ambientes marcados são mantidos)")) return; autoSugerir(p, st.S); st.ed.sel = null; mudou(true); toast("Posicionamento automático aplicado — revise e ajuste"); }
+function editarDados(id) { st.form = clone(getP(id)); go("editar"); }
+
+/* =========================================================
+   Apresentação no modelo Protemaxi (PowerPoint e PDF)
+   Página A4 paisagem: 11,693 x 8,268 pol
+   ========================================================= */
+const SW = 11.693, SH = 8.268, AZUL = "1F497D", NAVY = "213558", BORDA = "395E89", FONTE = "Calibri";
+async function plantaImagem(p) {
+  const S = st.S, eq = eqMap(S), src = await DB.img(p.planta.ref), im = await loadImg(src), W = p.planta.w, H = p.planta.h;
+  const k = Math.min(1, 2000 / W), c = document.createElement("canvas"); c.width = Math.round(W * k); c.height = Math.round(H * k);
+  const x = c.getContext("2d"); x.scale(k, k); x.drawImage(im, 0, 0, W, H);
+  const r = Math.max(10, W * 0.013), pts = p.cerca?.pts || [];
+  if (pts.length > 1) { x.strokeStyle = "#dc2626"; x.lineWidth = r * .35; x.setLineDash([r * .9, r * .5]); x.beginPath(); pts.forEach((q, j) => j ? x.lineTo(q[0], q[1]) : x.moveTo(q[0], q[1])); if (p.cerca.fechada && pts.length > 2) x.closePath(); x.stroke(); x.setLineDash([]); }
+  (p.itens || []).forEach(i => { const e = eq[i.t]; if (!e || e.grupo !== "cftv") return; const L = W * .085, f = (i.fov || 90) / 2;
+    x.beginPath(); x.moveTo(i.x, i.y); x.arc(i.x, i.y, L, (i.ang - f) * Math.PI / 180, (i.ang + f) * Math.PI / 180); x.closePath(); x.fillStyle = e.cor + "33"; x.fill(); x.strokeStyle = e.cor + "99"; x.lineWidth = r * .08; x.stroke(); });
+  return c.toDataURL("image/jpeg", .88);
+}
+// medição de texto (aproximação da Calibri) para ajustar a fonte ao espaço
+const _mc = document.createElement("canvas").getContext("2d");
+function linhasTexto(txt, size, w, bold) { _mc.font = `${bold ? "bold " : ""}${size * 96 / 72}px Calibri, Carlito, "Segoe UI", Arial, sans-serif`; const maxPx = w * 96; let n = 0;
+  String(txt).split("\n").forEach(par => { if (!par.trim()) { n++; return; } let ln = ""; par.split(" ").forEach(wd => { const t = ln ? ln + " " + wd : wd; if (_mc.measureText(t).width > maxPx && ln) { n++; ln = wd; } else ln = t; }); n++; }); return n; }
+function ajustaFonte(txt, size, w, h, bold, min = 8) { let s = size; while (s > min && linhasTexto(txt, s, w, bold) * s * 1.2 / 72 > h) s -= 0.5; return s; }
+
+async function montarSlides(p) {
+  const S = st.S, P = S.perfil, A = S.apres, c = calc(p, S), eq = eqMap(S), slides = [];
+  const [capa, fundo, fim, selo, logo] = await Promise.all(["capa", "fundo", "fim", "selo", "logo"].map(asset));
+  const base = titulo => ({ els: [{ t: "img", data: fundo, x: 0, y: 0.77, w: SW, h: 7.49 }, { t: "text", text: titulo, x: 0.55, y: 0.9, w: 10.2, h: 0.75, size: ajustaFonte(titulo, 40, 10.2, 0.75, false, 22), color: "FFFFFF", valign: "middle" }] });
+  // 1 Capa
+  const tCapa = `${A.tituloCapa ? A.tituloCapa + " - " : ""}${p.nome}`.toUpperCase();
+  const s1 = { els: [{ t: "img", data: capa, x: 0, y: 0.78, w: SW, h: 7.48 }, { t: "text", text: tCapa, x: 0.29, y: 0.86, w: 10.4, h: 0.78, size: ajustaFonte(tCapa, 30, 10.4, 0.78, false, 16), color: "FFFFFF", valign: "middle" }] };
+  if (p.logoCliente) { const d = await DB.img(p.logoCliente), z = await imgSize(d), k = Math.min(3.1 / z.w, 2.4 / z.h); s1.els.push({ t: "img", data: d, x: 7.0 + (3.1 - z.w * k) / 2, y: 2.8 + (2.4 - z.h * k) / 2, w: z.w * k, h: z.h * k }); }
+  else s1.els.push({ t: "img", data: selo, x: 7.34, y: 2.68, w: 2.91, h: 2.91 });
+  slides.push(s1);
+  // 2 Escopo
+  const esc_ = (p.escopo || "").trim() || escopoAuto(p), s2 = base("ESCOPO"), corpo = "ESCOPO\n\n" + esc_;
+  s2.els.push({ t: "text", text: corpo, x: 1.55, y: 2.05, w: 8.6, h: 5.3, size: ajustaFonte(corpo, 18, 8.6, 5.3), color: AZUL, align: "just" }); slides.push(s2);
+  // 3 Fotos (6 por slide)
+  const fotos = p.fotos || [], X = [1.30, 4.70, 8.11], Y = [2.31, 5.11], FW = 2.94, FH = 2.27;
+  for (let k = 0; k < fotos.length; k += 6) {
+    const s = base(p.tituloFotos || A.tituloFotos);
+    for (const [j, f] of fotos.slice(k, k + 6).entries()) {
+      let d; try { d = await cropCover(await DB.img(f.ref), FW, FH); } catch (e) { continue; }
+      const x = X[j % 3], y = Y[Math.floor(j / 3)];
+      s.els.push({ t: "img", data: d, x, y, w: FW, h: FH }, { t: "rect", x, y, w: FW, h: FH, line: BORDA, lw: 4.5 });
+      if (f.legenda) s.els.push({ t: "text", text: f.legenda, x: x - 0.2, y: y + FH + 0.08, w: FW + 0.4, h: 0.28, size: 12, color: AZUL, align: "center" });
+    }
+    slides.push(s);
+  }
+  // 4 Croqui (prancha do projeto)
+  if (p.planta) {
+    const s = base("Croqui"), bx = 1.3, by = 1.98, bw = 9.95, bh = 5.85, hh = 0.52, fh = 0.4, nums = numerar(p, S);
+    s.els.push({ t: "rect", x: bx, y: by, w: bw, h: bh, fill: "FFFFFF", line: NAVY, lw: 1 },
+      { t: "rect", x: bx, y: by, w: bw, h: hh, fill: NAVY },
+      { t: "rect", x: bx + bw - 1.62, y: by, w: 0.06, h: hh, fill: "F2C230" },
+      { t: "text", text: "PROJETO DE SEGURANÇA ELETRÔNICA", x: bx + 0.16, y: by + 0.05, w: 6.5, h: 0.26, size: 13, bold: true, color: "FFFFFF" },
+      { t: "text", text: sistemasTxt(p).join("  •  ").toUpperCase() + (p.cliente ? "  —  " + p.cliente.toUpperCase() : ""), x: bx + 0.16, y: by + 0.3, w: 7.8, h: 0.18, size: 8, color: "C9D4E6" },
+      { t: "img", data: logo, x: bx + bw - 1.48, y: by + 0.08, w: 1.17, h: 0.36 },
+      { t: "rect", x: bx, y: by + bh - fh, w: bw, h: fh, fill: NAVY },
+      { t: "text", text: A.frase || "", x: bx + 0.16, y: by + bh - fh, w: 6.4, h: fh, size: 10, bold: true, color: "FFFFFF", valign: "middle" },
+      { t: "text", text: [P.telefone, P.site].filter(Boolean).join("   •   "), x: bx + bw - 4.2, y: by + bh - fh, w: 4.05, h: fh, size: 9, color: "C9D4E6", valign: "middle", align: "right" });
+    const px = bx + 0.14, py = by + hh + 0.12, pw = 6.3, ph = bh - hh - fh - 0.24, img = await plantaImagem(p), k = Math.min(pw / p.planta.w, ph / p.planta.h), iw = p.planta.w * k, ih = p.planta.h * k, x0 = px + (pw - iw) / 2, y0 = py + (ph - ih) / 2;
+    s.els.push({ t: "img", data: img, x: x0, y: y0, w: iw, h: ih }, { t: "rect", x: x0, y: y0, w: iw, h: ih, line: "CBD5E1", lw: 0.75 });
+    const d = Math.max(0.17, Math.min(0.26, iw / 28));
+    (p.itens || []).forEach(i => { const e = eq[i.t]; if (!e) return; s.els.push({ t: "marker", x: x0 + i.x * k, y: y0 + i.y * k, d, fill: e.cor, label: nums[i.id], square: !!e.marcador }); });
+    // painel lateral
+    const rx = bx + 6.6, rw = bw - 6.74; let ry = py;
+    const faixa = t => { s.els.push({ t: "rect", x: rx, y: ry, w: rw, h: 0.24, fill: NAVY }, { t: "text", text: t, x: rx + 0.08, y: ry, w: rw - 0.1, h: 0.24, size: 8.5, bold: true, color: "FFFFFF", valign: "middle" }); ry += 0.3; };
+    faixa("LEGENDA");
+    S.equipamentos.forEach(e => { const n = (p.itens || []).filter(i => i.t === e.id).length; if (!n) return;
+      s.els.push({ t: "marker", x: rx + 0.12, y: ry + 0.1, d: 0.18, fill: e.cor, label: e.sigla, square: !!e.marcador }, { t: "text", text: e.marcador ? "Local do rack / gravador" : e.nome, x: rx + 0.3, y: ry, w: rw - 0.7, h: 0.2, size: 8.5, color: "1E293B", valign: "middle" });
+      if (!e.marcador) s.els.push({ t: "text", text: String(n), x: rx + rw - 0.4, y: ry, w: 0.35, h: 0.2, size: 8.5, bold: true, color: "1E293B", align: "right", valign: "middle" }); ry += 0.24; });
+    if (c.m.cerca) { s.els.push({ t: "line", x1: rx + 0.03, y1: ry + 0.1, x2: rx + 0.22, y2: ry + 0.1, color: "DC2626", lw: 2.25, dash: true }, { t: "text", text: "Cerca elétrica", x: rx + 0.3, y: ry, w: rw - 0.4, h: 0.2, size: 8.5, color: "1E293B", valign: "middle" }); ry += 0.24; }
+    ry += 0.08; faixa("QUANTITATIVO DE EQUIPAMENTOS");
+    const lim = by + bh - fh - 1.05, eqs = c.equip; let mostrados = 0;
+    for (const e of eqs) { if (ry > lim) break; s.els.push({ t: "text", text: e.nome, x: rx + 0.08, y: ry, w: rw - 0.55, h: 0.19, size: 8, color: "1E293B", valign: "middle" }, { t: "text", text: String(e.qtd), x: rx + rw - 0.45, y: ry, w: 0.4, h: 0.19, size: 8, bold: true, color: "1E293B", align: "right", valign: "middle" }, { t: "line", x1: rx, y1: ry + 0.205, x2: rx + rw, y2: ry + 0.205, color: "E2E8F0", lw: 0.5 }); ry += 0.215; mostrados++; }
+    if (mostrados < eqs.length) { s.els.push({ t: "text", text: `+ ${eqs.length - mostrados} itens na lista completa`, x: rx + 0.08, y: ry, w: rw, h: 0.18, size: 7.5, italic: true, color: "64748B" }); ry += 0.2; }
+    ry = Math.max(ry + 0.06, by + bh - fh - 0.98); faixa("CABOS E INFRAESTRUTURA");
+    [["Cabo de rede", c.m.total + " m"], ["Infraestrutura", INFRA[p.infra] || "-"], c.m.cerca ? ["Cerca elétrica", c.m.cerca + " m"] : null].filter(Boolean).forEach(([a, b]) => { s.els.push({ t: "text", text: a, x: rx + 0.08, y: ry, w: 1.4, h: 0.19, size: 8, color: "1E293B", valign: "middle" }, { t: "text", text: b, x: rx + 1.4, y: ry, w: rw - 1.45, h: 0.19, size: 8, bold: true, color: "1E293B", align: "right", valign: "middle" }); ry += 0.2; });
+    slides.push(s);
+  }
+  // 5 Equipamentos e materiais (sem detalhes técnicos)
+  const linhas = c.itens.map(x => [x.nome, x.grupo, x.un, String(x.qtd)]);
+  for (let k = 0; k < Math.max(1, linhas.length); k += 14) {
+    const s = base(linhas.length > 14 ? `Equipamentos e Materiais (${k / 14 + 1})` : "Equipamentos e Materiais");
+    s.els.push({ t: "table", x: 1.3, y: 2.0, colW: [5.6, 1.7, 1.0, 1.6], rowH: 0.36, size: 12, head: ["Item", "Sistema", "Un.", "Qtd."], align: ["left", "center", "center", "center"], rows: linhas.slice(k, k + 14) });
+    slides.push(s);
+  }
+  // 6 Funcionamento
+  const tf = `${A.funcionamento}\n\nPRINCIPAIS BENEFÍCIOS\n\n${(A.beneficios || "").split("\n").filter(Boolean).map(b => "• " + b).join("\n")}`, s6 = base("FUNCIONAMENTO SISTEMA");
+  s6.els.push({ t: "text", text: tf, x: 1.55, y: 1.95, w: 8.6, h: 5.45, size: ajustaFonte(tf, 17, 8.6, 5.45), color: AZUL, align: "just" }); slides.push(s6);
+  // 7 Proposta financeira
+  if (p.valores !== false) {
+    const rows = [], bold = [], tot = [];
+    GRUPOS.forEach(g => { const l = c.itens.filter(x => x.grupo === g); if (!l.length) return; l.forEach(x => rows.push([x.nome, String(x.qtd), x.preco ? BRL(x.preco) : "a definir", x.preco ? BRL(x.total) : "—"]));
+      bold.push(rows.length); rows.push([`Subtotal ${g === "CFTV" ? "CFTV" : g.charAt(0) + g.slice(1).toLowerCase()}`, "", "", BRL(l.reduce((a, x) => a + x.total, 0))]); });
+    if (c.mo) { bold.push(rows.length); rows.push(["Mão de obra / instalação", "", "", BRL(c.mo)]); }
+    if (c.desc) { bold.push(rows.length); rows.push(["Desconto", "", "", "− " + BRL(c.desc)]); }
+    tot.push(rows.length); rows.push(["TOTAL GERAL", "", "", BRL(c.total)]);
+    for (let k = 0; k < rows.length; k += 13) {
+      const s = base(rows.length > 13 ? `PROPOSTA FINANCEIRA (${k / 13 + 1})` : "PROPOSTA FINANCEIRA");
+      s.els.push({ t: "table", x: 1.3, y: 2.0, colW: [5.1, 1.0, 1.85, 1.95], rowH: 0.38, size: 12, head: ["Item", "Qtd.", "Unitário", "Total"], align: ["left", "center", "right", "right"], rows: rows.slice(k, k + 13),
+        bold: bold.filter(i => i >= k && i < k + 13).map(i => i - k), total: tot.filter(i => i >= k && i < k + 13).map(i => i - k) });
+      slides.push(s);
+    }
+  }
+  // 8 Encerramento
+  slides.push({ els: [{ t: "img", data: fim, x: 0, y: 0, w: SW, h: SH },
+    { t: "text", text: P.cargo || "Projetos Segurança Eletrônica", x: 0.91, y: 2.85, w: 4.54, h: 0.89, size: 14, color: "FFFFFF", align: "center", valign: "middle" },
+    { t: "text", text: P.endereco || "", x: 0.82, y: 3.88, w: 4.4, h: 0.62, size: 14, color: "FFFFFF", valign: "middle" },
+    { t: "text", text: P.telefone || "", x: 0.83, y: 4.74, w: 5.0, h: 0.37, size: 14, color: "FFFFFF", valign: "middle" },
+    { t: "text", text: P.email || "", x: 0.91, y: 5.44, w: 4.6, h: 0.37, size: 14, color: "FFFFFF", valign: "middle" },
+    { t: "text", text: P.linkedin || "", x: 0.70, y: 6.38, w: 3.5, h: 0.28, size: 10.5, color: "FFFFFF", valign: "middle" },
+    { t: "text", text: P.site || "", x: 0.70, y: 6.73, w: 3.5, h: 0.28, size: 10.5, color: "FFFFFF", valign: "middle" },
+    { t: "text", text: P.instagram || "", x: 0.70, y: 7.11, w: 3.5, h: 0.28, size: 10.5, color: "FFFFFF", valign: "middle" }] });
+  return slides;
+}
+
+async function exportar(id, tipo) {
+  const p = getP(id), done = busy(tipo === "pptx" ? "Gerando PowerPoint…" : "Gerando PDF…");
+  try {
+    const slides = await montarSlides(p), nome = `${slug(p.nome)}`;
+    if (tipo === "pptx") await renderPPTX(slides, nome, p); else await renderPDF(slides, nome);
+    if (!p.exportado) { p.exportado = true; await DB.salvar(p); }
+    toast(tipo === "pptx" ? "PowerPoint gerado — abra e edite à vontade" : "PDF gerado");
+  } catch (e) { console.error(e); alert("Erro ao gerar: " + e.message); } finally { done(); }
+}
+async function renderPPTX(slides, nome, p) {
+  await loadScript(LIBS.pptx);
+  const pptx = new PptxGenJS(); pptx.defineLayout({ name: "A4P", width: SW, height: SH }); pptx.layout = "A4P";
+  pptx.title = p.nome; pptx.company = st.S.perfil.empresa; pptx.author = st.S.perfil.responsavel || "Protemaxi";
+  for (const sl of slides) {
+    const s = pptx.addSlide(); s.background = { color: "FFFFFF" };
+    for (const e of sl.els) {
+      if (e.t === "img") s.addImage({ data: e.data, x: e.x, y: e.y, w: e.w, h: e.h });
+      else if (e.t === "rect") s.addShape(pptx.ShapeType.rect, { x: e.x, y: e.y, w: e.w, h: e.h, fill: e.fill ? { color: e.fill } : { color: "FFFFFF", transparency: 100 }, line: e.line ? { color: e.line, width: e.lw || 1 } : { color: e.fill || "FFFFFF", width: 0 } });
+      else if (e.t === "line") s.addShape(pptx.ShapeType.line, { x: e.x1, y: e.y1, w: Math.max(0.001, e.x2 - e.x1), h: e.y2 - e.y1, line: { color: e.color, width: e.lw || 1, dashType: e.dash ? "dash" : "solid" } });
+      else if (e.t === "text") s.addText(e.text, { x: e.x, y: e.y, w: e.w, h: e.h, fontFace: FONTE, fontSize: e.size, color: e.color, bold: !!e.bold, italic: !!e.italic, align: e.align === "just" ? "justify" : (e.align || "left"), valign: e.valign || "top", margin: 0, paraSpaceAfter: 0 });
+      else if (e.t === "marker") s.addText(e.label, { shape: e.square ? pptx.ShapeType.roundRect : pptx.ShapeType.ellipse, x: e.x - e.d / 2, y: e.y - e.d / 2, w: e.d, h: e.d, fill: { color: e.fill.replace("#", "") }, line: { color: "FFFFFF", width: 1 }, fontFace: FONTE, fontSize: e.label.length > 2 ? 5.5 : 7, bold: true, color: "FFFFFF", align: "center", valign: "middle", margin: 0 });
+      else if (e.t === "table") {
+        const head = e.head.map((h, j) => ({ text: h, options: { bold: true, color: "FFFFFF", fill: { color: NAVY }, align: e.align[j] } }));
+        const body = e.rows.map((r, i) => { const b = e.bold?.includes(i), t = e.total?.includes(i);
+          return r.map((v, j) => ({ text: v, options: { align: e.align[j], bold: b || t, color: t ? "FFFFFF" : "1E293B", fill: { color: t ? NAVY : b ? "C9D5EA" : i % 2 ? "E8EDF6" : "F5F7FB" } } })); });
+        s.addTable([head, ...body], { x: e.x, y: e.y, colW: e.colW, rowH: e.rowH, fontFace: FONTE, fontSize: e.size, valign: "middle", border: { type: "solid", color: "FFFFFF", pt: 1 } });
+      }
+    }
+  }
+  await pptx.writeFile({ fileName: nome + ".pptx" });
+}
+async function renderPDF(slides, nome) {
+  await loadScript(LIBS.jspdf);
+  const doc = new jspdf.jsPDF({ orientation: "landscape", unit: "in", format: [SW, SH], compress: true });
+  const rgb = h => { h = h.replace("#", ""); return [parseInt(h.slice(0, 2), 16), parseInt(h.slice(2, 4), 16), parseInt(h.slice(4, 6), 16)]; };
+  const fmt = d => d.startsWith("data:image/png") ? "PNG" : "JPEG";
+  const texto = (e) => {
+    doc.setFont("helvetica", e.bold ? "bold" : e.italic ? "italic" : "normal"); doc.setTextColor(...rgb(e.color || "000000"));
+    let size = e.size; const fit = sz => { doc.setFontSize(sz); return String(e.text).split("\n").reduce((n, par) => n + Math.max(1, doc.splitTextToSize(par || " ", e.w).length), 0) * sz * 1.18 / 72; };
+    while (size > 6 && fit(size) > e.h + 0.02) size -= 0.5; doc.setFontSize(size);
+    const lh = size * 1.18 / 72, tot = fit(size); let y = e.y + (e.valign === "middle" ? (e.h - tot) / 2 : 0);
+    String(e.text).split("\n").forEach(par => { const ls = doc.splitTextToSize(par || " ", e.w); const al = e.align === "just" ? "justify" : e.align || "left";
+      const x = al === "center" ? e.x + e.w / 2 : al === "right" ? e.x + e.w : e.x;
+      if (al === "justify" && ls.length > 1 && !/^[•\-]/.test(par)) { doc.text(ls.slice(0, -1).join(" "), e.x, y, { maxWidth: e.w, align: "justify", baseline: "top", lineHeightFactor: 1.18 }); y += lh * (ls.length - 1); doc.text(ls[ls.length - 1], e.x, y, { baseline: "top" }); y += lh; }
+      else { ls.forEach(l => { doc.text(l, x, y, { align: al === "justify" ? "left" : al, baseline: "top" }); y += lh; }); } });
+  };
+  slides.forEach((sl, n) => {
+    if (n) doc.addPage([SW, SH], "landscape");
+    for (const e of sl.els) {
+      if (e.t === "img") doc.addImage(e.data, fmt(e.data), e.x, e.y, e.w, e.h, undefined, "FAST");
+      else if (e.t === "rect") { if (e.fill) doc.setFillColor(...rgb(e.fill)); if (e.line) { doc.setDrawColor(...rgb(e.line)); doc.setLineWidth((e.lw || 1) / 72); } doc.rect(e.x, e.y, e.w, e.h, e.fill && e.line ? "FD" : e.fill ? "F" : "S"); }
+      else if (e.t === "line") { doc.setDrawColor(...rgb(e.color)); doc.setLineWidth((e.lw || 1) / 72); if (e.dash) doc.setLineDashPattern([0.05, 0.03], 0); doc.line(e.x1, e.y1, e.x2, e.y2); doc.setLineDashPattern([], 0); }
+      else if (e.t === "text") texto(e);
+      else if (e.t === "marker") { doc.setFillColor(...rgb(e.fill)); doc.setDrawColor(255, 255, 255); doc.setLineWidth(1 / 72);
+        if (e.square) doc.roundedRect(e.x - e.d / 2, e.y - e.d / 2, e.d, e.d, 0.03, 0.03, "FD"); else doc.circle(e.x, e.y, e.d / 2, "FD");
+        doc.setFont("helvetica", "bold"); doc.setFontSize(e.label.length > 2 ? 4.8 : 6); doc.setTextColor(255, 255, 255); doc.text(e.label, e.x, e.y, { align: "center", baseline: "middle" }); }
+      else if (e.t === "table") {
+        const W = e.colW.reduce((a, b) => a + b, 0), linha = (vals, y, fill, cor, b) => { doc.setFillColor(...rgb(fill)); doc.rect(e.x, y, W, e.rowH, "F"); doc.setDrawColor(255, 255, 255); doc.setLineWidth(1 / 72); doc.line(e.x, y + e.rowH, e.x + W, y + e.rowH);
+          let x = e.x; doc.setFont("helvetica", b ? "bold" : "normal"); doc.setTextColor(...rgb(cor));
+          vals.forEach((v, j) => { let fs = e.size - 1; doc.setFontSize(fs); const cw = e.colW[j] - 0.16; while (fs > 7 && doc.getTextWidth(v) > cw) { fs -= 0.5; doc.setFontSize(fs); }
+            const t = doc.getTextWidth(v) > cw ? doc.splitTextToSize(v, cw)[0] + "…" : v, al = e.align[j], tx = al === "center" ? x + e.colW[j] / 2 : al === "right" ? x + e.colW[j] - 0.08 : x + 0.08;
+            doc.text(t, tx, y + e.rowH / 2, { align: al, baseline: "middle" }); x += e.colW[j]; }); };
+        linha(e.head, e.y, NAVY, "FFFFFF", true);
+        e.rows.forEach((r, i) => { const b = e.bold?.includes(i), t = e.total?.includes(i); linha(r, e.y + e.rowH * (i + 1), t ? NAVY : b ? "C9D5EA" : i % 2 ? "E8EDF6" : "F5F7FB", t ? "FFFFFF" : "1E293B", b || t); });
+      }
+    }
+  });
+  doc.save(nome + ".pdf");
+}
+function exportInside(id) {
+  const p = getP(id), c = calc(p, st.S), csv = [["Código", "Produto", "Quantidade", "Unitário", "Total", "GrupoOrçamento"]];
+  c.itens.forEach(x => csv.push([x.codigo, x.produto, x.qtd, NUM(x.preco), NUM(x.total), x.grupo]));
+  if (c.mo) csv.push(["", "MAO DE OBRA / INSTALACAO", 1, NUM(c.mo), NUM(c.mo), "SERVICO"]);
+  csv.push(["", "TOTAL", "", "", NUM(c.total), ""]);
+  const txt = "﻿" + csv.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(";")).join("\r\n");
+  const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([txt], { type: "text/csv;charset=utf-8" })); a.download = `${slug(p.nome)}-lista-inside.csv`; a.click();
+  const semCod = c.itens.filter(x => !x.codigo).length; toast(semCod ? `Lista gerada — ${semCod} item(ns) sem código do Inside` : "Lista no formato Inside gerada");
+}
+
+/* =========================================================
+   Configurações (engrenagem)
+   ========================================================= */
+function vConfig() {
+  const S = st.cfg || (st.cfg = clone(st.S)), P = S.perfil, A = S.apres, t = st.cfgTab;
+  const tabs = [["perfil", "Perfil e segurança"], ["apres", "Apresentação"], ["catalogo", "Catálogo (Inside)"], ["equipamentos", "Símbolos da planta"], ["parametros", "Parâmetros"], ["linhas", "Linhas de alarme"], ...(DB.local ? [] : [["equipe", "Equipe"]]), ["dados", "Backup"]];
+  let body = "";
+  if (t === "perfil") body = `<div class="fg">
+    <div class="full" style="display:flex;gap:16px;align-items:center"><div class="avatar" style="width:72px;height:72px"><img src="${P.logo || ASSETS.selo}"></div>
+      <div><button class="btn sm" onclick="$('#inLogo').click()">${I.up}Trocar ícone do app</button> ${P.logo ? `<button class="btn sm danger" onclick="lerCfg();st.cfg.perfil.logo=null;render()">Usar selo padrão</button>` : ""}<div class="muted" style="font-size:12px;margin-top:6px">A capa, o fundo e o encerramento usam o modelo oficial da Protemaxi.</div></div><input type="file" id="inLogo" hidden accept="image/*"></div>
+    ${[["empresa", "Empresa"], ["responsavel", "Responsável / projetista"], ["cargo", "Setor (texto do encerramento)"], ["telefone", "Telefone / WhatsApp"], ["email", "E-mail"], ["site", "Site"], ["linkedin", "LinkedIn"], ["instagram", "Instagram"]].map(([k, l]) => `<div><label class="f">${l}</label><input class="inp" data-pf="${k}" value="${esc(P[k])}"></div>`).join("")}
+    <div class="full"><label class="f">Endereço (2 linhas)</label><textarea class="inp" data-pf="endereco" style="min-height:64px">${esc(P.endereco)}</textarea></div>
+    <div class="full card pad" style="box-shadow:none"><h3 style="margin-bottom:6px">${I.lock.replace("<svg", '<svg style="width:16px;height:16px;vertical-align:-2px"')} Segurança</h3>
+      <div class="muted" style="font-size:13px;margin-bottom:10px">Acesso com PIN de 4 números. Após 5 erros o app trava por tempo crescente, e bloqueia sozinho após ${S.parametros.bloqueioMin} min sem uso.</div>
+      <button class="btn sm" onclick="trocarPin()">Trocar meu PIN</button> <button class="btn sm" onclick="bloquear()">Bloquear agora</button></div></div>`;
+  if (t === "apres") body = `<div class="fg">
+    <div><label class="f">Título da capa (antes do nome do projeto)</label><input class="inp" data-ap="tituloCapa" value="${esc(A.tituloCapa)}"></div>
+    <div><label class="f">Título padrão do slide de fotos</label><input class="inp" data-ap="tituloFotos" value="${esc(A.tituloFotos)}"></div>
+    <div class="full"><label class="f">Frase do rodapé do croqui</label><input class="inp" data-ap="frase" value="${esc(A.frase)}"></div>
+    <div class="full"><label class="f">Texto do slide FUNCIONAMENTO SISTEMA</label><textarea class="inp" data-ap="funcionamento" style="min-height:160px">${esc(A.funcionamento)}</textarea></div>
+    <div class="full"><label class="f">Principais benefícios (um por linha)</label><textarea class="inp" data-ap="beneficios">${esc(A.beneficios)}</textarea></div></div>
+    <p class="hint" style="margin-top:14px">Ordem dos slides: Capa → Escopo → Fotos do local → Croqui → Equipamentos e Materiais → Funcionamento → Proposta financeira (se marcada no projeto) → Encerramento.</p>`;
+  if (t === "catalogo") body = `<p class="muted" style="margin-top:0">Produtos com <b>código e descrição do Inside</b>. Na apresentação aparece só o <b>nome no projeto</b> (simples); na lista do Inside sai o código e a descrição técnica. Quantidade = (base × multiplicar) ÷ a cada, arredondada para cima.</p>
+    <div style="overflow:auto;max-height:62vh;border:1px solid var(--line);border-radius:10px"><table class="tb"><thead style="position:sticky;top:0;background:#fff;z-index:1"><tr><th>Ativo</th><th>Código</th><th>Produto (Inside)</th><th>Nome no projeto</th><th>Grupo</th><th>Tipo</th><th>Un.</th><th>Unitário R$</th><th>Base de cálculo</th><th>×</th><th>÷ a cada</th><th>Quando usar</th><th></th></tr></thead><tbody>
+    ${S.catalogo.map((m, i) => `<tr><td><input type="checkbox" data-ct="${i}" data-k="ativo" ${m.ativo !== false ? "checked" : ""}></td>
+      <td><input class="inp" data-ct="${i}" data-k="codigo" value="${esc(m.codigo)}" style="width:70px"></td>
+      <td><input class="inp" data-ct="${i}" data-k="produto" value="${esc(m.produto)}" style="min-width:250px"></td>
+      <td><input class="inp" data-ct="${i}" data-k="nome" value="${esc(m.nome)}" style="min-width:180px"></td>
+      <td><select class="inp" data-ct="${i}" data-k="grupo">${GRUPOS.map(g => `<option ${m.grupo === g ? "selected" : ""}>${g}</option>`).join("")}</select></td>
+      <td><select class="inp" data-ct="${i}" data-k="tipo">${["Equipamento", "Material"].map(g => `<option ${m.tipo === g ? "selected" : ""}>${g}</option>`).join("")}</select></td>
+      <td><input class="inp" data-ct="${i}" data-k="un" value="${esc(m.un)}" style="width:56px"></td>
+      <td><input class="inp" type="number" step="0.01" data-ct="${i}" data-k="preco" value="${m.preco}" style="width:100px"></td>
+      <td><select class="inp" data-ct="${i}" data-k="base">${S.equipamentos.filter(e => !e.marcador).map(e => `<option value="equip:${e.id}" ${m.base === "equip:" + e.id ? "selected" : ""}>Na planta: ${esc(e.nome)}</option>`).join("")}${Object.entries(BASES).map(([k, l]) => `<option value="${k}" ${m.base === k ? "selected" : ""}>${l}</option>`).join("")}</select></td>
+      <td><input class="inp" type="number" step="any" data-ct="${i}" data-k="mult" value="${m.mult}" style="width:62px"></td>
+      <td><input class="inp" type="number" step="any" data-ct="${i}" data-k="cada" value="${m.cada}" style="width:72px"></td>
+      <td><select class="inp" data-ct="${i}" data-k="cond">${Object.entries(CONDS).map(([k, l]) => `<option value="${k}" ${m.cond === k ? "selected" : ""}>${l}</option>`).join("")}</select></td>
+      <td><button class="btn sm ghost danger" onclick="lerCfg();st.cfg.catalogo.splice(${i},1);render()">${I.trash}</button></td></tr>`).join("")}
+    </tbody></table></div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button class="btn sm" onclick="lerCfg();st.cfg.catalogo.push({id:'c'+Date.now(),codigo:'',produto:'NOVO PRODUTO',nome:'Novo item',grupo:'CFTV',tipo:'Material',un:'un',preco:0,base:'fixo',mult:1,cada:1,cond:'algum',ativo:true});render()">${I.plus}Adicionar produto</button></div>
+    <div class="card pad" style="box-shadow:none;margin-top:16px"><h3 style="margin-bottom:6px">Atualizar preços pelo Inside</h3><div class="muted" style="font-size:13px;margin-bottom:8px">Copie as linhas do orçamento do Inside (Código, Produto, Quantidade, Unitário…) e cole aqui. Os preços dos códigos existentes são atualizados e os códigos novos entram desativados para você configurar.</div>
+      <textarea class="inp" id="inside_cola" placeholder="2340	CAMERA DE TV IP DOME VIP 1230 D G4	19	R$ 716,04	R$ 13.604,76	CFTV"></textarea><button class="btn sm pri" style="margin-top:8px" onclick="colarInside()">Atualizar catálogo</button></div>`;
+  if (t === "equipamentos") body = `<p class="muted" style="margin-top:0">Símbolos que você posiciona na planta. O produto e o preço de cada um ficam no Catálogo (base "Na planta: …").</p>
+    <div style="overflow:auto"><table class="tb"><thead><tr><th>Nome</th><th>Sistema</th><th>Sigla</th><th>Cor</th><th></th></tr></thead><tbody>
+    ${S.equipamentos.map((e, i) => `<tr><td><input class="inp" data-eq="${i}" data-k="nome" value="${esc(e.nome)}"></td>
+      <td><select class="inp" data-eq="${i}" data-k="grupo" ${e.marcador ? "disabled" : ""}>${["cftv", "alarme", "cerca", "infra"].map(g => `<option ${e.grupo === g ? "selected" : ""}>${g}</option>`).join("")}</select></td>
+      <td><input class="inp" data-eq="${i}" data-k="sigla" value="${esc(e.sigla)}" maxlength="3" style="width:64px"></td><td><input type="color" data-eq="${i}" data-k="cor" value="${esc(e.cor)}" style="width:44px;height:34px;border:0;background:none"></td>
+      <td>${DEFAULT_SETTINGS.equipamentos.some(d => d.id === e.id) ? "" : `<button class="btn sm ghost danger" onclick="lerCfg();st.cfg.equipamentos.splice(${i},1);render()">${I.trash}</button>`}</td></tr>`).join("")}
+    </tbody></table></div><button class="btn sm" style="margin-top:12px" onclick="lerCfg();st.cfg.equipamentos.splice(st.cfg.equipamentos.length-1,0,{id:'eq_'+Date.now(),nome:'Novo símbolo',grupo:'alarme',sigla:'N',cor:'#64748b'});render()">${I.plus}Adicionar símbolo</button>`;
+  if (t === "parametros") { const pr = S.parametros; body = `<div class="fg">${[["folga", "Folga de cabo por ponto (m)"], ["fatorRota", "Fator de trajeto (1,15 = +15%)"], ["infraFator", "Tubulação ÷ cabo (0,35 = cabos dividem a mesma rota)"], ["larguraPadrao", "Largura padrão da planta (m)"], ["cercaFios", "Fios da cerca"], ["cercaHaste", "Espaçamento entre hastes (m)"], ["bloqueioMin", "Bloquear app após (minutos sem uso)"]].map(([k, l]) => `<div><label class="f">${l}</label><input class="inp" type="number" step="any" data-pr="${k}" value="${pr[k]}"></div>`).join("")}</div>`; }
+  if (t === "linhas") body = Object.entries(LINHAS).map(([k, l]) => `<div class="card pad" style="margin-bottom:12px;box-shadow:none"><h3>${l.nome} <span class="chip ${k === "jfl" ? "execucao" : "novo"}" style="margin-left:6px">${k === "jfl" ? "Reserva" : "Padrão"}</span></h3><ul style="margin:0;padding-left:18px;line-height:1.6;color:#334155">${l.notas.map(n => `<li>${esc(n)}</li>`).join("")}</ul></div>`).join("") + `<p class="muted" style="font-size:12px">Resumo dos datasheets e guias Intelbras. Confira sempre o manual do modelo antes da instalação.</p>`;
+  if (t === "equipe") body = vEquipe();
+  if (t === "dados") body = `<p class="muted" style="margin-top:0">Exporte uma cópia de segurança de todos os projetos e configurações, ou importe uma cópia salva.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" onclick="backup()">${I.save}Exportar backup (.json)</button><button class="btn" onclick="$('#inBk').click()">${I.up}Importar backup</button><input type="file" id="inBk" hidden accept=".json" onchange="restaurar(this.files[0])">
+    <button class="btn danger" onclick="if(confirm('Voltar catálogo, símbolos, textos e parâmetros ao padrão?')){const pf=st.cfg.perfil;st.cfg=clone(DEFAULT_SETTINGS);st.cfg.perfil=pf;render()}">Restaurar padrão</button></div>
+    <p class="hint" style="margin-top:16px">${DB.local ? "Você está no <b>modo local</b>: os dados ficam só neste aparelho. Configure o Supabase no config.js para guardar na nuvem e usar no computador e no celular." : "Conectado ao Supabase: projetos, fotos e configurações ficam na nuvem, compartilhados com a equipe liberada."}</p>`;
+  return topo("Configurações", "Perfil, apresentação, catálogo do Inside e regras de cálculo", `<button class="btn pri" onclick="salvarCfg()">${I.save}Salvar</button>`) +
+    `<div class="card pad"><div class="tabs">${tabs.map(([k, l]) => `<button class="${t === k ? "on" : ""}" onclick="lerCfg();st.cfgTab='${k}';render()">${l}</button>`).join("")}</div>${body}</div>`;
+}
+function lerCfg() {
+  const S = st.cfg; if (!S) return;
+  $$("[data-pf]").forEach(el => S.perfil[el.dataset.pf] = el.value);
+  $$("[data-ap]").forEach(el => S.apres[el.dataset.ap] = el.value);
+  $$("[data-pr]").forEach(el => S.parametros[el.dataset.pr] = +el.value);
+  $$("[data-eq]").forEach(el => S.equipamentos[+el.dataset.eq][el.dataset.k] = el.value);
+  $$("[data-ct]").forEach(el => { const m = S.catalogo[+el.dataset.ct], k = el.dataset.k; m[k] = el.type === "checkbox" ? el.checked : el.type === "number" ? +el.value : el.value; });
+}
+function bindCfg() {
+  const l = $("#inLogo"); if (l) l.onchange = async e => { lerCfg(); const f = e.target.files[0]; if (!f) return; st.cfg.perfil.logo = (await compress(await blobToDataURL(f), 400, "image/png")).data; render(); };
+  if (st.cfgTab === "equipe" && !DB.local && st.equipe === null) carregarEquipe();
+}
+async function salvarCfg() { lerCfg(); const done = busy("Salvando configurações…"); try { await DB.saveSettings(st.cfg); st.S = clone(st.cfg); toast("Configurações salvas"); render(); } catch (e) { alert("Erro: " + e.message); } finally { done(); } }
+function colarInside() {
+  lerCfg(); const txt = $("#inside_cola").value; let at = 0, nv = 0;
+  txt.split(/\r?\n/).forEach(l => {
+    const cel = l.split(/\t|;/).map(x => x.trim()).filter(Boolean); if (cel.length < 2 || !/^\d+$/.test(cel[0])) return;
+    const precos = [...l.matchAll(/R?\$?\s*([\d.]+,\d{2})/g)].map(m => +m[1].replace(/\./g, "").replace(",", ".")); const preco = precos[0];
+    const produto = cel[1], grupo = cel.find(x => GRUPOS.includes(x.toUpperCase()))?.toUpperCase() || "CFTV";
+    const ex = st.cfg.catalogo.find(m => m.codigo === cel[0]);
+    if (ex) { if (preco !== undefined) ex.preco = preco; ex.produto = produto; at++; }
+    else { st.cfg.catalogo.push({ id: "c" + cel[0], codigo: cel[0], produto, nome: produto.charAt(0) + produto.slice(1).toLowerCase(), grupo, tipo: "Material", un: "un", preco: preco || 0, base: "fixo", mult: 1, cada: 1, cond: "algum", ativo: false }); nv++; }
+  });
+  render(); toast(`${at} atualizado(s), ${nv} novo(s). Clique em Salvar.`, 4000);
+}
+function vEquipe() {
+  if (st.equipe === null) return `<div class="muted">Carregando equipe…</div>`;
+  return `<p class="muted" style="margin-top:0">Só os e-mails desta lista conseguem ver e editar projetos, mesmo que alguém crie uma conta. ${DB.admin ? "" : "Apenas administradores podem alterar a lista."}</p>
+    <table class="tb"><thead><tr><th>E-mail</th><th>Nome</th><th>Perfil</th><th></th></tr></thead><tbody>
+    ${st.equipe.map(m => `<tr><td>${esc(m.email)}</td><td>${esc(m.nome || "")}</td><td>${m.admin ? `<span class="chip novo">Administrador</span>` : "Usuário"}</td><td>${DB.admin && m.email.toLowerCase() !== DB.user.email.toLowerCase() ? `<button class="btn sm ghost danger" onclick="removerMembro('${esc(m.email)}')">${I.trash}</button>` : ""}</td></tr>`).join("")}
+    </tbody></table>
+    ${DB.admin ? `<div class="fg" style="margin-top:14px"><div><label class="f">E-mail</label><input class="inp" id="nm_e" type="email"></div><div><label class="f">Nome</label><input class="inp" id="nm_n"></div>
+      <div class="full"><label class="ck" style="display:inline-flex"><input type="checkbox" id="nm_a">Administrador</label> <button class="btn sm pri" onclick="addMembro()">${I.plus}Liberar acesso</button></div></div>
+      <p class="hint">Depois de liberar, a pessoa abre o app, toca em <b>Primeiro acesso</b>, digita o e-mail e cria o PIN dela.</p>` : ""}`;
+}
+async function carregarEquipe() { const { data, error } = await sb.from("equipe").select("*").order("email"); st.equipe = error ? [] : data; if (st.view === "config") { lerCfg(); render(); } }
+async function addMembro() { lerCfg(); const email = $("#nm_e").value.trim().toLowerCase(); if (!/^\S+@\S+\.\S+$/.test(email)) return alert("E-mail inválido");
+  const { error } = await sb.from("equipe").insert({ email, nome: $("#nm_n").value.trim(), admin: $("#nm_a").checked }); if (error) return alert(error.message); st.equipe = null; carregarEquipe(); toast("Acesso liberado"); }
+async function removerMembro(email) { if (!confirm(`Remover o acesso de ${email}?`)) return; lerCfg(); const { error } = await sb.from("equipe").delete().eq("email", email); if (error) return alert(error.message); st.equipe = null; carregarEquipe(); }
+async function backup() {
+  const done = busy("Preparando backup…");
+  try { const ps = clone(st.projetos); for (const p of ps) { if (p.planta?.ref) p.planta.ref = await DB.img(p.planta.ref); if (p.logoCliente) p.logoCliente = await DB.img(p.logoCliente); for (const f of p.fotos || []) f.ref = await DB.img(f.ref); }
+    const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify({ app: "protemaxi-projetos", data: new Date().toISOString(), settings: st.S, projetos: ps })], { type: "application/json" })); a.download = `protemaxi-backup-${new Date().toISOString().slice(0, 10)}.json`; a.click();
+  } finally { done(); }
+}
+async function restaurar(f) {
+  if (!f) return; const done = busy("Importando…");
+  try { const j = JSON.parse(await f.text()); if (j.app !== "protemaxi-projetos") throw new Error("Arquivo não é um backup do Protemaxi Projetos");
+    for (const p of j.projetos) { if (p.planta?.ref?.startsWith("data:")) p.planta.ref = await DB.upload(p.id, p.planta.ref, "planta"); if (p.logoCliente?.startsWith("data:")) p.logoCliente = await DB.upload(p.id, p.logoCliente, "logo-cliente");
+      for (const fo of p.fotos || []) if (fo.ref.startsWith("data:")) fo.ref = await DB.upload(p.id, fo.ref, fo.nome || "foto"); await DB.salvar(p); }
+    if (j.settings) { const s = mergeSettings(j.settings); await DB.saveSettings(s); st.S = s; st.cfg = null; }
+    await recarregar(); toast(`${j.projetos.length} projeto(s) importado(s)`); render();
+  } catch (e) { alert("Erro ao importar: " + e.message); } finally { done(); }
+}
+
+/* =========================================================
+   Inicialização
+   ========================================================= */
+function render() {
+  if (AUTH.travado) return vAuth();
+  const v = st.view; let html = "";
+  if (v === "dashboard") html = vDashboard();
+  else if (v === "projetos") html = vProjetos();
+  else if (v === "novo") { if (!st.form || getP(st.form.id) || st.form._v !== "novo") { st.form = novoProjeto(); st.form._v = "novo"; } html = vForm(); }
+  else if (v === "editar") html = vForm();
+  else if (v === "editor") html = vEditor();
+  else if (v === "config") html = vConfig();
+  if (v !== "config") { st.cfg = null; st.equipe = null; }
+  $("#root").innerHTML = shell(html);
+  if (v === "projetos") carregarThumbs();
+  if (v === "novo" || v === "editar") bindForm();
+  if (v === "editor") desenharPlanta();
+  if (v === "config") bindCfg();
+}
+async function iniciarApp() {
+  const done = busy("Carregando…");
+  try {
+    if (!DB.local) {
+      const { data: membro } = await sb.rpc("is_membro");
+      if (!membro) { done(); $("#root").innerHTML = `<div class="login"><div class="card"><img class="seal" src="${ASSETS.selo}"><h2>Acesso aguardando liberação</h2><p class="sub">O e-mail <b>${esc(DB.user.email)}</b> ainda não foi liberado por um administrador da Protemaxi.</p><button class="btn" onclick="sair()">Sair</button></div></div>`; return; }
+      const { data: adm } = await sb.rpc("is_admin"); DB.admin = !!adm;
+    }
+    st.S = await DB.getSettings(); await recarregar(); appPronto = true; ultimaAtividade = Date.now(); render();
+  } catch (e) { console.error(e); $("#root").innerHTML = `<div class="empty"><h3>Não foi possível carregar</h3><p>${esc(e.message)}</p><p>Confira o config.js e se o script supabase/schema.sql foi executado.</p></div>`; }
+  finally { done(); }
+}
+(async () => {
+  await DB.init();
+  if (!DB.local) {
+    const { data } = await sb.auth.getSession();
+    if (data.session) { DB.user = data.session.user; AUTH.email = DB.user.email; AUTH.modo = "entrar"; AUTH.travado = true; return vAuth(); }
+    AUTH.modo = "entrar"; return vAuth();
+  }
+  AUTH.modo = (await DB.kvGet("pin")) ? "local-entrar" : "local-criar"; vAuth();
+  if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(() => { });
+})();
+if ("serviceWorker" in navigator && location.protocol === "https:" && CFG.supabaseUrl) navigator.serviceWorker.register("sw.js").catch(() => { });
+</script>
+</body>
+</html>
