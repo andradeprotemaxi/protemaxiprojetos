@@ -171,12 +171,15 @@ label.f{display:block;font-weight:600;font-size:12.5px;margin-bottom:6px;color:#
 .avatar{width:40px;height:40px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700;overflow:hidden}
 .avatar img{width:100%;height:100%;object-fit:contain;background:#fff}
 .money{font-variant-numeric:tabular-nums}
+.mov{position:fixed;inset:0;background:rgba(20,34,61,.5);z-index:998;display:grid;place-items:center;padding:16px}
+.mov .prog{background:var(--navy);color:#fff;padding:20px 26px;border-radius:14px;display:flex;gap:12px;align-items:center;font-weight:700}
 /* Presença */
 .pres{margin-top:18px;padding:12px 8px 4px;border-top:1px solid rgba(255,255,255,.08)}
 .pres-t{font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;color:#7f93b4;font-weight:700;margin-bottom:8px;display:flex;justify-content:space-between}
 .pres-list{display:flex;flex-direction:column;gap:7px}
 .pp{display:flex;align-items:center;gap:9px;font-size:12.5px;color:#c9d4e6}
 .pp .av{width:28px;height:28px;border-radius:50%;background:#2b4570;color:#fff;display:grid;place-items:center;font-weight:700;font-size:11px;position:relative;flex:none}
+.pp .av img{width:100%;height:100%;border-radius:50%;object-fit:cover}
 .pp .av i{position:absolute;right:-1px;bottom:-1px;width:10px;height:10px;border-radius:50%;border:2px solid var(--navy2);background:#94a3b8}
 .pp.on .av i{background:#22c55e;box-shadow:0 0 0 2px rgba(34,197,94,.25)}
 .pp .nm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -379,7 +382,7 @@ const DEFAULT_SETTINGS = {
   apres: { tituloCapa: "PROPOSTA FINANCEIRA", tituloFotos: "Sistema de Câmeras", frase: "SEGURANÇA ELETRÔNICA É INVESTIMENTO, NÃO CUSTO.",
     funcionamento: "A proposta contempla a implantação de um sistema de alarme e câmeras monitorado, desenvolvido para proporcionar maior segurança e proteção ao patrimônio, permitindo a detecção de possíveis invasões e situações de risco.\n\nSerão instalados sensores de presença, câmeras e demais dispositivos de detecção, posicionados estrategicamente para identificar movimentações não autorizadas nas áreas protegidas. O sistema contará com uma central de alarme integrada ao monitoramento eletrônico, permitindo o recebimento de eventos e o acionamento dos procedimentos de segurança conforme a necessidade da operação.",
     beneficios: "Proteção de áreas estratégicas e pontos vulneráveis;\nIntegração com a central de monitoramento eletrônico;\nMaior segurança e proteção do patrimônio;\nAcionamento de procedimentos de segurança em caso de ocorrência." },
-  parametros: { folga: 3, fatorRota: 1.15, infraFator: 0.35, cercaFios: 6, cercaHaste: 2.5, larguraPadrao: 20, bloqueioMin: 20 },
+  parametros: { folga: 3, fatorRota: 1.15, infraFator: 0.35, cercaFios: 6, cercaHaste: 2.5, larguraPadrao: 20, bloqueioMin: 0 },
   equipamentos: [
     { id: "cam", nome: "Câmera bullet", grupo: "cftv", sigla: "C", cor: "#1e6bff" },
     { id: "cam_dome", nome: "Câmera dome", grupo: "cftv", sigla: "D", cor: "#06b6d4" },
@@ -475,7 +478,8 @@ const PAPEIS = { admin: "Administrador", editor: "Editor", visitante: "Visitante
 function mergeSettings(s) {
   const d = clone(DEFAULT_SETTINGS); if (!s) return d;
   const velho = !s.versao || s.versao < 2;
-  return { ...d, ...s, versao: 2, perfil: { ...d.perfil, ...(velho ? {} : s.perfil || {}) }, apres: { ...d.apres, ...(s.apres || {}) }, parametros: { ...d.parametros, ...(s.parametros || {}) },
+  if (!s.versao || s.versao < 3) s.parametros = { ...(s.parametros || {}), bloqueioMin: 0 };
+  return { ...d, ...s, versao: 3, perfil: { ...d.perfil, ...(velho ? {} : s.perfil || {}) }, apres: { ...d.apres, ...(s.apres || {}) }, parametros: { ...d.parametros, ...(s.parametros || {}) },
     equipamentos: !velho && s.equipamentos?.length ? s.equipamentos : d.equipamentos, catalogo: !velho && s.catalogo?.length ? s.catalogo : d.catalogo };
 }
 async function asset(k) { if (IMG.has("a:" + k)) return IMG.get("a:" + k); const r = await fetch(ASSETS[k]); if (!r.ok) throw new Error("Arquivo do modelo não encontrado: " + ASSETS[k]); const d = await blobToDataURL(await r.blob()); IMG.set("a:" + k, d); return d; }
@@ -722,7 +726,7 @@ function telaSessao(r) {
 }
 function tentarEntrar() { clearInterval(_retry); if (appPronto) retomar(); else iniciarApp(); }
 ["pointerdown", "keydown", "touchstart"].forEach(ev => document.addEventListener(ev, () => { if (!AUTH.travado) ultimaAtividade = Date.now(); }, { passive: true }));
-setInterval(() => { const m = +(st.S?.parametros?.bloqueioMin) || 20; if (appPronto && !AUTH.travado && Date.now() - ultimaAtividade > m * 60000) bloquear(); }, 15000);
+setInterval(() => { const m = +(st.S?.parametros?.bloqueioMin) || 0; if (m > 0 && appPronto && !AUTH.travado && Date.now() - ultimaAtividade > m * 60000) bloquear(); }, 15000);
 async function sair() { if (sb) { await SESSAO.sair(); await sb.auth.signOut(); } IMG.clear(); location.reload(); }
 async function trocarPin() {
   const a = prompt("Novo PIN (4 números):"); if (a === null) return; if (!/^\d{4}$/.test(a)) return alert("O PIN deve ter exatamente 4 números.");
@@ -740,18 +744,25 @@ function atualizarOnline(lista, silencioso) {
   if (!silencioso && st.online) novo.forEach(e => { if (!st.online.has(e) && e !== eu) { const m = st.membros.find(x => x.email === e); toast(`${m?.nome || e} entrou no app`); } });
   st.online = novo; $$(".pres-list").forEach(el => el.innerHTML = presencaHTML());
 }
-async function carregarMembros() { if (DB.local) return; const { data } = await sb.from("equipe").select("email,nome,papel").order("nome"); st.membros = (data || []).map(m => ({ ...m, email: m.email.toLowerCase() })); }
+async function carregarMembros() { if (DB.local) return; const { data } = await sb.from("equipe").select("email,nome,papel,foto").order("nome"); st.membros = (data || []).map(m => ({ ...m, email: m.email.toLowerCase() })); }
 const iniciais = n => String(n || "?").trim().split(/\s+/).slice(0, 2).map(x => x[0]).join("").toUpperCase();
 function presencaHTML() {
   const l = [...st.membros].sort((a, b) => (a.papel === "admin" ? -1 : 0) - (b.papel === "admin" ? -1 : 0) || (st.online.has(b.email) - st.online.has(a.email)) || String(a.nome).localeCompare(String(b.nome)));
-  return l.map(m => { const on = st.online.has(m.email); return `<div class="pp ${on ? "on" : ""}" title="${esc(m.email)} · ${on ? "online" : "offline"}"><div class="av">${esc(iniciais(m.nome || m.email))}<i></i></div><div class="nm">${esc(m.nome || m.email)}<br><small>${PAPEIS[m.papel] || ""} · ${on ? "online" : "offline"}</small></div></div>`; }).join("") || `<div class="pp"><small>Sem membros</small></div>`;
+  return l.map(m => { const on = st.online.has(m.email); return `<div class="pp ${on ? "on" : ""}" title="${esc(m.email)} · ${on ? "online" : "offline"}"><div class="av">${m.foto ? `<img src="${esc(m.foto)}" alt="">` : esc(iniciais(m.nome || m.email))}<i></i></div><div class="nm">${esc(m.nome || m.email)}<br><small>${PAPEIS[m.papel] || ""} · ${on ? "online" : "offline"}</small></div></div>`; }).join("") || `<div class="pp"><small>Sem membros</small></div>`;
 }
+async function pedirNome() {
+  const nome = (prompt("Bem-vindo ao Protemaxi Projetos!\n\nDigite seu nome (é assim que a equipe vai ver você):") || "").trim();
+  if (nome.length < 2) return;
+  const { error } = await sb.rpc("definir_meu_nome", { p_nome: nome.trim() }); if (error) alert("Não foi possível salvar o nome: " + error.message);
+  await carregarMembros();
+}
+async function trocarNome() { const n = prompt("Seu nome na equipe:", meuNome()); if (!n || n.trim().length < 2) return; const { error } = await sb.rpc("definir_meu_nome", { p_nome: n.trim() }); if (error) return alert(error.message); await carregarMembros(); render(); toast("Nome atualizado"); }
 const meuNome = () => st.membros.find(m => m.email === DB.user?.email?.toLowerCase())?.nome || DB.user?.email || "Eu";
 
 /* =========================================================
    Estado, navegação e telas
    ========================================================= */
-const st = { S: null, projetos: [], view: "dashboard", filtro: "todos", busca: "", ed: null, cfgTab: "perfil", equipe: null, membros: [], online: new Set() };
+const st = { S: null, projetos: [], view: "dashboard", filtro: "todos", busca: "", ed: null, cfgTab: "meuperfil", equipe: null, membros: [], online: new Set() };
 function go(view, arg) { st.view = view; st.arg = arg; render(); window.scrollTo(0, 0); }
 async function recarregar() { st.projetos = await DB.listar(); }
 const getP = id => st.projetos.find(p => p.id === id);
@@ -803,7 +814,7 @@ const miniEtapa = p => { const e = etapa(p); return `<div class="mini" title="${
 function vProjetos() {
   const q = st.busca.toLowerCase();
   const ps = st.projetos.filter(p => (st.filtro === "todos" || p.status === st.filtro) && (!q || (p.nome + " " + (p.cliente || "") + " " + (p.endereco || "")).toLowerCase().includes(q)));
-  return topo("Projetos", `${st.projetos.length} projetos cadastrados`, podeEditar() ? `<button class="btn pri" onclick="go('novo')">${I.plus}<span class="hide-m">Novo projeto</span></button>` : "") + `
+  return topo("Projetos", `${st.projetos.length} projetos cadastrados`, podeEditar() ? `<button class="btn" onclick="$('#inPastas').click()" title="Cada subpasta vira um projeto">${I.up}<span class="hide-m">Importar pastas</span></button><input type="file" id="inPastas" hidden webkitdirectory directory multiple onchange="prepararImport(this.files)"><button class="btn pri" onclick="go('novo')">${I.plus}<span class="hide-m">Novo projeto</span></button>` : "") + `
   <div class="filters"><div class="seg">${[["todos", "Todos"], ["novo", "Novos"], ["execucao", "Em execução"], ["concluido", "Concluídos"]].map(([k, l]) => `<button class="${st.filtro === k ? "on" : ""}" onclick="st.filtro='${k}';render()">${l}</button>`).join("")}</div>
   <input class="inp" id="busca" style="max-width:300px" placeholder="Buscar projeto, cliente, endereço…" value="${esc(st.busca)}" oninput="st.busca=this.value;clearTimeout(window._bt);window._bt=setTimeout(()=>{render();const i=$('#busca');i.focus();i.setSelectionRange(i.value.length,i.value.length)},300)"></div>
   ${ps.length ? `<div class="grid pcards">${ps.map(p => `<div class="card pcard" onclick="abrir('${p.id}')">
@@ -821,6 +832,58 @@ async function mudarStatus(id, s) { if (!podeEditar()) return; const p = getP(id
 async function duplicar(id) { const p = clone(getP(id)); p.id = uid(); p.nome += " (cópia)"; p.status = "novo"; p.exportado = false; p.created_at = null; await DB.salvar(p); await recarregar(); render(); toast("Projeto duplicado"); }
 async function excluir(id) { const p = getP(id); if (!confirm(`Excluir o projeto "${p.nome}"? Essa ação não pode ser desfeita.`)) return; await DB.excluir(p); await recarregar(); render(); toast("Projeto excluído"); }
 const abrir = id => go("editor", id);
+
+/* ---------- Importar pastas de clientes ---------- */
+const ehImg = f => /\.(jpe?g|png|webp|gif|bmp)$/i.test(f.name), ehPdf = f => /\.pdf$/i.test(f.name), ehPlanta = f => /planta|croqui|layout|baixa|projeto|implanta/i.test(f.name);
+const nomeLimpo = n => String(n).replace(/^\s*\d+\s*[-–._)]*\s*/, "").trim() || n;
+function prepararImport(lista) {
+  const arr = [...lista].filter(f => !/(^|\/)\./.test(f.webkitRelativePath || f.name)); if (!arr.length) return;
+  const grupos = new Map();
+  arr.forEach(f => { const pt = (f.webkitRelativePath || f.name).split("/"); const k = pt.length >= 3 ? pt[1] : pt[0]; if (!grupos.has(k)) grupos.set(k, []); grupos.get(k).push(f); });
+  st.imp = [...grupos.entries()].sort((a, b) => a[0].localeCompare(b[0], "pt", { numeric: true })).map(([pasta, fs]) => {
+    const imgs = fs.filter(ehImg), pdfs = fs.filter(ehPdf);
+    const planta = pdfs.find(ehPlanta) || imgs.find(ehPlanta) || pdfs[0] || null;
+    const fotos = imgs.filter(f => f !== planta).slice(0, 24);
+    const existe = st.projetos.some(p => p.nome.toLowerCase() === nomeLimpo(pasta).toLowerCase());
+    return { pasta, nome: nomeLimpo(pasta), planta, fotos, extras: Math.max(0, imgs.filter(f => f !== planta).length - 24), ignorados: fs.length - imgs.length - pdfs.length, ok: !existe, existe };
+  });
+  $("#inPastas").value = ""; vImport();
+}
+function vImport() {
+  let ov = $("#impOv"); if (!ov) { ov = document.createElement("div"); ov.id = "impOv"; ov.className = "mov"; document.body.appendChild(ov); }
+  const n = st.imp.filter(g => g.ok).length;
+  ov.innerHTML = `<div class="card" style="background:#fff;color:var(--ink);width:min(860px,100%);max-height:90vh;display:flex;flex-direction:column;font-weight:400;padding:0">
+    <div class="pad" style="border-bottom:1px solid var(--line)"><h3 style="margin:0">Importar ${st.imp.length} pasta(s)</h3><div class="muted" style="font-size:13px;margin-top:4px">Cada pasta vira um projeto. Imagens entram como fotos (até 24 por projeto); o PDF ou imagem com "planta", "croqui" ou "layout" no nome vira a planta.</div></div>
+    <div style="overflow:auto;flex:1"><table class="tb"><thead><tr><th></th><th>Projeto</th><th>Planta</th><th>Fotos</th><th>Observação</th></tr></thead><tbody>
+    ${st.imp.map((g, i) => `<tr><td><input type="checkbox" ${g.ok ? "checked" : ""} onchange="st.imp[${i}].ok=this.checked;vImport()"></td>
+      <td><input class="inp" value="${esc(g.nome)}" onchange="st.imp[${i}].nome=this.value" style="min-width:200px"><div class="muted" style="font-size:11px;margin-top:3px">📁 ${esc(g.pasta)}</div></td>
+      <td>${g.planta ? `<span class="chip concluido" title="${esc(g.planta.name)}"><i></i>${ehPdf(g.planta) ? "PDF" : "Imagem"}</span>` : `<span class="muted">—</span>`}</td>
+      <td><b>${g.fotos.length}</b></td>
+      <td class="muted" style="font-size:12px">${[g.existe && "Já existe um projeto com esse nome", g.extras && `${g.extras} foto(s) a mais ficam de fora`, g.ignorados && `${g.ignorados} arquivo(s) ignorado(s) (PowerPoint, DWG, HEIC…)`].filter(Boolean).join("<br>") || "OK"}</td></tr>`).join("")}
+    </tbody></table></div>
+    <div class="pad" style="border-top:1px solid var(--line);display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:space-between">
+      <div style="display:flex;gap:8px;align-items:center"><label class="f" style="margin:0">Status:</label><select class="inp" id="impSt" style="width:auto">${Object.entries(STATUS).map(([k, l]) => `<option value="${k}" ${k === (st.impStatus || "concluido") ? "selected" : ""}>${l}</option>`).join("")}</select></div>
+      <div style="display:flex;gap:8px"><button class="btn" onclick="$('#impOv').remove()">Cancelar</button><button class="btn pri" ${n ? "" : "disabled"} onclick="executarImport()">${I.up}Importar ${n} projeto(s)</button></div></div></div>`;
+  $("#impSt").onchange = e => st.impStatus = e.target.value;
+}
+async function executarImport() {
+  const status = $("#impSt").value, fila = st.imp.filter(g => g.ok), ov = $("#impOv"); let feitos = 0, erros = [];
+  const prog = (t) => ov.innerHTML = `<div class="prog"><span class="spin"></span>${esc(t)}</div>`;
+  for (const g of fila) {
+    try {
+      prog(`Importando ${feitos + 1} de ${fila.length}: ${g.nome}…`);
+      const p = novoProjeto(); p.nome = g.nome.trim() || g.pasta; p.cliente = p.nome; p.status = status;
+      if (g.planta) { const raw = ehPdf(g.planta) ? await pdfToImage(g.planta) : await blobToDataURL(g.planta); const c = await compress(raw, 2400, "image/jpeg", 0.9);
+        p.planta = { ref: await DB.upload(p.id, c.data, "planta"), w: c.w, h: c.h, bbox: await contentBBox(c.data), nome: g.planta.name }; }
+      for (const [j, f] of g.fotos.entries()) { prog(`${g.nome}: foto ${j + 1} de ${g.fotos.length}…`);
+        try { const c = await compress(await blobToDataURL(f), 1600, "image/jpeg", 0.82); const base = f.name.replace(/\.[^.]+$/, "");
+          p.fotos.push({ ref: await DB.upload(p.id, c.data, f.name), nome: f.name, legenda: /^(img|dsc|pxl|whatsapp|photo|foto|wp|screenshot|captura|imagem|image|\d)/i.test(base) ? "" : base.replace(/[_-]+/g, " ").toUpperCase().slice(0, 32) }); } catch (e) { } }
+      p.escopo = escopoAuto(p); await DB.salvar(p); feitos++;
+    } catch (e) { console.error(e); erros.push(g.nome + ": " + e.message); }
+  }
+  ov.remove(); st.imp = null; await recarregar(); render();
+  alert(`${feitos} projeto(s) importado(s).${erros.length ? "\n\nNão foi possível importar:\n" + erros.join("\n") : ""}\n\nAbra cada projeto para posicionar câmeras e sensores (ou use "Posicionar automático").`);
+}
 
 /* ---------- Formulário ---------- */
 function novoProjeto() {
@@ -1244,19 +1307,29 @@ function exportInside(id) {
    ========================================================= */
 function vConfig() {
   const S = st.cfg || (st.cfg = clone(st.S)), P = S.perfil, A = S.apres, t = st.cfgTab;
-  const tabs = !ehAdmin() ? [["perfil", "Minha conta"], ["linhas", "Linhas de alarme"], ["equipe", "Equipe"]] : [["perfil", "Perfil e segurança"], ["apres", "Apresentação"], ["catalogo", "Catálogo (Inside)"], ["equipamentos", "Símbolos da planta"], ["parametros", "Parâmetros"], ["linhas", "Linhas de alarme"], ...(DB.local ? [] : [["equipe", "Equipe e acessos"]]), ["dados", "Backup"]];
+  const meu = DB.local ? [] : [["meuperfil", "Meu perfil"]];
+  const tabs = !ehAdmin() ? [...meu, ["linhas", "Linhas de alarme"], ["equipe", "Equipe"]] : [...meu, ["perfil", "Empresa e segurança"], ["apres", "Apresentação"], ["catalogo", "Catálogo (Inside)"], ["equipamentos", "Símbolos da planta"], ["parametros", "Parâmetros"], ["linhas", "Linhas de alarme"], ...(DB.local ? [] : [["equipe", "Equipe e acessos"]]), ["dados", "Backup"]];
   if (!tabs.some(x => x[0] === t)) { st.cfgTab = tabs[0][0]; return vConfig(); }
   let body = "";
-  if (st.cfgTab === "perfil" && !ehAdmin()) body = `<div class="card pad" style="box-shadow:none"><h3 style="margin-bottom:6px">${esc(meuNome())}</h3><div class="muted" style="font-size:13px;margin-bottom:12px">${esc(DB.user?.email || "")} · ${PAPEIS[DB.papel] || ""}</div>
-      <button class="btn sm" onclick="trocarPin()">Trocar meu PIN</button> <button class="btn sm" onclick="bloquear()">Bloquear agora</button> <button class="btn sm danger" onclick="sair()">Sair e liberar a vaga</button></div>`;
+  if (t === "meuperfil") { const eu = st.membros.find(m => m.email === DB.user?.email?.toLowerCase()) || {}, foto = st.meuFoto !== undefined ? st.meuFoto : eu.foto;
+    body = `<div class="fg" style="max-width:720px">
+      <div class="full" style="display:flex;gap:18px;align-items:center"><div class="avatar" style="width:96px;height:96px;font-size:32px;background:#2b4570">${foto ? `<img src="${esc(foto)}" style="object-fit:cover;background:#fff">` : esc(iniciais(eu.nome || DB.user?.email))}</div>
+        <div><button class="btn sm" onclick="$('#inFoto').click()">${I.up}${foto ? "Trocar foto" : "Enviar foto"}</button> ${foto ? `<button class="btn sm danger" onclick="st.meuFoto=null;render()">Remover foto</button>` : ""}
+        <div class="muted" style="font-size:12px;margin-top:6px">A foto aparece para a equipe na lista online e no chat.</div></div><input type="file" id="inFoto" hidden accept="image/*"></div>
+      <div><label class="f">Nome</label><input class="inp" id="mp_nome" maxlength="60" value="${esc(st.meuNomeRasc ?? eu.nome ?? "")}" oninput="st.meuNomeRasc=this.value"></div>
+      <div><label class="f">E-mail de acesso</label><input class="inp" value="${esc(DB.user?.email || "")}" disabled></div>
+      <div><label class="f">Perfil</label><input class="inp" value="${PAPEIS[DB.papel] || ""}" disabled></div>
+      <div class="full" style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn pri" onclick="salvarMeuPerfil()">${I.save}Salvar meu perfil</button><button class="btn" onclick="trocarPin()">Trocar meu PIN</button><button class="btn" onclick="bloquear()">Bloquear</button><button class="btn danger" onclick="if(confirm('Sair do app? Para entrar de novo vai precisar do e-mail e do PIN.'))sair()">Sair do app</button></div></div>`; }
+  else if (st.cfgTab === "perfil" && !ehAdmin()) body = `<div class="card pad" style="box-shadow:none"><h3 style="margin-bottom:6px">${esc(meuNome())}</h3><div class="muted" style="font-size:13px;margin-bottom:12px">${esc(DB.user?.email || "")} · ${PAPEIS[DB.papel] || ""}</div>
+      <button class="btn sm" onclick="trocarNome()">Alterar meu nome</button> <button class="btn sm" onclick="trocarPin()">Trocar meu PIN</button> <button class="btn sm danger" onclick="if(confirm('Sair do app e liberar a vaga?'))sair()">Sair do app</button></div>`;
   else if (t === "perfil") body = `<div class="fg">
     <div class="full" style="display:flex;gap:16px;align-items:center"><div class="avatar" style="width:72px;height:72px"><img src="${P.logo || ASSETS.selo}"></div>
       <div><button class="btn sm" onclick="$('#inLogo').click()">${I.up}Trocar ícone do app</button> ${P.logo ? `<button class="btn sm danger" onclick="lerCfg();st.cfg.perfil.logo=null;render()">Usar selo padrão</button>` : ""}<div class="muted" style="font-size:12px;margin-top:6px">A capa, o fundo e o encerramento usam o modelo oficial da Protemaxi.</div></div><input type="file" id="inLogo" hidden accept="image/*"></div>
     ${[["empresa", "Empresa"], ["responsavel", "Responsável / projetista"], ["cargo", "Setor (texto do encerramento)"], ["telefone", "Telefone / WhatsApp"], ["email", "E-mail"], ["site", "Site"], ["linkedin", "LinkedIn"], ["instagram", "Instagram"]].map(([k, l]) => `<div><label class="f">${l}</label><input class="inp" data-pf="${k}" value="${esc(P[k])}"></div>`).join("")}
     <div class="full"><label class="f">Endereço (2 linhas)</label><textarea class="inp" data-pf="endereco" style="min-height:64px">${esc(P.endereco)}</textarea></div>
     <div class="full card pad" style="box-shadow:none"><h3 style="margin-bottom:6px">${I.lock.replace("<svg", '<svg style="width:16px;height:16px;vertical-align:-2px"')} Segurança</h3>
-      <div class="muted" style="font-size:13px;margin-bottom:10px">Acesso com PIN de 4 números. Após 5 erros o app trava por tempo crescente, e bloqueia sozinho após ${S.parametros.bloqueioMin} min sem uso.</div>
-      <button class="btn sm" onclick="trocarPin()">Trocar meu PIN</button> <button class="btn sm" onclick="bloquear()">Bloquear agora</button></div></div>`;
+      <div class="muted" style="font-size:13px;margin-bottom:10px">Acesso com PIN de 4 números. Após 5 erros o app trava por tempo crescente. Você continua conectado até tocar em <b>Sair</b>${+S.parametros.bloqueioMin ? ` (bloqueio automático após ${S.parametros.bloqueioMin} min sem uso)` : ""}.</div>
+      <button class="btn sm" onclick="trocarPin()">Trocar meu PIN</button> <button class="btn sm" onclick="bloquear()">Bloquear agora</button> ${DB.local ? "" : `<button class="btn sm danger" onclick="if(confirm('Sair do app? Para entrar de novo vai precisar do e-mail e do PIN.'))sair()">Sair do app</button>`}</div></div>`;
   if (t === "apres") body = `<div class="fg">
     <div><label class="f">Título da capa (antes do nome do projeto)</label><input class="inp" data-ap="tituloCapa" value="${esc(A.tituloCapa)}"></div>
     <div><label class="f">Título padrão do slide de fotos</label><input class="inp" data-ap="tituloFotos" value="${esc(A.tituloFotos)}"></div>
@@ -1290,14 +1363,14 @@ function vConfig() {
       <td><input class="inp" data-eq="${i}" data-k="sigla" value="${esc(e.sigla)}" maxlength="3" style="width:64px"></td><td><input type="color" data-eq="${i}" data-k="cor" value="${esc(e.cor)}" style="width:44px;height:34px;border:0;background:none"></td>
       <td>${DEFAULT_SETTINGS.equipamentos.some(d => d.id === e.id) ? "" : `<button class="btn sm ghost danger" onclick="lerCfg();st.cfg.equipamentos.splice(${i},1);render()">${I.trash}</button>`}</td></tr>`).join("")}
     </tbody></table></div><button class="btn sm" style="margin-top:12px" onclick="lerCfg();st.cfg.equipamentos.splice(st.cfg.equipamentos.length-1,0,{id:'eq_'+Date.now(),nome:'Novo símbolo',grupo:'alarme',sigla:'N',cor:'#64748b'});render()">${I.plus}Adicionar símbolo</button>`;
-  if (t === "parametros") { const pr = S.parametros; body = `<div class="fg">${[["folga", "Folga de cabo por ponto (m)"], ["fatorRota", "Fator de trajeto (1,15 = +15%)"], ["infraFator", "Tubulação ÷ cabo (0,35 = cabos dividem a mesma rota)"], ["larguraPadrao", "Largura padrão da planta (m)"], ["cercaFios", "Fios da cerca"], ["cercaHaste", "Espaçamento entre hastes (m)"], ["bloqueioMin", "Bloquear app após (minutos sem uso)"]].map(([k, l]) => `<div><label class="f">${l}</label><input class="inp" type="number" step="any" data-pr="${k}" value="${pr[k]}"></div>`).join("")}</div>`; }
+  if (t === "parametros") { const pr = S.parametros; body = `<div class="fg">${[["folga", "Folga de cabo por ponto (m)"], ["fatorRota", "Fator de trajeto (1,15 = +15%)"], ["infraFator", "Tubulação ÷ cabo (0,35 = cabos dividem a mesma rota)"], ["larguraPadrao", "Largura padrão da planta (m)"], ["cercaFios", "Fios da cerca"], ["cercaHaste", "Espaçamento entre hastes (m)"], ["bloqueioMin", "Bloquear app após X minutos sem uso (0 = nunca)"]].map(([k, l]) => `<div><label class="f">${l}</label><input class="inp" type="number" step="any" data-pr="${k}" value="${pr[k]}"></div>`).join("")}</div>`; }
   if (t === "linhas") body = Object.entries(LINHAS).map(([k, l]) => `<div class="card pad" style="margin-bottom:12px;box-shadow:none"><h3>${l.nome} <span class="chip ${k === "jfl" ? "execucao" : "novo"}" style="margin-left:6px">${k === "jfl" ? "Reserva" : "Padrão"}</span></h3><ul style="margin:0;padding-left:18px;line-height:1.6;color:#334155">${l.notas.map(n => `<li>${esc(n)}</li>`).join("")}</ul></div>`).join("") + `<p class="muted" style="font-size:12px">Resumo dos datasheets e guias Intelbras. Confira sempre o manual do modelo antes da instalação.</p>`;
   if (t === "equipe") body = vEquipe();
   if (t === "dados") body = `<p class="muted" style="margin-top:0">Exporte uma cópia de segurança de todos os projetos e configurações, ou importe uma cópia salva.</p>
     <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" onclick="backup()">${I.save}Exportar backup (.json)</button><button class="btn" onclick="$('#inBk').click()">${I.up}Importar backup</button><input type="file" id="inBk" hidden accept=".json" onchange="restaurar(this.files[0])">
     <button class="btn danger" onclick="if(confirm('Voltar catálogo, símbolos, textos e parâmetros ao padrão?')){const pf=st.cfg.perfil;st.cfg=clone(DEFAULT_SETTINGS);st.cfg.perfil=pf;render()}">Restaurar padrão</button></div>
     <p class="hint" style="margin-top:16px">${DB.local ? "Você está no <b>modo local</b>: os dados ficam só neste aparelho. Configure o Supabase no config.js para guardar na nuvem e usar no computador e no celular." : "Conectado ao Supabase: projetos, fotos e configurações ficam na nuvem, compartilhados com a equipe liberada."}</p>`;
-  return topo("Configurações", ehAdmin() ? "Perfil, apresentação, catálogo do Inside e regras de cálculo" : "Sua conta e a equipe", ehAdmin() && st.cfgTab !== "equipe" ? `<button class="btn pri" onclick="salvarCfg()">${I.save}Salvar</button>` : "") +
+  return topo("Configurações", ehAdmin() ? "Seu perfil, empresa, apresentação, catálogo do Inside e equipe" : "Seu perfil e a equipe", ehAdmin() && !["equipe", "meuperfil"].includes(st.cfgTab) ? `<button class="btn pri" onclick="salvarCfg()">${I.save}Salvar</button>` : "") +
     `<div class="card pad"><div class="tabs">${tabs.map(([k, l]) => `<button class="${t === k ? "on" : ""}" onclick="lerCfg();st.cfgTab='${k}';render()">${l}</button>`).join("")}</div>${body}</div>`;
 }
 function lerCfg() {
@@ -1308,9 +1381,19 @@ function lerCfg() {
   $$("[data-eq]").forEach(el => S.equipamentos[+el.dataset.eq][el.dataset.k] = el.value);
   $$("[data-ct]").forEach(el => { const m = S.catalogo[+el.dataset.ct], k = el.dataset.k; m[k] = el.type === "checkbox" ? el.checked : el.type === "number" ? +el.value : el.value; });
 }
+async function salvarMeuPerfil() {
+  const nome = $("#mp_nome").value.trim(); if (nome.length < 2) return alert("Digite seu nome.");
+  const eu = st.membros.find(m => m.email === DB.user?.email?.toLowerCase()) || {}, foto = st.meuFoto !== undefined ? st.meuFoto : eu.foto || null;
+  const d = busy("Salvando…"); const { error } = await sb.rpc("definir_meu_perfil", { p_nome: nome, p_foto: foto }); d();
+  if (error) return alert("Não foi possível salvar: " + error.message);
+  delete st.meuFoto; delete st.meuNomeRasc; await carregarMembros(); if (st.equipe) st.equipe = st.membros; render(); toast("Perfil atualizado");
+}
+async function fotoQuadrada(file) { const im = await loadImg(await blobToDataURL(file)), z = Math.min(im.width, im.height), c = document.createElement("canvas"); c.width = c.height = 160;
+  c.getContext("2d").drawImage(im, (im.width - z) / 2, (im.height - z) / 2, z, z, 0, 0, 160, 160); return c.toDataURL("image/jpeg", 0.82); }
 function bindCfg() {
+  const fi = $("#inFoto"); if (fi) fi.onchange = async e => { const f = e.target.files[0]; if (!f) return; st.meuNomeRasc = $("#mp_nome")?.value; st.meuFoto = await fotoQuadrada(f); render(); };
   const l = $("#inLogo"); if (l) l.onchange = async e => { lerCfg(); const f = e.target.files[0]; if (!f) return; st.cfg.perfil.logo = (await compress(await blobToDataURL(f), 400, "image/png")).data; render(); };
-  if (st.cfgTab === "equipe" && !DB.local && st.equipe === null) carregarEquipe();
+  if (["equipe", "meuperfil"].includes(st.cfgTab) && !DB.local && st.equipe === null) carregarEquipe();
 }
 async function salvarCfg() { lerCfg(); const done = busy("Salvando configurações…"); try { await DB.saveSettings(st.cfg); st.S = clone(st.cfg); toast("Configurações salvas"); render(); } catch (e) { alert("Erro: " + e.message); } finally { done(); } }
 function colarInside() {
@@ -1332,32 +1415,39 @@ function vEquipe() {
     <div style="overflow:auto"><table class="tb"><thead><tr><th>Status</th><th>Nome</th><th>E-mail</th><th>Perfil</th><th></th></tr></thead><tbody>
     ${st.equipe.map(m => { const on = st.online.has(m.email), sou = m.email === eu, ad = m.papel === "admin";
       return `<tr><td><span class="chip ${on ? "concluido" : ""}" style="${on ? "" : "background:#eef1f5;color:#64748b"}"><i></i>${on ? "Online" : "Offline"}</span></td>
-      <td>${adm ? `<input class="inp" value="${esc(m.nome || "")}" onchange="mudarMembro('${esc(m.email)}',{nome:this.value})" style="min-width:140px">` : esc(m.nome || "")}</td>
-      <td>${esc(m.email)}</td>
-      <td>${adm && !ad ? `<select class="inp" style="width:auto" onchange="mudarMembro('${esc(m.email)}',{papel:this.value,admin:false})"><option value="visitante" ${m.papel === "visitante" ? "selected" : ""}>Visitante</option><option value="editor" ${m.papel === "editor" ? "selected" : ""}>Editor</option></select>` : `<span class="chip ${ad ? "novo" : ""}">${PAPEIS[m.papel] || m.papel}</span>`}</td>
-      <td style="white-space:nowrap">${adm && on && !sou ? `<button class="btn sm" onclick="derrubar('${esc(m.email)}')">Encerrar sessão</button> ` : ""}${adm && !sou && !ad ? `<button class="btn sm ghost danger" title="Remover acesso" onclick="removerMembro('${esc(m.email)}')">${I.trash}</button>` : ""}</td></tr>`; }).join("")}
+      <td>${adm ? `<input class="inp" value="${esc(m.nome || "")}" placeholder="(a pessoa define no 1º acesso)" onchange="mudarMembro('${esc(m.email)}',{nome:this.value.trim()||null})" style="min-width:170px">` : esc(m.nome || "")}</td>
+      <td>${adm && !sou ? `<input class="inp" type="email" value="${esc(m.email)}" style="min-width:210px" onchange="mudarEmail('${esc(m.email)}',this)">` : esc(m.email)}</td>
+      <td>${adm && !sou ? `<select class="inp" style="width:auto" onchange="mudarMembro('${esc(m.email)}',{papel:this.value,admin:this.value==='admin'})">${Object.entries(PAPEIS).map(([k, l]) => `<option value="${k}" ${m.papel === k ? "selected" : ""}>${l}</option>`).join("")}</select>` : `<span class="chip ${ad ? "novo" : ""}">${PAPEIS[m.papel] || m.papel}${sou ? " (você)" : ""}</span>`}</td>
+      <td style="white-space:nowrap">${adm && on && !sou ? `<button class="btn sm" onclick="derrubar('${esc(m.email)}')">Encerrar sessão</button> ` : ""}${adm && !sou ? `<button class="btn sm danger" title="Excluir usuário" onclick="removerMembro('${esc(m.email)}')">${I.trash}Excluir</button>` : ""}</td></tr>`; }).join("")}
     </tbody></table></div>
     ${adm ? `<div class="card pad" style="box-shadow:none;margin-top:16px"><h3>Liberar novo acesso</h3><div class="fg">
-      <div><label class="f">Nome</label><input class="inp" id="nm_n" placeholder="Ex.: Carlos"></div><div><label class="f">E-mail</label><input class="inp" id="nm_e" type="email"></div>
+      <div><label class="f">Nome</label><input class="inp" id="nm_n" placeholder="Opcional — a pessoa define no 1º acesso"></div><div><label class="f">E-mail</label><input class="inp" id="nm_e" type="email"></div>
       <div><label class="f">Perfil</label><select class="inp" id="nm_p"><option value="visitante">Visitante — vê, comenta e baixa</option><option value="editor">Editor — também cria e edita projetos</option></select></div>
       <div style="display:flex;align-items:flex-end"><button class="btn pri" onclick="addMembro()">${I.plus}Liberar acesso</button></div></div>
       <p class="hint" style="margin-top:12px">Depois de liberar, a pessoa abre o app, toca em <b>Primeiro acesso</b>, digita o e-mail e cria o PIN dela.</p></div>
     <div class="card pad" style="box-shadow:none;margin-top:12px"><h3>Acessos ao mesmo tempo</h3><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><input class="inp" id="lim" type="number" min="1" max="20" value="${SESSAO.limite}" style="width:90px"><span class="muted">contando você (administrador)</span><button class="btn sm" onclick="salvarLimite()">Salvar</button></div></div>` : ""}`;
 }
 async function carregarEquipe() {
-  const [{ data, error }, { data: aj }] = await Promise.all([sb.from("equipe").select("email,nome,papel").order("nome"), sb.from("ajustes").select("valor").eq("chave", "limite_sessoes").maybeSingle()]);
+  const [{ data, error }, { data: aj }] = await Promise.all([sb.from("equipe").select("email,nome,papel,foto").order("nome"), sb.from("ajustes").select("valor").eq("chave", "limite_sessoes").maybeSingle()]);
   if (aj?.valor) SESSAO.limite = aj.valor;
   st.equipe = error ? [] : data.map(m => ({ ...m, email: m.email.toLowerCase() })).sort((a, b) => (a.papel === "admin" ? -1 : 1) - (b.papel === "admin" ? -1 : 1)); st.membros = st.equipe;
   if (st.view === "config") { lerCfg(); render(); }
 }
 async function addMembro() {
   lerCfg(); const email = $("#nm_e").value.trim().toLowerCase(), nome = $("#nm_n").value.trim(), papel = $("#nm_p").value;
-  if (!nome) return alert("Digite o nome"); if (!/^\S+@\S+\.\S+$/.test(email)) return alert("E-mail inválido");
-  const { error } = await sb.from("equipe").insert({ email, nome, papel, admin: false }); if (error) return alert(error.message.includes("duplicate") ? "Este e-mail já está na equipe." : error.message);
-  st.equipe = null; await carregarEquipe(); toast(`Acesso liberado para ${nome}`);
+  if (!/^\S+@\S+\.\S+$/.test(email)) return alert("E-mail inválido");
+  const { error } = await sb.from("equipe").insert({ email, nome: nome || null, papel, admin: false }); if (error) return alert(error.message.includes("duplicate") ? "Este e-mail já está na equipe." : error.message);
+  st.equipe = null; await carregarEquipe(); toast(`Acesso liberado para ${nome || email}`);
 }
 async function mudarMembro(email, dados) { const { error } = await sb.from("equipe").update(dados).eq("email", email); if (error) return alert(error.message); await carregarEquipe(); toast("Equipe atualizada"); }
-async function removerMembro(email) { if (!confirm(`Remover o acesso de ${email}?`)) return; lerCfg(); await sb.rpc("derrubar_sessao", { p_email: email }); const { error } = await sb.from("equipe").delete().eq("email", email); if (error) return alert(error.message); st.equipe = null; carregarEquipe(); }
+async function mudarEmail(antigo, el) {
+  const novo = el.value.trim().toLowerCase(); if (novo === antigo) return;
+  if (!/^\S+@\S+\.\S+$/.test(novo)) { el.value = antigo; return alert("E-mail inválido"); }
+  if (!confirm(`Trocar o e-mail de acesso\nde: ${antigo}\npara: ${novo}?\n\nA pessoa vai entrar com o novo e-mail tocando em "Primeiro acesso" e criando um PIN.`)) { el.value = antigo; return; }
+  const { error } = await sb.rpc("alterar_email_membro", { p_antigo: antigo, p_novo: novo }); if (error) { el.value = antigo; return alert(error.message.includes("duplicate") ? "Esse e-mail já está na equipe." : error.message); }
+  await carregarEquipe(); toast("E-mail de acesso alterado");
+}
+async function removerMembro(email) { if (!confirm(`Excluir o usuário ${email}?\n\nEle perde o acesso na hora e sai da lista da equipe.`)) return; lerCfg(); await sb.rpc("derrubar_sessao", { p_email: email }); const { error } = await sb.from("equipe").delete().eq("email", email); if (error) return alert(error.message); st.equipe = null; carregarEquipe(); }
 async function derrubar(email) { if (!confirm(`Encerrar a sessão de ${email}? A vaga fica livre e essa pessoa só consegue voltar em 5 minutos.`)) return; const { error } = await sb.rpc("derrubar_sessao", { p_email: email }); if (error) return alert(error.message); const { data } = await sb.rpc("online_agora"); atualizarOnline(data, true); render(); toast("Sessão encerrada"); }
 async function salvarLimite() { const v = Math.max(1, +$("#lim").value || 2); const { error } = await sb.from("ajustes").update({ valor: v }).eq("chave", "limite_sessoes"); if (error) return alert(error.message); SESSAO.limite = v; toast(`Limite: ${v} acessos ao mesmo tempo`); }
 async function backup() {
@@ -1475,6 +1565,8 @@ async function iniciarApp() {
     if (!DB.local) {
       const r = await SESSAO.entrar(); if (!r.ok) { done(); return telaSessao(r); }
       DB.papel = r.papel; await carregarMembros(); atualizarOnline(r.online, true); SESSAO.iniciar();
+      const eu = st.membros.find(m => m.email === DB.user.email.toLowerCase());
+      if (!eu?.nome || !eu.nome.trim()) { done(); await pedirNome(); }
     }
     st.S = await DB.getSettings(); await recarregar(); appPronto = true; ultimaAtividade = Date.now(); render();
     if (!DB.local) iniciarChat();
@@ -1485,7 +1577,7 @@ async function iniciarApp() {
   await DB.init();
   if (!DB.local) {
     const { data } = await sb.auth.getSession();
-    if (data.session) { DB.user = data.session.user; AUTH.email = DB.user.email; AUTH.modo = "entrar"; AUTH.travado = true; return vAuth(); }
+    if (data.session) { DB.user = data.session.user; AUTH.email = DB.user.email; SESSAO.token = data.session.access_token; return iniciarApp(); }
     AUTH.modo = "entrar"; return vAuth();
   }
   AUTH.modo = (await DB.kvGet("pin")) ? "local-entrar" : "local-criar"; vAuth();
