@@ -171,6 +171,61 @@ label.f{display:block;font-weight:600;font-size:12.5px;margin-bottom:6px;color:#
 .avatar{width:40px;height:40px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700;overflow:hidden}
 .avatar img{width:100%;height:100%;object-fit:contain;background:#fff}
 .money{font-variant-numeric:tabular-nums}
+/* Presença */
+.pres{margin-top:18px;padding:12px 8px 4px;border-top:1px solid rgba(255,255,255,.08)}
+.pres-t{font-size:10.5px;letter-spacing:1.4px;text-transform:uppercase;color:#7f93b4;font-weight:700;margin-bottom:8px;display:flex;justify-content:space-between}
+.pres-list{display:flex;flex-direction:column;gap:7px}
+.pp{display:flex;align-items:center;gap:9px;font-size:12.5px;color:#c9d4e6}
+.pp .av{width:28px;height:28px;border-radius:50%;background:#2b4570;color:#fff;display:grid;place-items:center;font-weight:700;font-size:11px;position:relative;flex:none}
+.pp .av i{position:absolute;right:-1px;bottom:-1px;width:10px;height:10px;border-radius:50%;border:2px solid var(--navy2);background:#94a3b8}
+.pp.on .av i{background:#22c55e;box-shadow:0 0 0 2px rgba(34,197,94,.25)}
+.pp .nm{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pp small{font-size:10px;color:#7f93b4}
+.pp.on .nm{color:#fff;font-weight:600}
+.drawer .pp{color:#334155}.drawer .pp .av{background:#e2e8f3;color:#1f3a63}.drawer .pp .av i{border-color:#fff}.drawer .pp.on .nm{color:#13213a}.drawer .pp small{color:#64748b}
+/* Chat */
+.fab{position:fixed;right:22px;bottom:22px;z-index:70;height:52px;padding:0 18px 0 16px;border-radius:26px;border:0;background:var(--navy);color:#fff;display:flex;align-items:center;gap:9px;font-weight:700;box-shadow:0 10px 30px rgba(19,33,58,.35);cursor:pointer}
+.fab svg{width:20px;height:20px}
+.fab .bd{min-width:20px;height:20px;border-radius:10px;background:var(--danger);font-size:11px;display:grid;place-items:center;padding:0 5px}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:400px;max-width:100vw;background:#fff;z-index:80;box-shadow:-10px 0 40px rgba(19,33,58,.18);display:flex;flex-direction:column}
+.dr-h{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;background:linear-gradient(135deg,var(--navy),var(--navy2));color:#fff}
+.dr-h small{display:block;color:#a9bad6;font-size:12px;font-weight:500}
+.dr-h button{all:unset;cursor:pointer;width:34px;height:34px;border-radius:9px;display:grid;place-items:center;font-size:20px}
+.dr-h button:hover{background:rgba(255,255,255,.1)}
+.dr-pres{display:flex;flex-wrap:wrap;gap:8px 14px;padding:12px 18px;border-bottom:1px solid var(--line);background:var(--soft)}
+.dr-pres .pp{flex-direction:row}
+.dr-tabs{margin:0;padding:0 12px}
+.msgs{flex:1;overflow:auto;padding:14px 16px;background:#f7f9fc;display:flex;flex-direction:column;gap:10px}
+.dia{align-self:center;font-size:11px;color:var(--mut);background:#e9eef6;padding:3px 10px;border-radius:99px;margin:6px 0}
+.ms{max-width:84%;display:flex;flex-direction:column;gap:3px}
+.ms .who{font-size:11px;color:var(--mut);font-weight:600;display:flex;gap:6px;align-items:center}
+.ms .bb{background:#fff;border:1px solid var(--line);padding:9px 12px;border-radius:4px 14px 14px 14px;line-height:1.45;white-space:pre-wrap;word-wrap:break-word;position:relative}
+.ms.eu{align-self:flex-end}.ms.eu .who{justify-content:flex-end}
+.ms.eu .bb{background:var(--pri);border-color:var(--pri);color:#fff;border-radius:14px 4px 14px 14px}
+.ms .del{all:unset;cursor:pointer;color:var(--mut);font-size:13px;opacity:0;transition:.15s}
+.ms:hover .del{opacity:1}
+.pj{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:99px;background:#e7eef9;color:var(--pri2);cursor:pointer;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ms.eu .pj{background:rgba(255,255,255,.2);color:#fff}
+.composer{border-top:1px solid var(--line);padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:#fff}
+.composer .row{display:flex;gap:8px;align-items:flex-end}
+.composer textarea{flex:1;min-height:44px;max-height:120px;resize:none;border:1px solid var(--line);border-radius:12px;padding:11px 12px;outline:none;line-height:1.4}
+.composer textarea:focus{border-color:var(--pri)}
+.composer .send{width:44px;height:44px;border-radius:12px;border:0;background:var(--pri);color:#fff;display:grid;place-items:center;cursor:pointer;flex:none}
+.composer .send svg{width:18px;height:18px}
+.composer label{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--mut);margin-bottom:7px;cursor:pointer}
+.notas{flex:1;overflow:auto;padding:14px 16px;background:#f7f9fc;display:flex;flex-direction:column;gap:10px}
+.nf{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px}
+.nf input,.nf textarea,.nf select{border:1px solid var(--line);border-radius:9px;padding:8px 10px;outline:none;width:100%}
+.nf textarea{min-height:70px;resize:vertical}
+.nf input[type=checkbox]{width:auto}
+.nota{background:#fff;border:1px solid var(--line);border-left:4px solid var(--pri);border-radius:10px;padding:11px 12px}
+.nota.fix{border-left-color:var(--gold);background:#fffdf3}
+.nota h5{margin:0 0 5px;font-size:13.5px;display:flex;justify-content:space-between;gap:8px}
+.nota p{margin:0 0 8px;white-space:pre-wrap;font-size:13px;line-height:1.45;color:#334155}
+.nota .mt{display:flex;justify-content:space-between;align-items:center;gap:6px;font-size:11px;color:var(--mut);flex-wrap:wrap}
+.nota .mt button{all:unset;cursor:pointer;font-weight:600;color:var(--pri2);font-size:11.5px}
+.ro{font-size:12px;color:#92400e;background:#fff7e6;border:1px solid #fde2b0;border-radius:10px;padding:10px;line-height:1.45}
+@media (max-width:860px){.fab{bottom:calc(78px + env(safe-area-inset-bottom));right:14px;height:46px;padding:0 14px}.fab span.t{display:none}.pres{display:none}}
 @media (max-width:1100px){.kpis{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}.ed{grid-template-columns:170px 1fr}.ed .panel{grid-column:1/-1}}
 @media (max-width:860px){
   .app{grid-template-columns:1fr}
@@ -193,7 +248,7 @@ label.f{display:block;font-weight:600;font-size:12.5px;margin-bottom:6px;color:#
 </style>
 </head>
 <body>
-<div id="root"></div>
+<div id="root"></div><div id="chatRoot"></div>
 <script>
 /* =========================================================
    PROTEMAXI PROJETOS — CFTV • Alarme • Cerca elétrica
@@ -241,6 +296,9 @@ const I = {
   back:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>',
   copy:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="13" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg>',
   save:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h11l5 5v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M7 3v5h8M7 21v-7h10v7"/></svg>',
+  chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>',
+  send:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4z"/></svg>',
+  users:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/></svg>',
   lock:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>'
 };
 
@@ -351,10 +409,12 @@ const INFRA = { eletroduto: "Eletroduto 3/4\"", canaleta: "Canaleta", aparente: 
 let sb = null;
 const IMG = new Map();
 const DB = {
-  local: true, idb: null, user: null, admin: false,
+  local: true, idb: null, user: null, papel: null, dev: null,
   async init() {
     if (CFG.supabaseUrl && CFG.supabaseAnonKey) {
-      try { await loadScript(LIBS.supabase); sb = window.supabase.createClient(CFG.supabaseUrl, CFG.supabaseAnonKey, { auth: { persistSession: true, autoRefreshToken: true } }); this.local = false; }
+      try { await loadScript(LIBS.supabase); sb = window.supabase.createClient(CFG.supabaseUrl, CFG.supabaseAnonKey, { auth: { persistSession: true, autoRefreshToken: true } }); this.local = false;
+        this.dev = LS.get("pmx_dev") || uid(); LS.set("pmx_dev", this.dev);
+        sb.auth.onAuthStateChange((_e, ses) => { SESSAO.token = ses?.access_token || null; }); }
       catch (e) { console.warn(e); }
     }
     this.idb = await new Promise((res, rej) => {
@@ -409,6 +469,9 @@ const DB = {
     const d = await blobToDataURL(data); IMG.set(ref, d); return d;
   }
 };
+const podeEditar = () => DB.local || DB.papel === "admin" || DB.papel === "editor";
+const ehAdmin = () => DB.local || DB.papel === "admin";
+const PAPEIS = { admin: "Administrador", editor: "Editor", visitante: "Visitante" };
 function mergeSettings(s) {
   const d = clone(DEFAULT_SETTINGS); if (!s) return d;
   const velho = !s.versao || s.versao < 2;
@@ -623,11 +686,44 @@ async function enviarPin() {
     LS.set("pmx_email", A.email); DB.user = data.user; liberar();
   } catch (e) { falha("Erro: " + e.message); }
 }
-function liberar() { TRAVA.ok(); AUTH.pin = ""; AUTH.msg = ""; AUTH.travado = false; ultimaAtividade = Date.now(); if (appPronto) render(); else iniciarApp(); }
-function bloquear() { if (!appPronto || AUTH.travado) return; AUTH.travado = true; AUTH.modo = DB.local ? "local-entrar" : "entrar"; AUTH.pin = ""; AUTH.msg = ""; vAuth(); }
+function liberar() { TRAVA.ok(); AUTH.pin = ""; AUTH.msg = ""; AUTH.travado = false; ultimaAtividade = Date.now(); if (appPronto) { if (DB.local) render(); else retomar(); } else iniciarApp(); }
+function bloquear() { if (!appPronto || AUTH.travado) return; AUTH.travado = true; AUTH.modo = DB.local ? "local-entrar" : "entrar"; AUTH.pin = ""; AUTH.msg = "";
+  if (!DB.local && DB.papel !== "admin") SESSAO.sair(); fecharChat(true); vAuth(); }
+/* ---------- Controle de acessos simultâneos ---------- */
+const SESSAO = {
+  timer: null, token: null, limite: 2,
+  async entrar() { const { data, error } = await sb.rpc("entrar_sessao", { p_dispositivo: DB.dev }); if (error) throw error; if (data?.limite) this.limite = data.limite; return data; },
+  iniciar() { clearInterval(this.timer); this.timer = setInterval(() => this.ping(), 30000); },
+  async ping() { if (!appPronto || AUTH.travado || DB.local) return; const { data, error } = await sb.rpc("ping_sessao", { p_dispositivo: DB.dev }); if (error || !data) return; if (!data.ok) return sessaoCaiu(); atualizarOnline(data.online); },
+  async sair() { clearInterval(this.timer); try { await sb.rpc("sair_sessao", { p_dispositivo: DB.dev }); } catch (e) { } },
+  beacon() { if (DB.local || !this.token || !appPronto) return; try { fetch(CFG.supabaseUrl + "/rest/v1/rpc/sair_sessao", { method: "POST", keepalive: true, headers: { apikey: CFG.supabaseAnonKey, Authorization: "Bearer " + this.token, "Content-Type": "application/json" }, body: JSON.stringify({ p_dispositivo: DB.dev }) }); } catch (e) { } }
+};
+window.addEventListener("pagehide", () => SESSAO.beacon());
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible") SESSAO.ping(); });
+async function sessaoCaiu() { try { const r = await SESSAO.entrar(); if (r.ok) { atualizarOnline(r.online); return; } telaSessao(r); } catch (e) { } }
+async function retomar() {
+  const d = busy("Verificando vaga…");
+  try { const r = await SESSAO.entrar(); d(); if (!r.ok) return telaSessao(r); DB.papel = r.papel; atualizarOnline(r.online, true); SESSAO.iniciar(); render(); renderChat(); }
+  catch (e) { d(); alert("Erro: " + e.message); }
+}
+let _retry = null;
+function telaSessao(r) {
+  clearInterval(SESSAO.timer); clearInterval(_retry); fecharChat(true); $("#chatRoot").innerHTML = "";
+  const txt = r.motivo === "lotado" ? { t: "Vaga ocupada", m: `O app permite ${SESSAO.limite} acessos ao mesmo tempo e a vaga da equipe está em uso${r.quem ? " por <b>" + esc(r.quem) + "</b>" : ""}. Assim que liberar, você entra.` }
+    : r.motivo === "derrubado" ? { t: "Sessão encerrada", m: "Seu acesso foi encerrado pelo administrador. Você poderá entrar novamente em alguns minutos." }
+    : r.motivo === "sem_acesso" ? { t: "Acesso aguardando liberação", m: `O e-mail <b>${esc(DB.user?.email || "")}</b> ainda não foi liberado pelo administrador da Protemaxi.` }
+    : { t: "Sessão encerrada", m: "Sua sessão foi encerrada. Tente entrar novamente." };
+  let seg = 20;
+  const pinta = () => { $("#root").innerHTML = `<div class="login"><div class="card"><img class="seal" src="${ASSETS.selo}" alt=""><h2>${txt.t}</h2><p class="sub" style="line-height:1.5">${txt.m}</p>
+    ${r.motivo === "lotado" ? `<div class="hint" style="margin-bottom:14px">Nova tentativa automática em <b>${seg}s</b></div>` : ""}
+    <div style="display:flex;gap:8px;justify-content:center">${r.motivo !== "sem_acesso" ? `<button class="btn pri" onclick="tentarEntrar()">Tentar agora</button>` : ""}<button class="btn" onclick="sair()">Sair</button></div></div></div>`; };
+  pinta();
+  if (r.motivo === "lotado") _retry = setInterval(() => { seg--; if (seg <= 0) { clearInterval(_retry); tentarEntrar(); } else pinta(); }, 1000);
+}
+function tentarEntrar() { clearInterval(_retry); if (appPronto) retomar(); else iniciarApp(); }
 ["pointerdown", "keydown", "touchstart"].forEach(ev => document.addEventListener(ev, () => { if (!AUTH.travado) ultimaAtividade = Date.now(); }, { passive: true }));
 setInterval(() => { const m = +(st.S?.parametros?.bloqueioMin) || 20; if (appPronto && !AUTH.travado && Date.now() - ultimaAtividade > m * 60000) bloquear(); }, 15000);
-async function sair() { if (sb) await sb.auth.signOut(); IMG.clear(); location.reload(); }
+async function sair() { if (sb) { await SESSAO.sair(); await sb.auth.signOut(); } IMG.clear(); location.reload(); }
 async function trocarPin() {
   const a = prompt("Novo PIN (4 números):"); if (a === null) return; if (!/^\d{4}$/.test(a)) return alert("O PIN deve ter exatamente 4 números.");
   const b = prompt("Repita o novo PIN:"); if (a !== b) return alert("Os PINs não conferem.");
@@ -638,22 +734,37 @@ async function trocarPin() {
   } catch (e) { alert("Não foi possível alterar: " + e.message); }
 }
 
+/* ---------- Presença da equipe ---------- */
+function atualizarOnline(lista, silencioso) {
+  const novo = new Set((lista || []).map(e => String(e).toLowerCase())), eu = DB.user?.email?.toLowerCase();
+  if (!silencioso && st.online) novo.forEach(e => { if (!st.online.has(e) && e !== eu) { const m = st.membros.find(x => x.email === e); toast(`${m?.nome || e} entrou no app`); } });
+  st.online = novo; $$(".pres-list").forEach(el => el.innerHTML = presencaHTML());
+}
+async function carregarMembros() { if (DB.local) return; const { data } = await sb.from("equipe").select("email,nome,papel").order("nome"); st.membros = (data || []).map(m => ({ ...m, email: m.email.toLowerCase() })); }
+const iniciais = n => String(n || "?").trim().split(/\s+/).slice(0, 2).map(x => x[0]).join("").toUpperCase();
+function presencaHTML() {
+  const l = [...st.membros].sort((a, b) => (a.papel === "admin" ? -1 : 0) - (b.papel === "admin" ? -1 : 0) || (st.online.has(b.email) - st.online.has(a.email)) || String(a.nome).localeCompare(String(b.nome)));
+  return l.map(m => { const on = st.online.has(m.email); return `<div class="pp ${on ? "on" : ""}" title="${esc(m.email)} · ${on ? "online" : "offline"}"><div class="av">${esc(iniciais(m.nome || m.email))}<i></i></div><div class="nm">${esc(m.nome || m.email)}<br><small>${PAPEIS[m.papel] || ""} · ${on ? "online" : "offline"}</small></div></div>`; }).join("") || `<div class="pp"><small>Sem membros</small></div>`;
+}
+const meuNome = () => st.membros.find(m => m.email === DB.user?.email?.toLowerCase())?.nome || DB.user?.email || "Eu";
+
 /* =========================================================
    Estado, navegação e telas
    ========================================================= */
-const st = { S: null, projetos: [], view: "dashboard", filtro: "todos", busca: "", ed: null, cfgTab: "perfil", equipe: null };
+const st = { S: null, projetos: [], view: "dashboard", filtro: "todos", busca: "", ed: null, cfgTab: "perfil", equipe: null, membros: [], online: new Set() };
 function go(view, arg) { st.view = view; st.arg = arg; render(); window.scrollTo(0, 0); }
 async function recarregar() { st.projetos = await DB.listar(); }
 const getP = id => st.projetos.find(p => p.id === id);
 
 function shell(inner) {
-  const nav = [["dashboard", "Painel", I.dash], ["projetos", "Projetos", I.folder], ["novo", "Novo projeto", I.plus], ["config", "Configurações", I.gear]];
+  const nav = [["dashboard", "Painel", I.dash], ["projetos", "Projetos", I.folder], ...(podeEditar() ? [["novo", "Novo projeto", I.plus]] : []), ["config", "Configurações", I.gear]];
   const P = st.S.perfil;
   return `<div class="app"><aside class="side">
     <div class="brand"><div class="mk"><img src="${P.logo || ASSETS.selo}" alt=""></div><div><b>Protemaxi</b><small>Projetos</small></div></div>
     <nav class="nav">${nav.map(([v, l, ic]) => `<button class="${st.view === v || (v === "projetos" && ["editor", "editar"].includes(st.view)) ? "on" : ""}" onclick="go('${v}')">${ic}<span class="lbl">${l}</span></button>`).join("")}</nav>
+    ${DB.local ? "" : `<div class="pres"><div class="pres-t"><span>Equipe</span><span>${st.online.size} online</span></div><div class="pres-list">${presencaHTML()}</div></div>`}
     <div class="foot"><span class="mode"><span class="dot" style="background:${DB.local ? "#f59e0b" : "#10b981"}"></span>${DB.local ? "Modo local" : "Nuvem conectada"}</span><br>
-      ${DB.user ? esc(DB.user.email) + "<br>" : ""}<a href="#" onclick="bloquear();return false" style="color:#9fb4d6">Bloquear</a>${DB.user ? ` · <a href="#" onclick="sair();return false" style="color:#9fb4d6">Sair</a>` : ""}</div>
+      ${DB.user ? esc(meuNome()) + " · " + (PAPEIS[DB.papel] || "") + "<br>" : ""}<a href="#" onclick="bloquear();return false" style="color:#9fb4d6">Bloquear</a>${DB.user ? ` · <a href="#" onclick="sair();return false" style="color:#9fb4d6">Sair</a>` : ""}</div>
   </aside><main class="main">${inner}</main></div>`;
 }
 function topo(t, sub, right = "") {
@@ -668,7 +779,7 @@ function vDashboard() {
   const nv = n("novo"), ex = n("execucao"), ok = n("concluido"), et = ETAPAS.map((_, i) => ps.filter(p => etapa(p) === i).length);
   const cs = ps.map(p => calc(p, st.S)), camsTot = cs.reduce((s, c) => s + c.cams, 0), sensTot = cs.reduce((s, c) => s + c.sensores, 0);
   const kpi = (cls, lb, v, ic, sub, w) => `<div class="card kpi ${cls}"><div class="ic">${ic}</div><div class="lb">${lb}</div><div class="vl">${v}</div><div class="sub">${sub}</div><div class="bar"><i style="width:${w}%"></i></div></div>`;
-  return topo("Painel de projetos", "Visão geral de todos os projetos da equipe", `<button class="btn pri" onclick="go('novo')">${I.plus}<span class="hide-m">Novo projeto</span></button>`) + `
+  return topo("Painel de projetos", "Visão geral de todos os projetos da equipe", podeEditar() ? `<button class="btn pri" onclick="go('novo')">${I.plus}<span class="hide-m">Novo projeto</span></button>` : "") + `
   <div class="grid kpis">
     ${kpi("k-tot", "Total de projetos", tot, I.folder, `${camsTot} câmeras · ${sensTot} sensores projetados`, 100)}
     ${kpi("k-novo", "Projetos novos", nv, I.spark, `${pc(nv)}% do total`, pc(nv))}
@@ -692,21 +803,21 @@ const miniEtapa = p => { const e = etapa(p); return `<div class="mini" title="${
 function vProjetos() {
   const q = st.busca.toLowerCase();
   const ps = st.projetos.filter(p => (st.filtro === "todos" || p.status === st.filtro) && (!q || (p.nome + " " + (p.cliente || "") + " " + (p.endereco || "")).toLowerCase().includes(q)));
-  return topo("Projetos", `${st.projetos.length} projetos cadastrados`, `<button class="btn pri" onclick="go('novo')">${I.plus}<span class="hide-m">Novo projeto</span></button>`) + `
+  return topo("Projetos", `${st.projetos.length} projetos cadastrados`, podeEditar() ? `<button class="btn pri" onclick="go('novo')">${I.plus}<span class="hide-m">Novo projeto</span></button>` : "") + `
   <div class="filters"><div class="seg">${[["todos", "Todos"], ["novo", "Novos"], ["execucao", "Em execução"], ["concluido", "Concluídos"]].map(([k, l]) => `<button class="${st.filtro === k ? "on" : ""}" onclick="st.filtro='${k}';render()">${l}</button>`).join("")}</div>
   <input class="inp" id="busca" style="max-width:300px" placeholder="Buscar projeto, cliente, endereço…" value="${esc(st.busca)}" oninput="st.busca=this.value;clearTimeout(window._bt);window._bt=setTimeout(()=>{render();const i=$('#busca');i.focus();i.setSelectionRange(i.value.length,i.value.length)},300)"></div>
   ${ps.length ? `<div class="grid pcards">${ps.map(p => `<div class="card pcard" onclick="abrir('${p.id}')">
     <div class="th" data-thumb="${esc(p.planta?.ref || p.fotos?.[0]?.ref || "")}">${p.planta || p.fotos?.length ? "" : I.folder}</div>
     <div class="meta"><h4>${esc(p.nome)}</h4>${chip(p.status)}</div>
     <div class="muted" style="font-size:12.5px">${esc(p.cliente || "Sem cliente")} · ${fmtData(p.updated_at)}</div>
-    <div class="meta">${miniEtapa(p)}<div onclick="event.stopPropagation()" style="display:flex;gap:4px">
+    <div class="meta">${miniEtapa(p)}${!podeEditar() ? "" : `<div onclick="event.stopPropagation()" style="display:flex;gap:4px">
       <select class="inp" style="padding:5px 8px;font-size:12px;width:auto" onchange="mudarStatus('${p.id}',this.value)">${Object.entries(STATUS).map(([k, l]) => `<option value="${k}" ${p.status === k ? "selected" : ""}>${l}</option>`).join("")}</select>
       <button class="btn sm ghost" title="Duplicar" onclick="duplicar('${p.id}')">${I.copy}</button>
-      <button class="btn sm ghost danger" title="Excluir" onclick="excluir('${p.id}')">${I.trash}</button></div></div>
+      <button class="btn sm ghost danger" title="Excluir" onclick="excluir('${p.id}')">${I.trash}</button></div>`}</div>
   </div>`).join("")}</div>` : `<div class="card empty">${I.folder}<p>Nenhum projeto encontrado.</p></div>`}`;
 }
 async function carregarThumbs() { for (const el of $$("[data-thumb]")) { const r = el.dataset.thumb; if (!r) continue; try { el.style.backgroundImage = `url("${await DB.img(r)}")`; } catch (e) { } } }
-async function mudarStatus(id, s) { const p = getP(id); p.status = s; await DB.salvar(p); toast("Status: " + STATUS[s]); render(); }
+async function mudarStatus(id, s) { if (!podeEditar()) return; const p = getP(id); p.status = s; await DB.salvar(p); toast("Status: " + STATUS[s]); render(); }
 async function duplicar(id) { const p = clone(getP(id)); p.id = uid(); p.nome += " (cópia)"; p.status = "novo"; p.exportado = false; p.created_at = null; await DB.salvar(p); await recarregar(); render(); toast("Projeto duplicado"); }
 async function excluir(id) { const p = getP(id); if (!confirm(`Excluir o projeto "${p.nome}"? Essa ação não pode ser desfeita.`)) return; await DB.excluir(p); await recarregar(); render(); toast("Projeto excluído"); }
 const abrir = id => go("editor", id);
@@ -831,12 +942,13 @@ function vEditor() {
   const grupos = { cftv: "CFTV", alarme: "Alarme", cerca: "Cerca", infra: "Infraestrutura" }, sel = (p.itens || []).find(i => i.id === E.sel);
   return topo(esc(p.nome), `${esc(p.cliente || "")} ${p.endereco ? "· " + esc(p.endereco) : ""} &nbsp; ${chip(p.status)}`,
     `<button class="btn" onclick="go('projetos')">${I.back}<span class="hide-m">Projetos</span></button>
-     <button class="btn" onclick="editarDados('${p.id}')">${I.edit}<span class="hide-m">Dados e fotos</span></button>
+     ${podeEditar() ? `<button class="btn" onclick="editarDados('${p.id}')">${I.edit}<span class="hide-m">Dados e fotos</span></button>` : ""}
+     <button class="btn" onclick="abrirChat('${p.id}')">${I.chat}<span class="hide-m">Comentar</span></button>
      <button class="btn" onclick="exportInside('${p.id}')" title="Lista no formato do Inside">${I.list}<span class="hide-m">Lista Inside</span></button>
      <button class="btn" onclick="exportar('${p.id}','pdf')">${I.pdf}<span class="hide-m">PDF</span></button>
      <button class="btn pri" onclick="exportar('${p.id}','pptx')">${I.ppt}<span class="hide-m">Gerar PowerPoint</span></button>`) + `
   <div class="ed">
-    <div class="card tools">
+    <div class="card tools">${!podeEditar() ? `<div class="ro">Modo visualização — seu acesso é de <b>visitante</b>. Você pode ver, comentar e baixar o projeto.</div><div class="tg">Legenda</div>${S.equipamentos.filter(e => (p.itens || []).some(i => i.t === e.id)).map(e => `<div class="tool" style="cursor:default"><span class="sw" style="background:${e.cor}">${e.sigla}</span>${e.marcador ? "Local do rack" : esc(e.nome)}</div>`).join("")}</div>` : `
       ${tool("sel", "Selecionar / mover", "#334155", "↖")}
       ${Object.entries(grupos).map(([g, gl]) => { const l = S.equipamentos.filter(e => e.grupo === g); return l.length ? `<div class="tg">${gl}</div>` + l.map(e => tool(e.id, e.marcador ? "Local do rack" : e.nome, e.cor, e.sigla)).join("") : ""; }).join("")}
       ${tool("cerca", "Desenhar cerca", "#b91c1c", "~")}
@@ -848,7 +960,7 @@ function vEditor() {
       <button class="tool" onclick="sugerir()"><span class="sw" style="background:var(--pri)">★</span>Posicionar automático</button>
       <button class="tool" onclick="limparCerca()"><span class="sw" style="background:#94a3b8">~</span>Limpar cerca</button>
       <button class="tool" onclick="limparTudo()"><span class="sw" style="background:#94a3b8">⌫</span>Limpar tudo</button>
-    </div>
+    </div>`}
     <div class="canvas-wrap" id="cw">
       <div class="zoom"><button class="btn sm ghost" onclick="zoom(-1)">−</button><button class="btn sm ghost" onclick="zoom(0)">${Math.round(E.zoom * 100)}%</button><button class="btn sm ghost" onclick="zoom(1)">+</button></div>
       ${p.planta ? `<svg id="plan" viewBox="0 0 ${p.planta.w} ${p.planta.h}" style="width:${E.zoom * 100}%;min-width:${Math.min(900, p.planta.w) * E.zoom}px"></svg>` : `<div class="empty">Este projeto ainda não tem planta.<br><br><button class="btn pri" onclick="editarDados('${p.id}')">Enviar planta ou usar croqui</button></div>`}
@@ -901,6 +1013,7 @@ function bindSvg(svg) {
   const pt = e => { const m = svg.getScreenCTM().inverse(); const q = new DOMPoint(e.clientX, e.clientY).matrixTransform(m); return { x: Math.round(q.x), y: Math.round(q.y) }; };
   let drag = null, raf = 0;
   svg.addEventListener("pointerdown", e => {
+    if (!podeEditar()) return;
     const p = getP(st.arg), E = st.ed, q = pt(e), g = e.target.closest("[data-id]"), ga = e.target.closest("[data-ap]");
     if (E.tool === "apagar") { if (g) p.itens = p.itens.filter(i => i.id !== g.dataset.id); else if (ga) p.apoio = p.apoio.filter(a => a.id !== ga.dataset.ap); else return; mudou(true); return; }
     if (g && E.tool !== "cerca") { E.sel = g.dataset.id; const it = p.itens.find(i => i.id === E.sel); drag = { it, dx: q.x - it.x, dy: q.y - it.y, moved: false, sel: true }; svg.setPointerCapture(e.pointerId); svg.innerHTML = svgConteudo(p); return; }
@@ -1052,7 +1165,7 @@ async function exportar(id, tipo) {
   try {
     const slides = await montarSlides(p), nome = `${slug(p.nome)}`;
     if (tipo === "pptx") await renderPPTX(slides, nome, p); else await renderPDF(slides, nome);
-    if (!p.exportado) { p.exportado = true; await DB.salvar(p); }
+    if (!p.exportado && podeEditar()) { p.exportado = true; await DB.salvar(p); }
     toast(tipo === "pptx" ? "PowerPoint gerado — abra e edite à vontade" : "PDF gerado");
   } catch (e) { console.error(e); alert("Erro ao gerar: " + e.message); } finally { done(); }
 }
@@ -1131,9 +1244,12 @@ function exportInside(id) {
    ========================================================= */
 function vConfig() {
   const S = st.cfg || (st.cfg = clone(st.S)), P = S.perfil, A = S.apres, t = st.cfgTab;
-  const tabs = [["perfil", "Perfil e segurança"], ["apres", "Apresentação"], ["catalogo", "Catálogo (Inside)"], ["equipamentos", "Símbolos da planta"], ["parametros", "Parâmetros"], ["linhas", "Linhas de alarme"], ...(DB.local ? [] : [["equipe", "Equipe"]]), ["dados", "Backup"]];
+  const tabs = !ehAdmin() ? [["perfil", "Minha conta"], ["linhas", "Linhas de alarme"], ["equipe", "Equipe"]] : [["perfil", "Perfil e segurança"], ["apres", "Apresentação"], ["catalogo", "Catálogo (Inside)"], ["equipamentos", "Símbolos da planta"], ["parametros", "Parâmetros"], ["linhas", "Linhas de alarme"], ...(DB.local ? [] : [["equipe", "Equipe e acessos"]]), ["dados", "Backup"]];
+  if (!tabs.some(x => x[0] === t)) { st.cfgTab = tabs[0][0]; return vConfig(); }
   let body = "";
-  if (t === "perfil") body = `<div class="fg">
+  if (st.cfgTab === "perfil" && !ehAdmin()) body = `<div class="card pad" style="box-shadow:none"><h3 style="margin-bottom:6px">${esc(meuNome())}</h3><div class="muted" style="font-size:13px;margin-bottom:12px">${esc(DB.user?.email || "")} · ${PAPEIS[DB.papel] || ""}</div>
+      <button class="btn sm" onclick="trocarPin()">Trocar meu PIN</button> <button class="btn sm" onclick="bloquear()">Bloquear agora</button> <button class="btn sm danger" onclick="sair()">Sair e liberar a vaga</button></div>`;
+  else if (t === "perfil") body = `<div class="fg">
     <div class="full" style="display:flex;gap:16px;align-items:center"><div class="avatar" style="width:72px;height:72px"><img src="${P.logo || ASSETS.selo}"></div>
       <div><button class="btn sm" onclick="$('#inLogo').click()">${I.up}Trocar ícone do app</button> ${P.logo ? `<button class="btn sm danger" onclick="lerCfg();st.cfg.perfil.logo=null;render()">Usar selo padrão</button>` : ""}<div class="muted" style="font-size:12px;margin-top:6px">A capa, o fundo e o encerramento usam o modelo oficial da Protemaxi.</div></div><input type="file" id="inLogo" hidden accept="image/*"></div>
     ${[["empresa", "Empresa"], ["responsavel", "Responsável / projetista"], ["cargo", "Setor (texto do encerramento)"], ["telefone", "Telefone / WhatsApp"], ["email", "E-mail"], ["site", "Site"], ["linkedin", "LinkedIn"], ["instagram", "Instagram"]].map(([k, l]) => `<div><label class="f">${l}</label><input class="inp" data-pf="${k}" value="${esc(P[k])}"></div>`).join("")}
@@ -1181,7 +1297,7 @@ function vConfig() {
     <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" onclick="backup()">${I.save}Exportar backup (.json)</button><button class="btn" onclick="$('#inBk').click()">${I.up}Importar backup</button><input type="file" id="inBk" hidden accept=".json" onchange="restaurar(this.files[0])">
     <button class="btn danger" onclick="if(confirm('Voltar catálogo, símbolos, textos e parâmetros ao padrão?')){const pf=st.cfg.perfil;st.cfg=clone(DEFAULT_SETTINGS);st.cfg.perfil=pf;render()}">Restaurar padrão</button></div>
     <p class="hint" style="margin-top:16px">${DB.local ? "Você está no <b>modo local</b>: os dados ficam só neste aparelho. Configure o Supabase no config.js para guardar na nuvem e usar no computador e no celular." : "Conectado ao Supabase: projetos, fotos e configurações ficam na nuvem, compartilhados com a equipe liberada."}</p>`;
-  return topo("Configurações", "Perfil, apresentação, catálogo do Inside e regras de cálculo", `<button class="btn pri" onclick="salvarCfg()">${I.save}Salvar</button>`) +
+  return topo("Configurações", ehAdmin() ? "Perfil, apresentação, catálogo do Inside e regras de cálculo" : "Sua conta e a equipe", ehAdmin() && st.cfgTab !== "equipe" ? `<button class="btn pri" onclick="salvarCfg()">${I.save}Salvar</button>` : "") +
     `<div class="card pad"><div class="tabs">${tabs.map(([k, l]) => `<button class="${t === k ? "on" : ""}" onclick="lerCfg();st.cfgTab='${k}';render()">${l}</button>`).join("")}</div>${body}</div>`;
 }
 function lerCfg() {
@@ -1211,18 +1327,39 @@ function colarInside() {
 }
 function vEquipe() {
   if (st.equipe === null) return `<div class="muted">Carregando equipe…</div>`;
-  return `<p class="muted" style="margin-top:0">Só os e-mails desta lista conseguem ver e editar projetos, mesmo que alguém crie uma conta. ${DB.admin ? "" : "Apenas administradores podem alterar a lista."}</p>
-    <table class="tb"><thead><tr><th>E-mail</th><th>Nome</th><th>Perfil</th><th></th></tr></thead><tbody>
-    ${st.equipe.map(m => `<tr><td>${esc(m.email)}</td><td>${esc(m.nome || "")}</td><td>${m.admin ? `<span class="chip novo">Administrador</span>` : "Usuário"}</td><td>${DB.admin && m.email.toLowerCase() !== DB.user.email.toLowerCase() ? `<button class="btn sm ghost danger" onclick="removerMembro('${esc(m.email)}')">${I.trash}</button>` : ""}</td></tr>`).join("")}
-    </tbody></table>
-    ${DB.admin ? `<div class="fg" style="margin-top:14px"><div><label class="f">E-mail</label><input class="inp" id="nm_e" type="email"></div><div><label class="f">Nome</label><input class="inp" id="nm_n"></div>
-      <div class="full"><label class="ck" style="display:inline-flex"><input type="checkbox" id="nm_a">Administrador</label> <button class="btn sm pri" onclick="addMembro()">${I.plus}Liberar acesso</button></div></div>
-      <p class="hint">Depois de liberar, a pessoa abre o app, toca em <b>Primeiro acesso</b>, digita o e-mail e cria o PIN dela.</p>` : ""}`;
+  const adm = ehAdmin(), eu = DB.user?.email?.toLowerCase();
+  return `<p class="muted" style="margin-top:0">Só os e-mails desta lista acessam os projetos. O app permite <b>${SESSAO.limite} acessos ao mesmo tempo</b>: uma vaga é sempre do administrador e as demais são disputadas pela equipe.</p>
+    <div style="overflow:auto"><table class="tb"><thead><tr><th>Status</th><th>Nome</th><th>E-mail</th><th>Perfil</th><th></th></tr></thead><tbody>
+    ${st.equipe.map(m => { const on = st.online.has(m.email), sou = m.email === eu, ad = m.papel === "admin";
+      return `<tr><td><span class="chip ${on ? "concluido" : ""}" style="${on ? "" : "background:#eef1f5;color:#64748b"}"><i></i>${on ? "Online" : "Offline"}</span></td>
+      <td>${adm ? `<input class="inp" value="${esc(m.nome || "")}" onchange="mudarMembro('${esc(m.email)}',{nome:this.value})" style="min-width:140px">` : esc(m.nome || "")}</td>
+      <td>${esc(m.email)}</td>
+      <td>${adm && !ad ? `<select class="inp" style="width:auto" onchange="mudarMembro('${esc(m.email)}',{papel:this.value,admin:false})"><option value="visitante" ${m.papel === "visitante" ? "selected" : ""}>Visitante</option><option value="editor" ${m.papel === "editor" ? "selected" : ""}>Editor</option></select>` : `<span class="chip ${ad ? "novo" : ""}">${PAPEIS[m.papel] || m.papel}</span>`}</td>
+      <td style="white-space:nowrap">${adm && on && !sou ? `<button class="btn sm" onclick="derrubar('${esc(m.email)}')">Encerrar sessão</button> ` : ""}${adm && !sou && !ad ? `<button class="btn sm ghost danger" title="Remover acesso" onclick="removerMembro('${esc(m.email)}')">${I.trash}</button>` : ""}</td></tr>`; }).join("")}
+    </tbody></table></div>
+    ${adm ? `<div class="card pad" style="box-shadow:none;margin-top:16px"><h3>Liberar novo acesso</h3><div class="fg">
+      <div><label class="f">Nome</label><input class="inp" id="nm_n" placeholder="Ex.: Carlos"></div><div><label class="f">E-mail</label><input class="inp" id="nm_e" type="email"></div>
+      <div><label class="f">Perfil</label><select class="inp" id="nm_p"><option value="visitante">Visitante — vê, comenta e baixa</option><option value="editor">Editor — também cria e edita projetos</option></select></div>
+      <div style="display:flex;align-items:flex-end"><button class="btn pri" onclick="addMembro()">${I.plus}Liberar acesso</button></div></div>
+      <p class="hint" style="margin-top:12px">Depois de liberar, a pessoa abre o app, toca em <b>Primeiro acesso</b>, digita o e-mail e cria o PIN dela.</p></div>
+    <div class="card pad" style="box-shadow:none;margin-top:12px"><h3>Acessos ao mesmo tempo</h3><div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap"><input class="inp" id="lim" type="number" min="1" max="20" value="${SESSAO.limite}" style="width:90px"><span class="muted">contando você (administrador)</span><button class="btn sm" onclick="salvarLimite()">Salvar</button></div></div>` : ""}`;
 }
-async function carregarEquipe() { const { data, error } = await sb.from("equipe").select("*").order("email"); st.equipe = error ? [] : data; if (st.view === "config") { lerCfg(); render(); } }
-async function addMembro() { lerCfg(); const email = $("#nm_e").value.trim().toLowerCase(); if (!/^\S+@\S+\.\S+$/.test(email)) return alert("E-mail inválido");
-  const { error } = await sb.from("equipe").insert({ email, nome: $("#nm_n").value.trim(), admin: $("#nm_a").checked }); if (error) return alert(error.message); st.equipe = null; carregarEquipe(); toast("Acesso liberado"); }
-async function removerMembro(email) { if (!confirm(`Remover o acesso de ${email}?`)) return; lerCfg(); const { error } = await sb.from("equipe").delete().eq("email", email); if (error) return alert(error.message); st.equipe = null; carregarEquipe(); }
+async function carregarEquipe() {
+  const [{ data, error }, { data: aj }] = await Promise.all([sb.from("equipe").select("email,nome,papel").order("nome"), sb.from("ajustes").select("valor").eq("chave", "limite_sessoes").maybeSingle()]);
+  if (aj?.valor) SESSAO.limite = aj.valor;
+  st.equipe = error ? [] : data.map(m => ({ ...m, email: m.email.toLowerCase() })).sort((a, b) => (a.papel === "admin" ? -1 : 1) - (b.papel === "admin" ? -1 : 1)); st.membros = st.equipe;
+  if (st.view === "config") { lerCfg(); render(); }
+}
+async function addMembro() {
+  lerCfg(); const email = $("#nm_e").value.trim().toLowerCase(), nome = $("#nm_n").value.trim(), papel = $("#nm_p").value;
+  if (!nome) return alert("Digite o nome"); if (!/^\S+@\S+\.\S+$/.test(email)) return alert("E-mail inválido");
+  const { error } = await sb.from("equipe").insert({ email, nome, papel, admin: false }); if (error) return alert(error.message.includes("duplicate") ? "Este e-mail já está na equipe." : error.message);
+  st.equipe = null; await carregarEquipe(); toast(`Acesso liberado para ${nome}`);
+}
+async function mudarMembro(email, dados) { const { error } = await sb.from("equipe").update(dados).eq("email", email); if (error) return alert(error.message); await carregarEquipe(); toast("Equipe atualizada"); }
+async function removerMembro(email) { if (!confirm(`Remover o acesso de ${email}?`)) return; lerCfg(); await sb.rpc("derrubar_sessao", { p_email: email }); const { error } = await sb.from("equipe").delete().eq("email", email); if (error) return alert(error.message); st.equipe = null; carregarEquipe(); }
+async function derrubar(email) { if (!confirm(`Encerrar a sessão de ${email}? A vaga fica livre e essa pessoa só consegue voltar em 5 minutos.`)) return; const { error } = await sb.rpc("derrubar_sessao", { p_email: email }); if (error) return alert(error.message); const { data } = await sb.rpc("online_agora"); atualizarOnline(data, true); render(); toast("Sessão encerrada"); }
+async function salvarLimite() { const v = Math.max(1, +$("#lim").value || 2); const { error } = await sb.from("ajustes").update({ valor: v }).eq("chave", "limite_sessoes"); if (error) return alert(error.message); SESSAO.limite = v; toast(`Limite: ${v} acessos ao mesmo tempo`); }
 async function backup() {
   const done = busy("Preparando backup…");
   try { const ps = clone(st.projetos); for (const p of ps) { if (p.planta?.ref) p.planta.ref = await DB.img(p.planta.ref); if (p.logoCliente) p.logoCliente = await DB.img(p.logoCliente); for (const f of p.fotos || []) f.ref = await DB.img(f.ref); }
@@ -1240,10 +1377,84 @@ async function restaurar(f) {
 }
 
 /* =========================================================
+   Chat da equipe e anotações
+   ========================================================= */
+const CHAT = { aberto: false, aba: "conversa", msgs: [], notas: [], lido: +(LS.get("pmx_lido") || 0), proj: null, canal: null, poll: null };
+async function iniciarChat() {
+  await Promise.all([carregarMsgs(), carregarNotas()]); renderChat();
+  try {
+    CHAT.canal = sb.channel("pmx-equipe")
+      .on("postgres_changes", { event: "INSERT", schema: "public", table: "mensagens" }, ev => addMsg(ev.new))
+      .on("postgres_changes", { event: "DELETE", schema: "public", table: "mensagens" }, ev => { CHAT.msgs = CHAT.msgs.filter(m => m.id !== ev.old.id); renderChat(); })
+      .on("postgres_changes", { event: "*", schema: "public", table: "notas" }, () => carregarNotas().then(renderChat))
+      .on("postgres_changes", { event: "*", schema: "public", table: "sessoes" }, async () => { const { data } = await sb.rpc("online_agora"); if (data) atualizarOnline(data); })
+      .subscribe();
+  } catch (e) { console.warn(e); }
+  clearInterval(CHAT.poll); CHAT.poll = setInterval(async () => { if (!appPronto || AUTH.travado) return; const ult = CHAT.msgs.at(-1)?.id || 0;
+    const { data } = await sb.from("mensagens").select("*").gt("id", ult).order("id"); (data || []).forEach(addMsg); if (CHAT.aberto && CHAT.aba === "notas") { await carregarNotas(); renderChat(); } }, 20000);
+}
+async function carregarMsgs() { const { data } = await sb.from("mensagens").select("*").order("id", { ascending: false }).limit(150); CHAT.msgs = (data || []).reverse(); }
+async function carregarNotas() { const { data } = await sb.from("notas").select("*").order("fixada", { ascending: false }).order("updated_at", { ascending: false }).limit(200); CHAT.notas = data || []; }
+function addMsg(m) { if (CHAT.msgs.some(x => x.id === m.id)) return; CHAT.msgs.push(m); const eu = DB.user?.email?.toLowerCase();
+  if (!CHAT.aberto && m.email !== eu) toast(`${m.nome || m.email}: ${String(m.texto).slice(0, 60)}`); renderChat(); }
+function abrirChat(projId) { CHAT.aberto = true; CHAT.aba = "conversa"; CHAT.proj = projId || (st.view === "editor" ? st.arg : null); renderChat(); setTimeout(() => $("#msgTxt")?.focus(), 50); }
+function fecharChat(semRender) { CHAT.aberto = false; if (!semRender) renderChat(); }
+function abaChat(a) { CHAT.aba = a; renderChat(); }
+const horaMsg = d => new Date(d).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
+const diaMsg = d => { const x = new Date(d), h = new Date(); const y = new Date(); y.setDate(h.getDate() - 1); return x.toDateString() === h.toDateString() ? "Hoje" : x.toDateString() === y.toDateString() ? "Ontem" : x.toLocaleDateString("pt-BR"); };
+function renderChat() {
+  const root = $("#chatRoot"); if (!root || DB.local || !appPronto || AUTH.travado) { if (root && (AUTH.travado || !appPronto)) root.innerHTML = ""; return; }
+  const eu = DB.user?.email?.toLowerCase(), rasc = $("#msgTxt")?.value || "", nf = { t: $("#nt_t")?.value || "", x: $("#nt_x")?.value || "", p: $("#nt_p")?.value ?? (CHAT.proj || ""), f: $("#nt_f")?.checked || false };
+  if (CHAT.aberto && CHAT.aba === "conversa" && CHAT.msgs.length) { CHAT.lido = CHAT.msgs.at(-1).id; LS.set("pmx_lido", CHAT.lido); }
+  const naoLidas = CHAT.msgs.filter(m => m.id > CHAT.lido && m.email !== eu).length, proj = CHAT.proj && getP(CHAT.proj);
+  let html = CHAT.aberto ? "" : `<button class="fab" onclick="abrirChat()">${I.chat}<span class="t">Equipe</span>${naoLidas ? `<span class="bd">${naoLidas > 99 ? "99+" : naoLidas}</span>` : ""}</button>`;
+  if (CHAT.aberto) {
+    let ult = "", corpo = "";
+    if (CHAT.aba === "conversa") {
+      corpo = `<div class="msgs" id="msgs">${CHAT.msgs.length ? CHAT.msgs.map(m => { const d = diaMsg(m.created_at), cab = d !== ult ? `<div class="dia">${d}</div>` : ""; ult = d; const mine = m.email === eu;
+        return cab + `<div class="ms ${mine ? "eu" : ""}"><div class="who">${mine ? "" : esc(m.nome || m.email) + " · "}${horaMsg(m.created_at)}${mine || ehAdmin() ? `<button class="del" title="Apagar" onclick="apagarMsg(${m.id})">×</button>` : ""}</div>
+          <div class="bb">${m.projeto_nome ? `<div style="margin-bottom:5px"><span class="pj" onclick="${m.projeto_id && getP(m.projeto_id) ? `fecharChat();abrir('${m.projeto_id}')` : ""}">📁 ${esc(m.projeto_nome)}</span></div>` : ""}${esc(m.texto)}</div></div>`; }).join("")
+        : `<div class="empty" style="padding:40px 10px">${I.chat}<p>Nenhuma mensagem ainda.<br>Comece a conversa com a equipe.</p></div>`}</div>
+        <div class="composer">${proj ? `<label><input type="checkbox" id="msgProj" checked>Comentar no projeto <b>${esc(proj.nome)}</b></label>` : ""}
+          <div class="row"><textarea id="msgTxt" rows="1" maxlength="2000" placeholder="Escreva uma mensagem…" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();enviarMsg()}">${esc(rasc)}</textarea><button class="send" title="Enviar" onclick="enviarMsg()">${I.send}</button></div></div>`;
+    } else {
+      corpo = `<div class="notas"><div class="nf"><b style="font-size:13px">Nova anotação</b>
+          <input id="nt_t" maxlength="120" placeholder="Título (ex.: Visita técnica — levar escada)" value="${esc(nf.t)}">
+          <textarea id="nt_x" maxlength="4000" placeholder="Detalhes da anotação…">${esc(nf.x)}</textarea>
+          <select id="nt_p"><option value="">Sem projeto vinculado</option>${st.projetos.map(p => `<option value="${p.id}" ${nf.p === p.id ? "selected" : ""}>${esc(p.nome)}</option>`).join("")}</select>
+          <div style="display:flex;justify-content:space-between;align-items:center"><label style="display:flex;gap:6px;align-items:center;font-size:12.5px;cursor:pointer"><input type="checkbox" id="nt_f" ${nf.f ? "checked" : ""}>Fixar no topo</label><button class="btn sm pri" onclick="salvarNota()">${I.save}Salvar anotação</button></div></div>
+        ${CHAT.notas.map(n => { const mine = n.email === eu; return `<div class="nota ${n.fixada ? "fix" : ""}"><h5><span>${n.fixada ? "📌 " : ""}${esc(n.titulo)}</span></h5>${n.texto ? `<p>${esc(n.texto)}</p>` : ""}
+          ${n.projeto_nome ? `<div style="margin-bottom:7px"><span class="pj" onclick="${n.projeto_id && getP(n.projeto_id) ? `fecharChat();abrir('${n.projeto_id}')` : ""}">📁 ${esc(n.projeto_nome)}</span></div>` : ""}
+          <div class="mt"><span>${esc(n.nome || n.email)} · ${diaMsg(n.created_at)} ${horaMsg(n.created_at)}</span><span style="display:flex;gap:12px">${mine || ehAdmin() ? `<button onclick="fixarNota(${n.id},${!n.fixada})">${n.fixada ? "Desafixar" : "Fixar"}</button><button style="color:var(--danger)" onclick="apagarNota(${n.id})">Apagar</button>` : ""}</span></div></div>`; }).join("") || `<div class="empty" style="padding:20px 10px">Nenhuma anotação ainda.</div>`}</div>`;
+    }
+    html += `<div class="drawer"><div class="dr-h"><div><b>Equipe Protemaxi</b><small>${st.online.size} online agora</small></div><button onclick="fecharChat()" title="Fechar">×</button></div>
+      <div class="dr-pres pres-list">${presencaHTML()}</div>
+      <div class="tabs dr-tabs"><button class="${CHAT.aba === "conversa" ? "on" : ""}" onclick="abaChat('conversa')">Conversa</button><button class="${CHAT.aba === "notas" ? "on" : ""}" onclick="abaChat('notas')">Anotações (${CHAT.notas.length})</button></div>${corpo}</div>`;
+  }
+  root.innerHTML = html;
+  const box = $("#msgs"); if (box) box.scrollTop = box.scrollHeight;
+  if (rasc && $("#msgTxt")) { const t = $("#msgTxt"); t.focus(); t.setSelectionRange(t.value.length, t.value.length); }
+}
+async function enviarMsg() {
+  const t = $("#msgTxt"), texto = t.value.trim(); if (!texto) return; const proj = CHAT.proj && $("#msgProj")?.checked ? getP(CHAT.proj) : null;
+  t.value = ""; const { data, error } = await sb.from("mensagens").insert({ nome: meuNome(), texto, projeto_id: proj?.id || null, projeto_nome: proj?.nome || null }).select().single();
+  if (error) { t.value = texto; return alert("Não foi possível enviar: " + error.message); } addMsg(data);
+}
+async function apagarMsg(id) { if (!confirm("Apagar esta mensagem?")) return; const { error } = await sb.from("mensagens").delete().eq("id", id); if (error) return alert(error.message); CHAT.msgs = CHAT.msgs.filter(m => m.id !== id); renderChat(); }
+async function salvarNota() {
+  const titulo = $("#nt_t").value.trim(), texto = $("#nt_x").value.trim(), pid = $("#nt_p").value, p = pid ? getP(pid) : null; if (!titulo) return alert("Dê um título à anotação.");
+  const { error } = await sb.from("notas").insert({ nome: meuNome(), titulo, texto, projeto_id: p?.id || null, projeto_nome: p?.nome || null, fixada: $("#nt_f").checked }); if (error) return alert(error.message);
+  $("#nt_t").value = ""; $("#nt_x").value = ""; $("#nt_f").checked = false; await carregarNotas(); renderChat(); toast("Anotação salva");
+}
+async function fixarNota(id, v) { const { error } = await sb.from("notas").update({ fixada: v, updated_at: new Date().toISOString() }).eq("id", id); if (error) return alert(error.message); await carregarNotas(); renderChat(); }
+async function apagarNota(id) { if (!confirm("Apagar esta anotação?")) return; const { error } = await sb.from("notas").delete().eq("id", id); if (error) return alert(error.message); await carregarNotas(); renderChat(); }
+
+/* =========================================================
    Inicialização
    ========================================================= */
 function render() {
-  if (AUTH.travado) return vAuth();
+  if (AUTH.travado) { $("#chatRoot").innerHTML = ""; return vAuth(); }
+  setTimeout(renderChat, 0);
   const v = st.view; let html = "";
   if (v === "dashboard") html = vDashboard();
   else if (v === "projetos") html = vProjetos();
@@ -1262,11 +1473,11 @@ async function iniciarApp() {
   const done = busy("Carregando…");
   try {
     if (!DB.local) {
-      const { data: membro } = await sb.rpc("is_membro");
-      if (!membro) { done(); $("#root").innerHTML = `<div class="login"><div class="card"><img class="seal" src="${ASSETS.selo}"><h2>Acesso aguardando liberação</h2><p class="sub">O e-mail <b>${esc(DB.user.email)}</b> ainda não foi liberado por um administrador da Protemaxi.</p><button class="btn" onclick="sair()">Sair</button></div></div>`; return; }
-      const { data: adm } = await sb.rpc("is_admin"); DB.admin = !!adm;
+      const r = await SESSAO.entrar(); if (!r.ok) { done(); return telaSessao(r); }
+      DB.papel = r.papel; await carregarMembros(); atualizarOnline(r.online, true); SESSAO.iniciar();
     }
     st.S = await DB.getSettings(); await recarregar(); appPronto = true; ultimaAtividade = Date.now(); render();
+    if (!DB.local) iniciarChat();
   } catch (e) { console.error(e); $("#root").innerHTML = `<div class="empty"><h3>Não foi possível carregar</h3><p>${esc(e.message)}</p><p>Confira o config.js e se o script supabase/schema.sql foi executado.</p></div>`; }
   finally { done(); }
 }

@@ -11,6 +11,15 @@ App de projetos de **CFTV, alarme e cerca elétrica** do Grupo Protemaxi. Funcio
 - Apresentação no **modelo oficial Protemaxi** em PowerPoint editável e PDF
 - **Lista Inside** (.csv) com Código; Produto; Quantidade; Unitário; Total; GrupoOrçamento
 
+## Equipe, vagas e chat
+- **Administrador** (Andrade): vaga garantida, sempre entra. Gerencia equipe, catálogo e textos.
+- **Editor**: cria e edita projetos. **Visitante**: vê, comenta e baixa PowerPoint/PDF.
+- **Acessos ao mesmo tempo: 2** (você + 1 da equipe). Quem tentar entrar com a vaga ocupada vê *"Vaga ocupada"* e o app tenta de novo sozinho a cada 20 s. A vaga é liberada ao sair, ao bloquear ou após 90 s sem sinal. O limite muda em Configurações → Equipe e acessos.
+- O administrador pode **encerrar a sessão** de alguém; a pessoa só volta após 5 minutos.
+- Lista da equipe com **bolinha online/offline** no menu lateral e no chat.
+- **Chat da equipe** (botão *Equipe*, no canto) com comentários ligados a projetos, e aba **Anotações** com fixar no topo.
+- Essas regras valem no servidor (Supabase), não só na tela.
+
 ## Slides gerados (modelo Mall Jardins de Fátima)
 1. Capa — "PROPOSTA FINANCEIRA - NOME DO PROJETO" + logo Protemaxi + selo (ou logo do cliente)
 2. Escopo
